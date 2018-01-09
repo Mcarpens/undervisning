@@ -242,7 +242,7 @@ class User {
             session_start();
         }
         if ($token === $_SESSION['token']) {
-            if ((time() - $_SESSION['tokentime']) > 60) {
+            if ((time() - $_SESSION['tokentime']) > 120) {
                 return FALSE;
             } else {
                 return TRUE;

@@ -39,6 +39,9 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'logud';
                 include_once './logout.php';
                 break;
+            case 'opret';
+                include_once './signin.php';
+                break;
 
             default:
                 header('Location: index.php?side=forside');
