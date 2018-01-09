@@ -14,6 +14,11 @@ require_once './config.php';
 $setting = new Settings($db);
 $user = new User($db);
 
+include_once './inc/head.php';
+include_once './inc/menu.php';
+
+print_r($_SESSION);
+
 if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
     $get = $user->secGetInputArray(INPUT_GET);
     if (isset($get['side']) && !empty($get['side'])) {
@@ -28,6 +33,12 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'kontakt';
                 include_once './contact.php';
                 break;
+            case 'logind';
+                include_once './login.php';
+                break;
+            case 'logud';
+                include_once './logout.php';
+                break;
 
             default:
                 header('Location: index.php?side=forside');
@@ -37,3 +48,5 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
         header('Location: index.php?side=forside');
     }
 }
+
+include_once './inc/footer.php';
