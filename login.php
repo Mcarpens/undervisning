@@ -22,3 +22,50 @@ if(isset($_POST['btn-login']))
 }
 
 $user->destroyToken();
+?>
+
+<div>
+
+    <div class="container">
+
+        <form class="form-signin" method="post" id="login-form">
+            <input type="hidden" name="token" value="<?php echo $user->getToken() ?>">
+            <h2 class="form-signin-heading">Log Ind</h2><hr />
+
+            <div id="error">
+                <?php
+                if(isset($error))
+                {
+                    ?>
+                    <div class="alert alert-danger alert-dismissible" id="myAlert">
+                        <a href="#" class="close">&times;</a>
+                        <i class="glyphicon glyphicon-warning-sign"></i> &nbsp;<?php echo $error; ?>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" name="txt_uname_email" placeholder="Brugernavn eller E-mail" required />
+                <span id="check-e"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" name="txt_password" placeholder="Din adgangskode" requried />
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <button type="submit" name="btn-login" class="btn btn-success">
+                    <i class="fa fa-sign-in"></i> &nbsp; LOG IND
+                </button>
+            </div>
+            <br />
+            <label>Har du ikke en konto endnu? <a href="sign-up.php">Opret en konto</a></label>
+        </form>
+
+    </div>
+
+</div>
