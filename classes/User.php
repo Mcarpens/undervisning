@@ -7,7 +7,8 @@
  * License: Closed
  */
 
-class User {
+class User extends \PDO
+{
 
     /**
      * @var
@@ -363,7 +364,7 @@ class User {
         {
             $new_password = password_hash($username, PASSWORD_BCRYPT, ['cost' => 12]);
 
-            $stmt = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) SELECT (:fname, :lname, :uname, :upass, 1)");
+            $stmt = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) VALUES (:fname, :lname, :uname, :upass, 1)");
 
             $stmt->bindparam(":fname", $firstname);
             $stmt->bindparam(":lname", $lastname);
@@ -372,11 +373,12 @@ class User {
 
             $stmt->execute();
 
-            return $stmt;
+            return true;
         }
         catch(PDOException $e)
         {
             echo $e->getMessage();
+            return false;
         }
     }
 
@@ -390,14 +392,16 @@ class User {
     {
         try
         {
-            $stmt = $this->db->prepare("SELECT id, username, password FROM users WHERE username=:uname");
-            $stmt->execute(array(':uname'=>$username));
-            $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-            if($stmt->rowCount() == 1)
+            $stmt = $this->db->query("SELECT id, username, password FROM users WHERE username = :uname", [':uname' => $username]);
+//            $stmt->execute(array(':uname' => $username));
+//            $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
+            var_dump($stmt);
+            if(sizeof($stmt) == 1)
             {
-                if(password_verify($password, $userRow['password']))
+                if(password_verify($password, $stmt->password))
                 {
-                    $_SESSION['user_session'] = $userRow['id'];
+                    $_SESSION['user_id'] = $stmt->id;
+                    $_SESSION['username'] = $stmt->username;
                     return true;
                 }
                 else
@@ -405,7 +409,7 @@ class User {
                     return false;
                 }
             } else {
-                return false;
+                return $username;
             }
         }
         catch(PDOException $e)
@@ -432,7 +436,7 @@ class User {
      */
     public function redirect($url)
     {
-        header("Location: $url");
+        header("Location: index.php?side=".$url."");
     }
 
     /**

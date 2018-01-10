@@ -28,3 +28,8 @@ spl_autoload_register('ClassLoader');
 
 // Håndtere database forbindelse //
 $db = new DB('mysql:host='._DB_HOST_.';dbname='._DB_NAME_.';charset=utf8',_DB_USER_,_DB_PASSWORD_);
+
+// Sæt debug status
+// 1 = On
+// 0 = Off
+$debug = 1;

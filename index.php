@@ -11,13 +11,18 @@ session_start();
 
 require_once './config.php';
 
-$setting = new Settings($db);
+$setting = new settings($db);
 $user = new User($db);
 
 include_once './inc/head.php';
 include_once './inc/menu.php';
 
-print_r($_SESSION);
+if ($user->is_loggedin() === true && $debug == 1){
+    echo '<div class="debug">';
+    echo '<h4><i class="fa fa-bug"></i> DEBUG MENU <i class="fa fa-bug"></i></h4>';
+    echo '<p>'. print_r($_SESSION) .'</p>';
+    echo '</div>';
+}
 
 if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
     $get = $user->secGetInputArray(INPUT_GET);
@@ -41,6 +46,10 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'opret';
                 include_once './signup.php';
+                break;
+
+                case 'joined';
+                include_once './joined.php';
                 break;
 
             default:

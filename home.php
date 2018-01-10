@@ -9,12 +9,32 @@
 </div>
 <?php
 if($user->is_loggedin() === TRUE) {
-    foreach ($user->getAll() as $users) {
-        echo 'Hej, ' . $users->firstname . ' ' . $users->lastname;
-        echo '<br>';
-        echo 'Dit brugernavn er: ' . $users->username;
-        echo '<br>';
-        echo 'Din brugerrolle er: ' . $users->fk_userrole;
+    foreach ($user->getAll() as $u){
+        if ($u->fk_userrole == 1) {
+            $userrole = "Super Admin";
+        }
+        if ($u->fk_userrole == 2) {
+            $userrole = "Admin";
+        }
+        if ($u->fk_userrole == 3) {
+            $userrole = "Medarbejder";
+        }
+        if ($u->id === $_SESSION['user_session']) {
+            echo "<p>Hej, " . $u->firstname . " " . $u->lastname . "!</p>";
+            echo "<p>Dit brugernavn er: " . $u->username . ".</p>";
+            echo "<p>Din brugerrolle er: " . $userrole . ".</p>";
+        }
     }
 }
+
+
+//if($user->is_loggedin() === TRUE) {
+//    foreach ($user->getAll() as $users) {
+//        echo 'Hej, ' . $users->firstname . ' ' . $users->lastname;
+//        echo '<br>';
+//        echo 'Dit brugernavn er: ' . $users->username;
+//        echo '<br>';
+//        echo 'Din brugerrolle er: ' . $users->fk_userrole;
+//    }
+//}
 ?>

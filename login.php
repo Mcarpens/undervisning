@@ -11,13 +11,18 @@ if(isset($_POST['btn-login']))
     $username = strip_tags($_POST['txt_uname_email']);
     $password = strip_tags($_POST['txt_password']);
 
-    if($user->doLogin($username,$password))
+    if($user->doLogin($username,$password) == true)
     {
-        $user->redirect('index.php');
+        echo 'Success!';
+        print_r($_SESSION);
+//        $user->redirect('index.php');
     }
-    else
+    else if($user->doLogin($username, $password) == false)
     {
+        var_dump($var);
         $error = "Forkerte oplysninger !";
+    } else {
+        echo 'der skete vist en fejl i row count';
     }
 }
 
@@ -59,7 +64,7 @@ $user->destroyToken();
 
             <div class="form-group">
                 <button type="submit" name="btn-login" class="btn btn-success">
-                    <i class="fa fa-sign-in"></i> &nbsp; LOG IND
+                    <i class="fa fa-sign-in-alt"></i> &nbsp; LOG IND
                 </button>
             </div>
             <br />
