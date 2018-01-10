@@ -184,23 +184,6 @@ class User {
         }
     }
 
-    ## Login Session
-
-//    /**
-//     * @param $id
-//     */
-//    public function doLogin($id, $st) {
-//        if ($this->isSessionStarted() == false) {
-//            session_start();
-//        }
-//
-////      $_SESSION['user'] = array("userId" => $id, $this->ISLOGGEDIN => true, "token" => "...", "expiry" => time() > 1800);
-//        $_SESSION[$this->ISLOGGEDIN] = TRUE;
-//        $_SESSION['userId'] = $id;
-//        $_SESSION['timeout'] = time();
-//    }
-
-
     ## Token Generator
 
     /**
@@ -369,21 +352,21 @@ class User {
 
     /**
      * @param $username
-     * @param $first_name
-     * @param $last_name
+     * @param $firstname
+     * @param $lastname
      * @param $password
      * @return mixed
      */
-    public function register($username, $first_name, $last_name, $password)
+    public function register($username, $firstname, $lastname, $password)
     {
         try
         {
             $new_password = password_hash($username, PASSWORD_BCRYPT, ['cost' => 12]);
 
-            $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, username, password) SELECT (:fname, :lname, :uname, :umail, :upass)");
+            $stmt = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) SELECT (:fname, :lname, :uname, :upass, 1)");
 
-            $stmt->bindparam(":fname", $first_name);
-            $stmt->bindparam(":lname", $last_name);
+            $stmt->bindparam(":fname", $firstname);
+            $stmt->bindparam(":lname", $lastname);
             $stmt->bindparam(":uname", $username);
             $stmt->bindparam(":upass", $new_password);
 

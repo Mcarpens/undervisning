@@ -63,7 +63,7 @@ $user->destroyToken();
                 </button>
             </div>
             <br />
-            <label>Har du ikke en konto endnu? <a href="sign-up.php">Opret en konto</a></label>
+            <label>Har du ikke en konto endnu? <a href="./index.php?side=opret">Opret en konto</a></label>
         </form>
 
     </div>

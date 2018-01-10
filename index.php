@@ -40,7 +40,7 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './logout.php';
                 break;
             case 'opret';
-                include_once './signin.php';
+                include_once './signup.php';
                 break;
 
             default:
