@@ -1,4 +1,8 @@
 <?php
+if($user->is_loggedin() !== "") {
+    $user->redirect('index.php');
+}
+
 if(isset($_SESSION['username']) && $_SESSION['username'] !== "") {
 
     echo 'Velkommen! <b>'.@$_SESSION['username'].'</b>';
@@ -17,5 +21,3 @@ if(isset($_SESSION['username']) && $_SESSION['username'] !== "") {
     $user->redirect('logind');
 
 }
-
-

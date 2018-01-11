@@ -17,7 +17,7 @@ $user = new User($db);
 include_once './inc/head.php';
 include_once './inc/menu.php';
 
-if ($user->is_loggedin() === true && $debug == 1){
+if ($user->is_loggedin() == true && $debug == 1){
     echo '<div class="debug">';
     echo '<h4><i class="fa fa-bug"></i> DEBUG MENU <i class="fa fa-bug"></i></h4>';
     echo '<p>'. print_r($_SESSION) .'</p>';

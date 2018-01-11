@@ -393,7 +393,7 @@ class User extends \PDO
         try
         {
             $stmt = $this->db->single("SELECT id, username, password FROM users WHERE username = :uname", [':uname' => $username]);
-            if($stmt !== false)
+            if($stmt == true)
             {
                 if(password_verify($password, $stmt->password))
                 {
@@ -420,7 +420,7 @@ class User extends \PDO
      */
     public function is_loggedin()
     {
-        if(isset($_SESSION['user_session']))
+        if(isset($_SESSION['user_id']))
         {
             return true;
         } else {
