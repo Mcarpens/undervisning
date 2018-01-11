@@ -392,7 +392,8 @@ class User extends \PDO
     {
         try
         {
-            $stmt = $this->db->single("SELECT id, username, password FROM users WHERE username = :uname", [':uname' => $username]);
+            $stmt = $this->db->single("SELECT id, username, password FROM users WHERE username = :uname",
+                                        [':uname' => $username]);
             if($stmt == true)
             {
                 if(password_verify($password, $stmt->password))

@@ -17,7 +17,7 @@ if($user->is_loggedin() === TRUE) {
             $userrole = "Admin";
         }
         else if ($u->fk_userrole == 3) {
-            $userrole = "Medarbejder";
+            $userrole = "Bruger";
         }
         if ($u->id === $_SESSION['user_id']) {
             echo "<p>Hej, " . $u->firstname . " " . $u->lastname . "!</p>";

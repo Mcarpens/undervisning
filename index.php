@@ -11,7 +11,7 @@ session_start();
 
 require_once './config.php';
 
-$setting = new settings($db);
+$setting = new Settings($db);
 $user = new User($db);
 
 include_once './inc/head.php';
@@ -47,8 +47,7 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'opret';
                 include_once './signup.php';
                 break;
-
-                case 'joined';
+            case 'joined';
                 include_once './joined.php';
                 break;
 
