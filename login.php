@@ -13,13 +13,10 @@ if(isset($_POST['btn-login']))
 
     if($user->doLogin($username,$password) == true)
     {
-        echo 'Success!';
-        print_r($_SESSION);
-//        $user->redirect('index.php');
+       $user->redirect('joined');
     }
     else if($user->doLogin($username, $password) == false)
     {
-        var_dump($var);
         $error = "Forkerte oplysninger !";
     } else {
         echo 'der skete vist en fejl i row count';

@@ -41,7 +41,7 @@ if(isset($_POST['btn-signup']))
             }
             else
             {
-                if($user->register($firstname, $lastname, $username,$password) == true){
+                if($user->register($firstname, $lastname, $username, $password) == true){
                     $_SESSION['tmp']['username'] = $username;
                     $_SESSION['tmp']['password'] = $password;
                         $user->redirect('joined');

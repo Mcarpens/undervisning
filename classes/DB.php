@@ -109,6 +109,8 @@ class DB extends \PDO
         $data = $this->query($sql, $params);
         if(sizeof($data) === 1){
             return $data[0];
+        } else {
+            return false;
         }
     }
 

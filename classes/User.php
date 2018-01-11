@@ -358,11 +358,11 @@ class User extends \PDO
      * @param $password
      * @return mixed
      */
-    public function register($username, $firstname, $lastname, $password)
+    public function register($firstname, $lastname, $username, $password)
     {
         try
         {
-            $new_password = password_hash($username, PASSWORD_BCRYPT, ['cost' => 12]);
+            $new_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 
             $stmt = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) VALUES (:fname, :lname, :uname, :upass, 1)");
 
@@ -392,11 +392,8 @@ class User extends \PDO
     {
         try
         {
-            $stmt = $this->db->query("SELECT id, username, password FROM users WHERE username = :uname", [':uname' => $username]);
-//            $stmt->execute(array(':uname' => $username));
-//            $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($stmt);
-            if(sizeof($stmt) == 1)
+            $stmt = $this->db->single("SELECT id, username, password FROM users WHERE username = :uname", [':uname' => $username]);
+            if($stmt !== false)
             {
                 if(password_verify($password, $stmt->password))
                 {
@@ -409,7 +406,7 @@ class User extends \PDO
                     return false;
                 }
             } else {
-                return $username;
+                return false;
             }
         }
         catch(PDOException $e)

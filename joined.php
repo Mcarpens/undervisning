@@ -1,9 +1,21 @@
 <?php
-print_r($_SESSION['tmp']);
-if($user->doLogin($_SESSION['tmp']['username'], $_SESSION['tmp']['password'])) {
-    unset($_SESSION['tmp']);
-    print_r($_SESSION);
-    echo '<br>';
-    echo 'Velkommen! '.@$_SESSION['username'].'';
+if(isset($_SESSION['username']) && $_SESSION['username'] !== "") {
+
+    echo 'Velkommen! <b>'.@$_SESSION['username'].'</b>';
+
+} else if(isset($_SESSION['tmp']['username']) && $_SESSION['tmp']['username'] !== "") {
+    
+    if($user->doLogin($_SESSION['tmp']['username'], $_SESSION['tmp']['password'])) {
+        unset($_SESSION['tmp']);
+        echo 'Velkommen! <b>'.@$_SESSION['username'].'</b>';
+    } else {
+        echo 'Der skete en fejl i login.';
+    }
+
+} else {
+
+    $user->redirect('logind');
+
 }
+
 
