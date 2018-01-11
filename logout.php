@@ -6,7 +6,4 @@
  * Time: 13:02
  */
 
-session_destroy();
-unset($_SESSION['user_session']);
-header('Location: index.php');
-return true;
+$user->doLogout();
