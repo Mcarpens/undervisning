@@ -32,19 +32,15 @@ if(isset($_POST['btn-signup']))
     {
         try
         {
-            $stmt = $user->runQuery("SELECT username FROM users WHERE username=:uname");
-            $stmt->execute(array(':uname'=>$username));
-            $row=$stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt = $user->query("SELECT username FROM users WHERE username=:uname", [':uname' => $username]);
 
-            if($row['username']==$username) {
+            if($stmt->username == $username) {
                 $error[] = "Brugernavnet er allerede i brug !";
             }
             else
             {
                 if($user->register($firstname, $lastname, $username, $password) == true){
-                    $_SESSION['tmp']['username'] = $username;
-                    $_SESSION['tmp']['password'] = $password;
-                        $user->redirect('joined');
+                    $user->redirect('logind');
                 }
             }
         }
@@ -84,13 +80,13 @@ if(isset($_POST['btn-signup']))
                 }
                 ?>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="txt_fname" placeholder="Indtast Fornavn" value="<?php if(isset($error)){echo $firstname;}?>" />
+                    <input type="text" class="form-control" name="txt_fname" placeholder="Indtast Fornavn" value="<?= @$_POST['txt_fname'] ?>" />
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="txt_lname" placeholder="Indtast Efternavn" value="<?php if(isset($error)){echo $lastname;}?>" />
+                    <input type="text" class="form-control" name="txt_lname" placeholder="Indtast Efternavn" value="<?= @$_POST['txt_lname'] ?>" />
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="txt_uname" placeholder="Indtast Brugernavn" value="<?php if(isset($error)){echo $username;}?>" />
+                    <input type="text" class="form-control" name="txt_uname" placeholder="Indtast Brugernavn" value="<?= @$_POST['txt_uname'] ?>" />
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="txt_upass" placeholder="Indtast Adgangskode" />

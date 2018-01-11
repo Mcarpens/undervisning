@@ -47,7 +47,7 @@ $user->destroyToken();
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control" name="txt_uname_email" placeholder="Brugernavn eller E-mail" required />
+                <input type="text" class="form-control" name="txt_uname_email" placeholder="Brugernavn eller E-mail" value="<?= @$_POST['txt_uname_email'] ?>" required />
                 <span id="check-e"></span>
             </div>
 

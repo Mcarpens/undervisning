@@ -364,14 +364,15 @@ class User extends \PDO
         {
             $new_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 
-            $stmt = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) VALUES (:fname, :lname, :uname, :upass, 3)");
+            $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) 
+                                VALUES (:fname, :lname, :uname, :upass, 3)",
+                                [
+                                    ':fname' => $firstname,
+                                    ':lname' => $lastname,
+                                    ':uname' => $username,
+                                    ':upass' => $new_password
+                                ]);
 
-            $stmt->bindparam(":fname", $firstname);
-            $stmt->bindparam(":lname", $lastname);
-            $stmt->bindparam(":uname", $username);
-            $stmt->bindparam(":upass", $new_password);
-
-            $stmt->execute();
 
             return true;
         }

@@ -1,20 +1,7 @@
 <?php
-if($user->is_loggedin() == false) {
-    $user->redirect('index.php');
-}
+if($user->is_loggedin() == true) {
 
-if(isset($_SESSION['username']) && $_SESSION['username'] !== "") {
-
-    echo 'Velkommen! <b>'.@$_SESSION['username'].'</b>';
-
-} else if(isset($_SESSION['tmp']['username']) && $_SESSION['tmp']['username'] !== "") {
-    
-    if($user->doLogin($_SESSION['tmp']['username'], $_SESSION['tmp']['password'])) {
-        unset($_SESSION['tmp']);
-        echo 'Velkommen! <b>'.@$_SESSION['username'].'</b>';
-    } else {
-        echo 'Der skete en fejl i login.';
-    }
+    echo 'Velkommen ! <b>'.$_SESSION['username'].'</b>';
 
 } else {
 
