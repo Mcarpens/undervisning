@@ -17,7 +17,7 @@ if(isset($_POST['btn-login']))
     }
     else if($user->doLogin($username, $password) == false)
     {
-        $error = "Forkerte oplysninger !";
+        $error = "Forkerte oplysninger!";
     } else {
         echo 'der skete vist en fejl i row count';
     }
