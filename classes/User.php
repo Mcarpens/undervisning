@@ -364,7 +364,7 @@ class User extends \PDO
         {
             $new_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 
-            $stmt = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) VALUES (:fname, :lname, :uname, :upass, 1)");
+            $stmt = $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) VALUES (:fname, :lname, :uname, :upass, 3)");
 
             $stmt->bindparam(":fname", $firstname);
             $stmt->bindparam(":lname", $lastname);
@@ -392,8 +392,9 @@ class User extends \PDO
     {
         try
         {
-            $stmt = $this->db->single("SELECT id, username, password FROM users WHERE username = :uname", [':uname' => $username]);
-            if($stmt !== false)
+            $stmt = $this->db->single("SELECT id, username, password FROM users WHERE username = :uname",
+                                        [':uname' => $username]);
+            if($stmt == true)
             {
                 if(password_verify($password, $stmt->password))
                 {
@@ -420,7 +421,7 @@ class User extends \PDO
      */
     public function is_loggedin()
     {
-        if(isset($_SESSION['user_session']))
+        if(isset($_SESSION['user_id']))
         {
             return true;
         } else {
@@ -441,9 +442,9 @@ class User extends \PDO
      */
     public function doLogout()
     {
-        session_start();
         session_destroy();
         unset($_SESSION['user_session']);
+        header('Location: ./index.php?side=forside');
         return true;
     }
 

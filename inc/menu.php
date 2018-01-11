@@ -8,10 +8,20 @@
             <?php
             foreach ($setting->getAllMenu() as $menu) {
                 echo '<li class="nav-item">';
-                echo '<a class="nav-link" href="./index.php?side=' . $menu->link . '">' . $menu->name . '</a>';
+                echo '<a class="nav-link" href="./index.php?side=';
+                echo $menu->link;
+                echo '">';
+                echo  $menu->name;
+                echo '</a>';
                 echo '</li>';
             }
             ?>
+            <?php
+            foreach ($setting->getAllMenu() as $menu) { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?side=<?= $menu->link ?>"><?= $menu->name ?></a>
+            </li>
+            <?php } ?>
         </ul>
     </div>
 </nav>

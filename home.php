@@ -13,13 +13,13 @@ if($user->is_loggedin() === TRUE) {
         if ($u->fk_userrole == 1) {
             $userrole = "Super Admin";
         }
-        if ($u->fk_userrole == 2) {
+        else if ($u->fk_userrole == 2) {
             $userrole = "Admin";
         }
-        if ($u->fk_userrole == 3) {
-            $userrole = "Medarbejder";
+        else if ($u->fk_userrole == 3) {
+            $userrole = "Bruger";
         }
-        if ($u->id === $_SESSION['user_session']) {
+        if ($u->id === $_SESSION['user_id']) {
             echo "<p>Hej, " . $u->firstname . " " . $u->lastname . "!</p>";
             echo "<p>Dit brugernavn er: " . $u->username . ".</p>";
             echo "<p>Din brugerrolle er: " . $userrole . ".</p>";

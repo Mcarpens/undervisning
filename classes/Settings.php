@@ -18,11 +18,17 @@ class Settings {
         $this->db = $db;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllMenu()
     {
         return $this->db->toList("SELECT * FROM `menu`");
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllSettings()
     {
         return $this->db->toList("SELECT * FROM `settings`");
