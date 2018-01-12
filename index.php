@@ -13,6 +13,7 @@ require_once './config.php';
 
 $setting = new settings($db);
 $user = new User($db);
+$email = new Email($db);
 
 include_once './inc/head.php';
 include_once './inc/menu.php';
