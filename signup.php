@@ -32,16 +32,15 @@ if(isset($_POST['btn-signup']))
     {
         try
         {
-            $stmt = $user->query("SELECT username FROM users WHERE username=:uname", [':uname' => $username]);
-
-            if($stmt->username == $username) {
-                $error[] = "Brugernavnet er allerede i brug !";
+            $stmt = $user->checkUsername($username);
+            if($stmt == false) {
+                if($user->register($firstname, $lastname, $username, $password) == true){
+                       $user->redirect('logind');
+                }
             }
             else
             {
-                if($user->register($firstname, $lastname, $username, $password) == true){
-                    $user->redirect('logind');
-                }
+                $error[] = "Brugernavnet er allerede i brug !";
             }
         }
         catch(PDOException $e)

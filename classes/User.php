@@ -33,6 +33,11 @@ class User extends \PDO
         $this->db = $db;
     }
 
+    public function checkUsername($username) {
+        return $this->db->single("SELECT username FROM users WHERE username=:uname",
+                                [':uname' => $username]);
+    }
+
     # Only accept the $_POST inputs and not $_GET inputs.
 
     /**
@@ -364,7 +369,7 @@ class User extends \PDO
         {
             $new_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 
-            $this->db->prepare("INSERT INTO users (firstname, lastname, username, password, fk_userrole) 
+            $this->db->query("INSERT INTO users (firstname, lastname, username, password, fk_userrole) 
                                 VALUES (:fname, :lname, :uname, :upass, 3)",
                                 [
                                     ':fname' => $firstname,
