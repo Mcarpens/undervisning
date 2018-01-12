@@ -1,7 +1,28 @@
-**Objekt Oriteret Programmering med PDO. BASIC**
+##Objekt Oriteret Programmering med PDO
 
-Indeholder:<br>
-Dynamisk Menu<br>
-Switch case på index<br>
-Logind side<br>
-Bruger oprettelse<br>
+### For ord
+I dette projekt, gennemgår vi OOP med PDO for begyndere. <br>
+Vi laver forskellige moduler indefor forskellige niveauer.<br>
+Du kan se på denne liste, hvor langt vi er kommet,<br>
+samt hvad de forskellige moduler er kategoriseret i niveau.
+
+###Basic:
+####Indeholder:
+1) Dynamisk Menu
+2) Switch case på index
+3) Logind side
+4) Bruger oprettelse
+
+###Øvet
+####Indeholder:
+1) Kommer snart!
+
+
+###Avanceret
+####Indeholder:
+1) Kommer snart!
+
+
+###Professional
+####Indeholder:
+1) Kommer snart!
