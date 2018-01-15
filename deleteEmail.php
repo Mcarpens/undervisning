@@ -1,6 +1,4 @@
 <?php
-
-
 if($email->deleteEmail($_GET['id']) == true) {
     $user->redirect('beskeder');
 } else {
@@ -12,5 +10,3 @@ if($email->deleteEmail($_GET['id']) == true) {
 </div>
     <?php
 }
-
-

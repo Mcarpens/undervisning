@@ -5,7 +5,7 @@
  * Date: 15-01-2018
  * Time: 09:13
  */
-
+if($user->secCheckLevel() >= 90) {
 ?>
 <table class="table">
     <thead class="thead-dark">
@@ -18,8 +18,7 @@
     </thead>
     <tbody>
     <?php
-    if($user->secCheckLevel() >= 90) {
-        foreach($email->getAllEmails() as $emails) { ?>
+    foreach($email->getAllEmails() as $emails) { ?>
     <tr>
         <td><?= $emails->name ?></td>
         <td><?= $emails->email ?></td>
@@ -27,6 +26,8 @@
         <td><a href="?side=sletEmail&id=<?=$emails->id?>"><button class="btn btn-danger" >Slet</button></a></td>
     </tr>
         <?php }
+    } else {
+    $user->redirect('forside');
     }
     ?>
     </tbody>

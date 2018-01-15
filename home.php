@@ -26,15 +26,4 @@ if($user->is_loggedin() === TRUE) {
         }
     }
 }
-
-
-//if($user->is_loggedin() === TRUE) {
-//    foreach ($user->getAll() as $users) {
-//        echo 'Hej, ' . $users->firstname . ' ' . $users->lastname;
-//        echo '<br>';
-//        echo 'Dit brugernavn er: ' . $users->username;
-//        echo '<br>';
-//        echo 'Din brugerrolle er: ' . $users->fk_userrole;
-//    }
-//}
 ?>

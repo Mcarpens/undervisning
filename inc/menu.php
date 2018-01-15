@@ -11,6 +11,18 @@
                 echo '<a class="nav-link" href="./index.php?side=' . $menu->link . '">' . $menu->name . '</a>';
                 echo '</li>';
             }
+
+            if($user->secCheckLevel() >= 90) {
+                echo '<li class="nav-item"><a href="index.php?side=beskeder">Beskeder</a></li>';
+            } else {
+                echo '';
+            }
+
+            if($user->is_loggedin() === TRUE) {
+                echo '<li class="nav-item"><a href="index.php?side=logud">Log ud</a></li>';
+            } else {
+                echo '<li class="nav-item"><a href="index.php?side=logind">Log ind</a></li>';
+            }
             ?>
         </ul>
     </div>
