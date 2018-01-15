@@ -63,10 +63,8 @@ class Email extends \PDO{
     
     public function deleteEmail($id)
     {
-        if($this->db->query("DELETE FROM messages WHERE id = :id", [':id' => $id])) {
-            return true;
-        }
-        return false;
+        $this->db->query("DELETE FROM messages WHERE id = :id", [':id' => $id]);
+        return true;
     }
 
 }
