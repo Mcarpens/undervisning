@@ -20,8 +20,8 @@ if (file_exists('versions/')) {
     mkdir('versions/', 0755, true);
 }
 
-file_put_contents("versions/" . "/" . $zip_filename, fopen($filename, 'r'));
-$new_filename = 'versions/' . "/" . $zip_filename; // Only used to check the error handling
+file_put_contents("versions/" . $zip_filename, fopen($filename, 'r'));
+$new_filename = 'versions/' . $zip_filename; // Only used to check the error handling
 
 $integrity_check = sha1_file($filename);
 $sha1file = sha1_file($new_filename); // Can be edited to the $testpath for checking the error handling. Default: $new_filename
@@ -29,23 +29,23 @@ $sha1file = sha1_file($new_filename); // Can be edited to the $testpath for chec
 if($integrity_check === $sha1file) {
 
 } else {
-    unlink("versions/" . "/" . $zip_filename);
-    file_put_contents("versions/" . "/" . $zip_filename, fopen($filename, 'r'));
-    $new_filename = 'versions/' . "/" . $zip_filename;
+    unlink("versions/" . $zip_filename);
+    file_put_contents("versions/" . $zip_filename, fopen($filename, 'r'));
+    $new_filename = 'versions/' . $zip_filename;
 }
 
 if($integrity_check === $sha1file) {
 
 } else {
-    unlink("versions/" . "/" . $zip_filename);
-    file_put_contents("versions/" . "/" . $zip_filename, fopen($filename, 'r'));
-    $new_filename = 'versions/' . "/" . $zip_filename;
+    unlink("versions/" . $zip_filename);
+    file_put_contents("versions/" . $zip_filename, fopen($filename, 'r'));
+    $new_filename = 'versions/' . $zip_filename;
 }
 
 if($integrity_check === $sha1file) {
 
 } else {
-    unlink("versions/" . "/" . $zip_filename);
+    unlink("versions/" . $zip_filename);
 
 }
 
