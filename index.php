@@ -53,6 +53,10 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './joined.php';
                 break;
 
+                case 'beskeder';
+                include_once './messages.php';
+                break;
+
             default:
                 header('Location: index.php?side=forside');
                 break;

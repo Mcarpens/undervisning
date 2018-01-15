@@ -57,4 +57,8 @@ class Email extends \PDO{
         }
     }
 
+    public function getAllEmails() {
+        return $this->db->toList('SELECT * FROM `messages`');
+    }
+
 }

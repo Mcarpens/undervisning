@@ -186,8 +186,8 @@ class User extends \PDO
      * @return integer
      */
     public function secCheckLevel(){
-        $stmt = $this->db->prepare("SELECT userroles.niveau FROM `users`
-								INNER JOIN `userroles` ON `userroles`.`id` = `users`.`fk_userrole`
+        $stmt = $this->db->prepare("SELECT userrole.niveau FROM `users`
+								INNER JOIN `userrole` ON `userrole`.`id` = `users`.`fk_userrole`
 								WHERE `users`.`id` = :id");
         $stmt->bindParam(':id', $_SESSION['user_id'], PDO::PARAM_STR);
         $stmt->execute();
