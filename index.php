@@ -61,6 +61,10 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './deleteEmail.php';
                 break;
 
+            case 'opdater';
+                include_once './update.php';
+                break;
+
             default:
                 header('Location: index.php?side=forside');
                 break;
