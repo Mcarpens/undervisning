@@ -6,6 +6,8 @@
  * Time: 10:39
  */
 
+if($user->secCheckLevel() >= 90) {
+
 // Update Script
 // -------------------------------
 $zip_filename = "master.zip"; /// The filename of the zip filename. Can be edited!
@@ -92,3 +94,7 @@ if(file_exists($new_filename)) {
     }
     ?>
 </div>
+<?php }
+else {
+    echo 'Du har ikke adgang til denne funktion!';
+} ?>
