@@ -52,38 +52,6 @@ if(file_exists($new_filename)) {
     $sha1file = sha1_file($new_filename);
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Updater for the CSYS Indexer">
-    <meta name="author" content="Carpens Systems, PMV">
-
-    <title>Updating</title>
-
-    <link rel="shortcut icon" href="resources/themes/bootstrap/img/folder.png">
-
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-
-    <link rel="stylesheet" type="text/css" href="resources/themes/bootstrap/css/style.css">
-
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</head>
-<body id="update-body">
-
 <div class="col-lg-12" id="form" align="center">
     <?php
     if($integrity_check === $sha1file) {
@@ -124,6 +92,3 @@ if(file_exists($new_filename)) {
     }
     ?>
 </div>
-
-</body>
-</html>
