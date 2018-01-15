@@ -60,5 +60,13 @@ class Email extends \PDO{
     public function getAllEmails() {
         return $this->db->toList('SELECT * FROM `messages`');
     }
+    
+    public function deleteEmail($id)
+    {
+        if($this->db->query("DELETE FROM messages WHERE id = :id", [':id' => $id])) {
+            return true;
+        }
+        return false;
+    }
 
 }

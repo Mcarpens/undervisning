@@ -13,6 +13,7 @@
         <th scope="col">Navn</th>
         <th scope="col">Email</th>
         <th scope="col">Besked</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
         <td><?= $emails->name ?></td>
         <td><?= $emails->email ?></td>
         <td><?= $emails->message ?></td>
+        <td><a href="?side=sletEmail&id=<?=$emails->id?>"><button class="btn btn-danger" >Slet</button></a></td>
     </tr>
         <?php }
     }

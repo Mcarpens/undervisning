@@ -49,12 +49,16 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './signup.php';
                 break;
 
-                case 'joined';
+            case 'joined';
                 include_once './joined.php';
                 break;
 
-                case 'beskeder';
+            case 'beskeder';
                 include_once './messages.php';
+                break;
+
+            case 'sletEmail';
+                include_once './deleteEmail.php';
                 break;
 
             default:
