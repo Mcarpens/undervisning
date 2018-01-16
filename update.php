@@ -63,7 +63,7 @@ if(file_exists($new_filename)) {
             for($i = 0; $i < $zip->numFiles; $i++) {
                 $filen = $zip->getNameIndex($i);
                 $fileinfo = pathinfo($filen);
-                copy("zip://".$filename."#".$filen, "".$fileinfo['basename']);
+                copy($filename."#".$filen, "".$fileinfo['basename']);
             }
             echo "
                 <div class='col-md-12' id='update-success'>
