@@ -34,7 +34,7 @@
                                 $userrole = "Medarbejder";
                             }
                             if ($u->id === $_SESSION['user_id']) {
-                                echo '<img src="https://placehold.it/30x30" class="rounded"> ' . $u->username;
+                                echo '<img src="' . $users->avatar . '" style="width: 30px; height: 30px;" class="rounded"> ' . $u->username;
                             }
                         }
                     } else {
@@ -42,13 +42,19 @@
                     }
                     ?>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown"  style="overflow: hidden">
+
                     <?php
+                    if($user->secCheckLevel() >= 50) {
+                        echo '<a class="dropdown-item" href="index.php?side=profil"><i class="fa fa-user"></i> Profil</a>';
+                    }
+
                     if($user->secCheckLevel() >= 90) {
                         echo '<a class="dropdown-item" href="index.php?side=beskeder"><i class="fas fa-envelope"></i> Beskeder</a>';
+                    }
+
+                    if($user->secCheckLevel() == 99) {
                         echo '<a class="dropdown-item" href="index.php?side=opdater"><i class="fas fa-sync"></i> Opdater</a>';
-                    } else {
-                        echo '';
                     }
                     ?>
                     <div class="dropdown-divider"></div>

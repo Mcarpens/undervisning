@@ -16,6 +16,10 @@ $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
 
+if ($user->is_loggedin() == true) {
+    $users = $user->getOne($_SESSION['user_id']);
+}
+
 include_once './inc/head.php';
 include_once './inc/menu.php';
 
@@ -92,6 +96,10 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
 
             case 'nytProdukt';
                 include_once './newProduct.php';
+                break;
+
+            case 'profil';
+                include_once './profile.php';
                 break;
 
             default:
