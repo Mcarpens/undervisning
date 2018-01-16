@@ -60,11 +60,8 @@ if(file_exists($new_filename)) {
         $zip = new ZipArchive;
         $res = $zip->open($new_filename);
         if ($res === TRUE) {
-            for($i = 0; $i < $zip->numFiles; $i++) {
-                $filen = $zip->getNameIndex($i);
-                $fileinfo = pathinfo($filen);
-                copy($filename."#".$filen, "".$fileinfo['basename']);
-            }
+            $zip->extractTo(__DIR__);
+            $zip->close();
             echo "
                 <div class='col-md-12' id='update-success'>
                     <h3><i class='fa fa-check-circle'></i> Update success <i class='fa fa-check-circle'></i></h3>
