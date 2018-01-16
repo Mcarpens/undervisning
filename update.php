@@ -11,7 +11,7 @@ if($user->secCheckLevel() >= 90) {
 // Update Script
 // -------------------------------
 $zip_filename = "master.zip"; /// The filename of the zip filename. Can be edited!
-$zip_path = "https://github.com/Mcarpens/undervisning/archive/"; /// The path to the zip file. Can be edited!
+$zip_path = "https://carpens-systems.dk/produkter/undervisning/archive/"; /// The path to the zip file. Can be edited!
 $filename = $zip_path . '/' .$zip_filename;
 
 if (file_exists('versions/')) {
