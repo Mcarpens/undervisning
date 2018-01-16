@@ -15,8 +15,6 @@
             if($user->secCheckLevel() >= 90) {
                 echo '<li class="nav-item"><a href="index.php?side=beskeder">Beskeder</a></li>';
                 echo '<li class="nav-item"><a href="index.php?side=opdater">Opdater</a></li>';
-            } else {
-                echo '';
             }
 
             if($user->is_loggedin() === TRUE) {
