@@ -64,8 +64,9 @@ if(file_exists($new_filename)) {
             $zip->close();
             echo "
                 <div class='col-md-12' id='update-success'>
-                    <h3><i class='fa fa-check-circle'></i> Update success <i class='fa fa-check-circle'></i></h3>
-                    <p class='lead'>The project has been updated.</p>
+                    <h3><i class='fa fa-check-circle'></i> Opdateret <i class='fa fa-check-circle'></i></h3>
+                    <p class='lead'>Projektet er blevet opdateret.</p>
+                    <p class='lead'>Det nye build nummer er " . $buildnr . "</p>
                     <table class='table table-striped'>
                             <tr>
                                 <td>MD5</td>
@@ -76,20 +77,20 @@ if(file_exists($new_filename)) {
                                 <td>$sha1file</td>
                             </tr>
                         </table>
-                    <p><a href='../' class='btn btn-success btn-md'><i class='fa fa-chevron-circle-left'></i> Go back</a></p>
+                    <p><a href='./index.php?side=forside' class='btn btn-success btn-md'><i class='fa fa-chevron-circle-left'></i> Gå tilbage</a></p>
                 </div>";
         } else {
             echo "<div class='col-md-12' id='update-error'>
-                            <h3><i class='fa fa-exclamation-triangle'></i> Update error <i class='fa fa-exclamation-triangle'></i></h3>
-                            <p>The updater encountered an critical error while trying to update.</p>
-                            <p><a href='' id='try-again' class='btn btn-danger btn-md'><i class='fa fa-refresh'></i> Try again</a> &nbsp; &nbsp; <a href='../' class='btn btn-primary'><i class='fa fa-chevron-circle-left'></i> Go back</a></p>
+                            <h3><i class='fa fa-exclamation-triangle'></i> Opdaterings fejl <i class='fa fa-exclamation-triangle'></i></h3>
+                            <p>Der opstod en fejl med opdateringen. Prøv venligst igen.</p>
+                            <p><a href='./index.php?side=opdater' id='try-again' class='btn btn-danger btn-md'><i class='fa fa-refresh'></i> Prøv igen</a> &nbsp; &nbsp; <a href='./index.php?side=forside' class='btn btn-primary'><i class='fa fa-chevron-circle-left'></i> Gå tilbage</a></p>
                           </div>";}
     } else {
         echo "<div class='col-md-12' id='update-error'>
-                            <h3><i class='fa fa-exclamation-triangle'></i> Update error <i class='fa fa-exclamation-triangle'></i></h3>
-                            <p>The updater encountered an file integrity error while trying to update.</p>
-                            <p>Please try again, and see if that dosen't fix the problem.</p>
-                            <p><a href='' id='try-again' class='btn btn-danger btn-md'><i class='fa fa-refresh'></i> Try again</a> &nbsp; &nbsp; <a href='../' class='btn btn-primary'><i class='fa fa-chevron-circle-left'></i> Go back</a></p>
+                            <h3><i class='fa fa-exclamation-triangle'></i> Opdaterings fejl <i class='fa fa-exclamation-triangle'></i></h3>
+                            <p>Der opstod en fejl med integriteten af den nye opdatering.</p>
+                            <p>Prøv venligst igen.</p>
+                            <p><a href='./index.php?side=opdater' id='try-again' class='btn btn-danger btn-md'><i class='fa fa-refresh'></i> Prøv igen</a> &nbsp; &nbsp; <a href='./index.php?side=forside' class='btn btn-primary'><i class='fa fa-chevron-circle-left'></i> Gå tilbage</a></p>
                           </div>";
     }
     ?>

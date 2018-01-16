@@ -44,3 +44,10 @@
     color: white;
     font-size: 12px;
 }
+
+kbd {
+    display: block;
+    position: fixed;
+    bottom: 0.5%;
+    right: 0.5%;
+}
