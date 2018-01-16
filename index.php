@@ -90,6 +90,10 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './singleProduct.php';
                 break;
 
+            case 'nytProdukt';
+                include_once './newProduct.php';
+                break;
+
             default:
                 header('Location: index.php?side=forside');
                 break;

@@ -5,7 +5,7 @@
         <th scope="col">Pris</th>
         <th scope="col">Vare nummer</th>
         <th scope="col">Beskrivelse</th>
-        <th></th>
+        <th scope="col">Handling</th>
     </tr>
     </thead>
     <tbody>
@@ -20,7 +20,11 @@ if(isset($_GET['search'])) {
         <td><?= $product->price ?></td>
         <td><?= $product->product_number ?></td>
         <td><?= $product->description ?></td>
-        <td><a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-primary" >Vis Produkt</button></a></td>
+        <td>
+            <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Vis produkt"><i class="fas fa-external-link-alt"></i> </button></a>
+            <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Rediger produkt"><i class="fas fa-edit"></i> </button></a>
+            <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Slet produkt"><i class="fas fa-ban"></i> </button></a>
+        </td>
     </tr>
         <?php }
 } else {
@@ -30,7 +34,11 @@ if(isset($_GET['search'])) {
         <td><?= $product->price ?></td>
         <td><?= $product->product_number ?></td>
         <td><?= $product->description ?></td>
-        <td><a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-primary" >Vis Produkt</button></a></td>
+        <td>
+            <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Vis produkt"><i class="fas fa-external-link-alt"></i> </button></a>
+            <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Rediger produkt"><i class="fas fa-edit"></i> </button></a>
+            <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Slet produkt"><i class="fas fa-ban"></i> </button></a>
+        </td>
     </tr>
         <?php }
 }
@@ -39,5 +47,6 @@ if(isset($_GET['search'])) {
     </tbody>
 </table>
 
-<a href="index.php?p=products"><button class="btn btn-success">Vis alle produkter</button></a>
+<a href="index.php?side=produkter"><button class="btn btn-success">Vis alle produkter</button></a> &nbsp;
+<a href="index.php?side=nytProdukt"><button class="btn btn-primary">Opret nyt produkt</button></a>
 
