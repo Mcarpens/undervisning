@@ -16,6 +16,10 @@ samt hvad de forskellige moduler er kategoriseret i niveau.
 ## Øvet
 ## Indeholder:
 1) Kontakt formular
+2) Produkter
+3) Produkt Søgning
+4) Opret, Rediger og slet produkt
+5) Rediger og slet bruger
 
 
 ## Avanceret 
