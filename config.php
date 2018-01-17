@@ -32,7 +32,7 @@ $db = new DB('mysql:host='._DB_HOST_.';dbname='._DB_NAME_.';charset=utf8',_DB_US
 // Sæt debug status
 // 1 = On
 // 0 = Off
-$debug = 0;
+$debug = 1;
 
 // Build Nummer
 // Ændres for hver gang vi har opdateret vores kode

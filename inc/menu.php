@@ -56,13 +56,14 @@
                     if($user->secCheckLevel() == 99) {
                         echo '<a class="dropdown-item" href="index.php?side=opdater"><i class="fas fa-sync"></i> Opdater</a>';
                     }
-                    ?>
-                    <div class="dropdown-divider"></div>
-                    <?php
+
                     if($user->is_loggedin() === TRUE) {
+                        echo '<div class="dropdown-divider"></div>';
                         echo '<a class="dropdown-item" href="index.php?side=logud"><i class="fas fa-sign-out-alt"></i>Log ud</a>';
                     } else {
                         echo '<a class="dropdown-item" href="index.php?side=logind"><i class="fas fa-sign-in-alt"></i> Log ind</a>';
+                        echo '<div class="dropdown-divider"></div>';
+                        echo '<a class="dropdown-item" href="index.php?side=opret"><i class="fas fa-user-plus"></i> Opret en bruger</a>';
                     }
                     ?>
                 </div>
