@@ -102,6 +102,14 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './profile.php';
                 break;
 
+            case 'sletProdukt';
+                include_once './deleteProduct.php';
+                break;
+
+            case 'redigerProdukt';
+                include_once './editProduct.php';
+                break;
+
             default:
                 header('Location: index.php?side=forside');
                 break;
@@ -112,3 +120,28 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
 }
 
 include_once './inc/footer.php';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
