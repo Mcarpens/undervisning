@@ -16,7 +16,7 @@
         </ul>
         <form class="form-inline my-2 my-lg-0" method="post">
             <input class="form-control mr-sm-2" type="search" name="navn" placeholder="Søgning..." aria-label="Search">
-            <button class="btn btn-outline-primary my-2 my-sm-0" name="search" type="submit">Søg</button>
+            <button class="btn btn-success my-2 my-sm-0" name="search" type="submit">Søg</button>
         </form>
         <ul class="navbar-nav mr-right">
             <li class="nav-item dropdown">
