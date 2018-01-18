@@ -6,7 +6,7 @@
  * Time: 10:59
  */
 
-class Email extends \PDO{
+class Email extends \PDO {
 
     private $db = null;
 
@@ -63,7 +63,24 @@ class Email extends \PDO{
     
     public function deleteEmail($id)
     {
-        return $this->db->query("DELETE FROM messages WHERE id = :id", [':id' => $id]);
+        return $this->db->query("DELETE FROM `messages` WHERE id = :id", [':id' => $id]);
+    }
+
+    public function getLastesEmail()
+    {
+        return $this->db->toList("SELECT * FROM `messages` ORDER BY `id` DESC LIMIT 3");
+    }
+
+    public function singleEmail($id)
+    {
+        return $this->db->single("SELECT * FROM `messages` WHERE id = :id", [':id' => $id]);
+    }
+
+    public function rowCountEmail()
+    {
+        $result = $this->db->prepare("SELECT count(*) FROM `messages`");
+        $result->execute();
+        return $emailRows = $result->fetchColumn();
     }
 
 }

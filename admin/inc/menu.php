@@ -144,7 +144,7 @@
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-envelope"></i>
                     <span class="d-lg-none">Beskeder
-              <span class="badge badge-pill badge-primary">12</span>
+              <span class="badge badge-pill badge-primary"><?= $email->rowCountEmail() ?></span>
             </span>
                     <span class="indicator text-primary d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
@@ -153,12 +153,16 @@
                 <div class="dropdown-menu" aria-labelledby="messagesDropdown">
                     <h6 class="dropdown-header">Seneste beskeder:</h6>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <strong>David Miller</strong>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+                    <?php
+                    foreach ($email->getLastesEmail() as $emails) {
+                    ?>
+                    <a class="dropdown-item" href="?side=visBesked&id<?= $emails->id ?>">
+                        <strong><?= $emails->name ?></strong>
+                        <span class="small float-right text-muted"><?= $emails->timestamp ?></span>
+                        <div class="dropdown-message small"><?= $emails->message ?></div>
                     </a>
                     <div class="dropdown-divider"></div>
+                    <?php } ?>
                     <a class="dropdown-item small" href="./index.php?side=beskeder">Se alle beskeder</a>
                 </div>
             </li>
@@ -166,9 +170,9 @@
                 <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-bell"></i>
                     <span class="d-lg-none">Notifikationer
-              <span class="badge badge-pill badge-warning">6 New</span>
+              <span class="badge badge-pill badge-warning"><?= $setting->rowCountNotifications() ?></span>
             </span>
-                    <span class="indicator text-warning d-none d-lg-block">
+            <span class="indicator text-warning d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
             </span>
                 </a>
@@ -178,7 +182,7 @@
                     <?php
                     foreach ($setting->getLastesNotifications() as $notification) {
                         ?>
-                        <a class="dropdown-item" href="./index.php?side=notifikation&id=<?= $notification->id ?>">
+                        <a class="dropdown-item" href="?side=visNotifikation&id=<?= $notification->id ?>">
                             <span class="text-<?= $notification->status ?>">
                               <strong><i class="<?= $notification->link ?>"></i> <?= $notification->name ?></strong>
                             </span>

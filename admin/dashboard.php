@@ -18,12 +18,12 @@ if ($user->is_loggedin() == false){
                 <div class="card text-white bg-primary o-hidden h-100">
                     <div class="card-body">
                         <div class="card-body-icon">
-                            <i class="fa fa-fw fa-comments"></i>
+                            <i class="fa fa-fw fa-envelope"></i>
                         </div>
-                        <div class="mr-5">26 New Messages!</div>
+                        <div class="mr-5"><?= $email->rowCountEmail() ?> Beskeder</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#">
-                        <span class="float-left">View Details</span>
+                    <a class="card-footer text-white clearfix small z-1" href="?side=beskeder">
+                        <span class="float-left">Se mere</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
@@ -34,12 +34,12 @@ if ($user->is_loggedin() == false){
                 <div class="card text-white bg-warning o-hidden h-100">
                     <div class="card-body">
                         <div class="card-body-icon">
-                            <i class="fa fa-fw fa-list"></i>
+                            <i class="fa fa-fw fa-bell"></i>
                         </div>
-                        <div class="mr-5">11 New Tasks!</div>
+                        <div class="mr-5"><?= $setting->rowCountNotifications() ?> Notifikationer</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#">
-                        <span class="float-left">View Details</span>
+                    <a class="card-footer text-white clearfix small z-1" href="?side=notifikationer">
+                        <span class="float-left">Se mere</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
@@ -52,10 +52,10 @@ if ($user->is_loggedin() == false){
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-shopping-cart"></i>
                         </div>
-                        <div class="mr-5">123 New Orders!</div>
+                        <div class="mr-5"><?= $products->rowCountProducts() ?> Produkter</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#">
-                        <span class="float-left">View Details</span>
+                    <a class="card-footer text-white clearfix small z-1" href="?side=produkter">
+                        <span class="float-left">Se mere</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>
@@ -66,12 +66,12 @@ if ($user->is_loggedin() == false){
                 <div class="card text-white bg-danger o-hidden h-100">
                     <div class="card-body">
                         <div class="card-body-icon">
-                            <i class="fa fa-fw fa-support"></i>
+                            <i class="fa fa-fw fa-comments"></i>
                         </div>
-                        <div class="mr-5">13 New Tickets!</div>
+                        <div class="mr-5">Kommentarer</div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1" href="#">
-                        <span class="float-left">View Details</span>
+                        <span class="float-left">Se mere</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>

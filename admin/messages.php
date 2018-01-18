@@ -33,7 +33,10 @@ if($user->secCheckLevel() >= 90) {
                     <td><?= $emails->name ?></td>
                     <td><?= $emails->email ?></td>
                     <td><?= $emails->message ?></td>
-                    <td><a href="?side=sletEmail&id=<?=$emails->id?>"><button class="btn btn-danger" >Slet</button></a></td>
+                    <td>
+                        <a href="?side=visBesked&id<?= $emails->id ?>"><button class="btn btn-primary"> Vis</button></a>
+                        <a href="?side=sletEmail&id=<?=$emails->id?>"><button class="btn btn-danger" >Slet</button></a>
+                    </td>
                 </tr>
             <?php }
             } else {

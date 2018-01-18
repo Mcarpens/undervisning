@@ -27,7 +27,10 @@
                 <td><?= $notification->name ?></td>
                 <td><?= $notification->description ?></td>
                 <td><?= $notification->timestamp ?></td>
-                <td><a href="?side=sletNotifikation&id=<?= $notification->id ?>"><button class="btn btn-danger" >Slet</button></a></td>
+                <td>
+                    <a href="?side=visNotifikation&id=<?= $notification->id ?>"><button class="btn btn-primary" >Vis</button></a>
+                    <a href="?side=sletNotifikation&id=<?= $notification->id ?>"><button class="btn btn-danger" >Slet</button></a>
+                </td>
             </tr>
             <?php } ?>
             </tbody>

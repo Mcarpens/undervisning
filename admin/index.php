@@ -47,6 +47,7 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
     if (isset($get['side']) && !empty($get['side'])) {
         switch ($get['side']) {
 
+            /** Hovedsider */
             case 'dashboard';
                 include_once './dashboard.php';
                 break;
@@ -56,9 +57,19 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'logud';
                 include_once './logout.php';
                 break;
+
+            /** Beskeder */
             case 'beskeder';
                 include_once './messages.php';
                 break;
+            case 'sletEmail';
+                include_once './deleteEmail.php';
+                break;
+            case 'visBesked';
+                include_once './singleEmail.php';
+                break;
+
+            /** Produkter */
             case 'produkter';
                 include_once './products.php';
                 break;
@@ -71,23 +82,27 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'sletProdukt';
                 include_once './deleteProduct.php';
                 break;
-            case 'sletEmail';
-                include_once './deleteEmail.php';
-                break;
             case 'produkt';
                 include_once './singleProduct.php';
                 break;
+
+            /** Bruger */
             case 'brugere';
                 include_once './users.php';
                 break;
             case 'sletBruger';
                 include_once './deleteUser.php';
                 break;
+
+            /** Notifikationer */
             case 'notifikationer';
                 include_once './notifications.php';
                 break;
             case 'sletNotifikation';
                 include_once './deleteNotification.php';
+                break;
+            case 'visNotifikation';
+                include_once './singleNotification.php';
                 break;
 
             default:

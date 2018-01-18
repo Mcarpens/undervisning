@@ -50,7 +50,7 @@
                     }
 
                     if($user->secCheckLevel() >= 90) {
-                        echo '<a class="dropdown-item" href="./admin/index.php?side=beskeder"><i class="fab fa-connectdevelop"></i> Admin CP</a>';
+                        echo '<a class="dropdown-item" href="./admin/index.php?side=dashboard"><i class="fab fa-connectdevelop"></i> Admin CP</a>';
                     }
 
                     if($user->is_loggedin() === TRUE) {

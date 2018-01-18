@@ -66,6 +66,13 @@ class Products extends \PDO
             ]);
         return true;
     }
+
+    public function rowCountProducts()
+    {
+        $result = $this->db->prepare("SELECT count(*) FROM `products`");
+        $result->execute();
+        return $notificationRows = $result->fetchColumn();
+    }
 }
 
 
