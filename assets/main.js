@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    /* Slide in the feedback message - we suggest doing this only once per session */
+    /* Slide in the debug menu */
     setTimeout(function(){
         $('.usrp-fb-2').addClass('slide-in');
     }, 200);
@@ -8,7 +8,7 @@ $(document).ready(function(){
     /* Bind actions to small buttons click */
     $('.usrp-fb-2 .usrp-fb-btn').on('click', function(){
 
-        /* Collapse the feedback message into a regular button */
+        /* Collapse the debug menu into a regular button */
         $('.usrp-fb-2').removeClass('is-expanded');
         setTimeout(function(){ $('.usrp-fb-2').addClass('is-collapsed'); }, 300)
     });
@@ -16,9 +16,8 @@ $(document).ready(function(){
     /* Bind actions to small buttons click */
     $('.usrp-fb-2 .usrp-fb-title').on('click', function(){
 
-        /* Collapse the feedback message into a regular button */
+        /* Expand the debug menu on click button */
         $('.usrp-fb-2').removeClass('is-collaped');
         setTimeout(function(){ $('.usrp-fb-2').addClass('is-expanded'); }, 300)
     });
-
 });
