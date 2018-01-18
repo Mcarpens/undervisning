@@ -32,8 +32,8 @@ $db = new DB('mysql:host='._DB_HOST_.';dbname='._DB_NAME_.';charset=utf8',_DB_US
 // Sæt debug status
 // 1 = On
 // 0 = Off
-$debug = 1;
+$debug = 0;
 
 // Build Nummer
 // Ændres for hver gang vi har opdateret vores kode
-$buildnr = 127;
+$buildnr = 128;

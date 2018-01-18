@@ -23,6 +23,11 @@ class Settings {
         return $this->db->toList("SELECT * FROM `menu`");
     }
 
+    public function getAllAdminMenu()
+    {
+        return $this->db->toList("SELECT * FROM `admin_menu`");
+    }
+
 //    Kommenteret ud, da vi ikke skal bruge denne metode lige nu!
 
     public function getAllSettings()
