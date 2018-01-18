@@ -34,4 +34,40 @@ class Settings {
     {
         return $this->db->toList("SELECT * FROM `settings`");
     }
+
+    public function  getAllNotifications()
+    {
+        return $this->db->toList("SELECT * FROM `notifications`");
+    }
+
+    public function getLastesNotifications()
+    {
+        return $this->db->toList("SELECT * FROM `notifications` ORDER BY `id` DESC LIMIT 3");
+    }
+
+    public function deleteNotification($id)
+    {
+        return $this->db->query("DELETE FROM notifications WHERE id = :id", [':id' => $id]);
+    }
+
+    public function setUpdateNotification($post)
+    {
+        try
+        {
+            $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`,) VALUES (:name, :link, :description, :status)",
+             [
+                 ':name' => $post['name'],
+                 ':link' => $post['link'],
+                 ':description' => $post['description'],
+                 ':status' => $post['status']
+             ]);
+
+            return true;
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }

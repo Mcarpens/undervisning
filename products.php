@@ -24,9 +24,7 @@
                             <td><?= $product->description ?></td>
                             <td>
                                 <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Vis produkt"><i class="fas fa-external-link-alt"></i> </button></a>
-                                <a href="?side=redigerProdukt&id=<?=$product->id?>"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Rediger produkt"><i class="fas fa-edit"></i> </button></a>
-                                <a href="?side=sletProdukt&id=<?=$product->id?>"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Slet produkt"><i class="fas fa-ban"></i> </button></a>
-                            </td>
+                           </td>
                         </tr>
                     <?php }
                 } else {
@@ -38,9 +36,7 @@
                             <td><?= $product->description ?></td>
                             <td>
                                 <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Vis produkt"><i class="fas fa-external-link-alt"></i> </button></a>
-                                <a href="?side=redigerProdukt&id=<?=$product->id?>"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Rediger produkt"><i class="fas fa-edit"></i> </button></a>
-                                <a href="?side=sletProdukt&id=<?=$product->id?>"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Slet produkt"><i class="fas fa-ban"></i> </button></a>
-                            </td>
+                           </td>
                         </tr>
                     <?php }
                 }
@@ -48,10 +44,6 @@
 
                 </tbody>
             </table>
-
-            <a href="../index.php?side=produkter"><button class="btn btn-success">Vis alle produkter</button></a> &nbsp;
-            <a href="../index.php?side=nytProdukt"><button class="btn btn-primary">Opret nyt produkt</button></a>
-
         </div>
     </div>
 </div>

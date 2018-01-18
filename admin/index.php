@@ -83,6 +83,12 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'sletBruger';
                 include_once './deleteUser.php';
                 break;
+            case 'notifikationer';
+                include_once './notifications.php';
+                break;
+            case 'sletNotifikation';
+                include_once './deleteNotification.php';
+                break;
 
             default:
                 header('Location: index.php?side=dashboard');

@@ -62,6 +62,44 @@ if(file_exists($new_filename)) {
         if ($res === TRUE) {
             $zip->extractTo(__DIR__);
             $zip->close();
+
+            if ($setting->setUpdateNotification($_POST) == true) { ?>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="name" id="name" class="form-control" value="Opdatering Succes">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="link" name="link" value="fa fa-check-circle">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="description" name="description" value="Opdateret med success">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="status" name="status" value="success">
+                    </div>
+                </form>
+            <?php } else { ?>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="name" id="name" class="form-control" value="Opdatering Fejlede">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="link" name="link" value="fa fa-exclamation-triangle">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="description" name="description" value="Opdateringen fejlede">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="status" name="status" value="danger">
+                    </div>
+                </form>
+            <?php }
             echo "
                 <div class='col-md-12' id='update-success'>
                     <h3><i class='fa fa-check-circle'></i> Opdateret <i class='fa fa-check-circle'></i></h3>
