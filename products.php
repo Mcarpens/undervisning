@@ -49,8 +49,8 @@
                 </tbody>
             </table>
 
-            <a href="index.php?side=produkter"><button class="btn btn-success">Vis alle produkter</button></a> &nbsp;
-            <a href="index.php?side=nytProdukt"><button class="btn btn-primary">Opret nyt produkt</button></a>
+            <a href="../index.php?side=produkter"><button class="btn btn-success">Vis alle produkter</button></a> &nbsp;
+            <a href="../index.php?side=nytProdukt"><button class="btn btn-primary">Opret nyt produkt</button></a>
 
         </div>
     </div>

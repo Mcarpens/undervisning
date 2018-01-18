@@ -39,32 +39,37 @@ if(isset($_POST['btn_send'])) {
 }
 
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <br>
-            <?=@$success?>
-            <form name="contactform" action="" method="post">
-                <div class="form-group">
-                    <label for="name">Navn</label>
-                    <?=@$error['name']?>
-                    <input type="text" name="name" id="name" class="form-control" value="<?= @$_POST['name'] ?>">
-                </div>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="./index.php?side=dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Produkter</li>
+        </ol>
+        <?=@$success?>
+        <form name="contactform" action="" method="post">
+            <div class="form-group">
+                <label for="name">Navn</label>
+                <?=@$error['name']?>
+                <input type="text" name="name" id="name" class="form-control" value="<?= @$_POST['name'] ?>">
+            </div>
 
-                <div class="form-group">
-                    <label for="price">Pris</label>
-                    <?=@$error['price']?>
-                    <input type="text" class="form-control" id="price" name="price" aria-describedby="emailHelp" value="<?= @$_POST['price'] ?>">
-                </div>
+            <div class="form-group">
+                <label for="price">Pris</label>
+                <?=@$error['price']?>
+                <input type="text" class="form-control" id="price" name="price" aria-describedby="emailHelp" value="<?= @$_POST['price'] ?>">
+            </div>
 
-                <div class="form-group">
-                    <label for="description">Beskrivelse</label>
-                    <?=@$error['description']?>
-                    <textarea class="form-control" id="description" name="description" rows="3"><?= @$_POST['description'] ?></textarea>
-                </div>
+            <div class="form-group">
+                <label for="description">Beskrivelse</label>
+                <?=@$error['description']?>
+                <textarea class="form-control" id="description" name="description" rows="3"><?= @$_POST['description'] ?></textarea>
+            </div>
 
-                <input type="submit" class="btn btn-success" value="Opret" name="btn_send" />
-            </form>
-        </div>
+            <input type="submit" class="btn btn-success" value="Opret" name="btn_send" />
+        </form>
     </div>
 </div>

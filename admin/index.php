@@ -56,6 +56,33 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'logud';
                 include_once './logout.php';
                 break;
+            case 'beskeder';
+                include_once './messages.php';
+                break;
+            case 'produkter';
+                include_once './products.php';
+                break;
+            case 'nytProdukt';
+                include_once './newProduct.php';
+                break;
+            case 'redigerProdukt';
+                include_once './editProduct.php';
+                break;
+            case 'sletProdukt';
+                include_once './deleteProduct.php';
+                break;
+            case 'sletEmail';
+                include_once './deleteEmail.php';
+                break;
+            case 'produkt';
+                include_once './singleProduct.php';
+                break;
+            case 'brugere';
+                include_once './users.php';
+                break;
+            case 'sletBruger';
+                include_once './deleteUser.php';
+                break;
 
             default:
                 header('Location: index.php?side=dashboard');

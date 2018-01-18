@@ -9,9 +9,8 @@ if ($user->is_loggedin() == false){
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Dashboard</a>
+                <a href="./index.php?side=dashboard">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">My Dashboard</li>
         </ol>
         <!-- Icon Cards-->
         <div class="row">
