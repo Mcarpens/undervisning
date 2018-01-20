@@ -13,7 +13,8 @@ if(isset($_POST['btn-login']))
 
     if($user->doLogin($username,$password) == true)
     {
-       $user->redirect('profil');
+        $notification->setLoginUserNotificaitonAdminSuccess();
+        $user->redirect('profil');
     }
     else if($user->doLogin($username, $password) == false)
     {
@@ -27,12 +28,12 @@ $user->destroyToken();
 <body class="bg-dark">
 <div class="container">
     <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Login</div>
+        <div class="card-header" style="text-align: center"><?php foreach ($setting->getAllSettings() as $settings) {echo $settings->site_name;} ?> - Administrations Panel</div>
         <div class="card-body">
 
         <form class="form-signin" method="post" id="login-form">
             <input type="hidden" name="token" value="<?php echo $user->getToken() ?>">
-            <h2 class="form-signin-heading">Log Ind</h2><hr />
+            <h2 class="form-signin-heading" style="text-align: center">Log Ind</h2><hr />
 
             <div id="error">
                 <?php
@@ -60,12 +61,11 @@ $user->destroyToken();
             <hr />
 
             <div class="form-group">
-                <button type="submit" name="btn-login" class="btn btn-success">
+                <button type="submit" name="btn-login" class="btn btn-success btn-block">
                     <i class="fa fa-sign-in-alt"></i> &nbsp; LOG IND
                 </button>
             </div>
-            <br />
-            <label>Har du ikke en konto endnu? <a href="./index.php?side=opret">Opret en konto</a></label>
+
         </form>
             <div class="text-center">
                 <a class="d-block small" href="forgot-password.html">Forgot Password?</a>

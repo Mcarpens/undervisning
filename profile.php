@@ -5,7 +5,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-3 col-lg-3 " align="center">
-                            <img alt="User Pic" src="./assets/img/users/<?= $users->avatar ?>" style="height: 300px; width: 300px;" id="profile_img" class="rounded">
+                            <img alt="User Pic" src="./assets/img/users/<?= $users->avatar ?>" style="height: 300px; width: auto;" id="profile_img" class="rounded">
                         </div>
 
                         <div class=" col-md-9 col-lg-9 ">

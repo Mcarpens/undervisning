@@ -131,4 +131,18 @@ class Notifications extends \PDO
         return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('En Bruger er Slettet', 'fa fa-check-circle', 'Der er blevet slettet en bruger fra siden.', 'success')");
     }
 
+    /**
+     * Bruger Logind Notifikationer
+     * @return mixed
+     */
+    public function setLoginUserNotificaitonAdminSuccess()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('En Bruger er logget ind', 'fa fa-check-circle', 'En bruger er logget ind på administrations panelet', 'success')");
+    }
+
+    public function setLoginUserNotificaitonFrontSuccess()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('En Bruger er logget ind', 'fa fa-check-circle', 'En bruger er logget ind på forsiden', 'success')");
+    }
+
 }

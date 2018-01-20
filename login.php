@@ -13,7 +13,8 @@ if(isset($_POST['btn-login']))
 
     if($user->doLogin($username,$password) == true)
     {
-       $user->redirect('profil');
+        $notification->setLoginUserNotificaitonAdminSuccess();
+        $user->redirect('profil');
     }
     else if($user->doLogin($username, $password) == false)
     {
