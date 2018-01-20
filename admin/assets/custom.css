@@ -246,3 +246,11 @@ kbd {
     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
+
+/** Slet Alle Notifikationer Knap **/
+
+/*#delete_all_notifications {*/
+    /*text-align: center;*/
+    /*justify-content: center;*/
+    /*margin-right: 250px;*/
+/*}*/

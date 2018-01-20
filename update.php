@@ -62,7 +62,7 @@ if(file_exists($new_filename)) {
         if ($res === TRUE) {
             $zip->extractTo(__DIR__);
             $zip->close();
-            $setting->setUpdateNotificationSuccess();
+            $notification->setUpdateNotificationSuccess();
             echo "
                 <div class='col-md-12' id='update-success'>
                     <h3><i class='fa fa-check-circle'></i> Opdateret <i class='fa fa-check-circle'></i></h3>
@@ -81,14 +81,14 @@ if(file_exists($new_filename)) {
                     <p><a href='./admin/index.php?side=forside' class='btn btn-success btn-md'><i class='fa fa-chevron-circle-left'></i> Gå tilbage</a></p>
                 </div>";
         } else {
-            $setting->setUpdateNotificationFailed();
+            $notification->setUpdateNotificationFailed();
             echo "<div class='col-md-12' id='update-error'>
                             <h3><i class='fa fa-exclamation-triangle'></i> Opdaterings fejl <i class='fa fa-exclamation-triangle'></i></h3>
                             <p>Der opstod en fejl med opdateringen. Prøv venligst igen.</p>
                             <p><a href='./index.php?side=opdater' id='try-again' class='btn btn-danger btn-md'><i class='fa fa-refresh'></i> Prøv igen</a> &nbsp; &nbsp; <a href='./admin/index.php?side=dashboard' class='btn btn-primary'><i class='fa fa-chevron-circle-left'></i> Gå tilbage</a></p>
                           </div>";}
     } else {
-        $setting->setUpdateNotificationFailed();
+        $notification->setUpdateNotificationFailedIntegrity();
         echo "<div class='col-md-12' id='update-error'>
                             <h3><i class='fa fa-exclamation-triangle'></i> Opdaterings fejl <i class='fa fa-exclamation-triangle'></i></h3>
                             <p>Der opstod en fejl med integriteten af den nye opdatering.</p>

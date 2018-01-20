@@ -36,7 +36,7 @@ if ($user->is_loggedin() == false){
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-bell"></i>
                         </div>
-                        <div class="mr-5"><?= $setting->rowCountNotifications() ?> Notifikationer</div>
+                        <div class="mr-5"><?= $notification->rowCountNotifications() ?> Notifikationer</div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1" href="?side=notifikationer">
                         <span class="float-left">Se mere</span>

@@ -23,6 +23,7 @@ if($user->secCheckLevel() >= 90) {
                 <th scope="col">Navn</th>
                 <th scope="col">Email</th>
                 <th scope="col">Besked</th>
+                <th scope="col">Tidspunkt</th>
                 <th scope="col">Handling</th>
             </tr>
             </thead>
@@ -33,9 +34,10 @@ if($user->secCheckLevel() >= 90) {
                     <td><?= $emails->name ?></td>
                     <td><?= $emails->email ?></td>
                     <td><?= $emails->message ?></td>
+                    <td><?= $emails->timestamp ?></td>
                     <td>
-                        <a href="?side=visBesked&id<?= $emails->id ?>"><button class="btn btn-primary"> Vis</button></a>
-                        <a href="?side=sletEmail&id=<?=$emails->id?>"><button class="btn btn-danger" >Slet</button></a>
+                        <a href="?side=visBesked&id=<?= $emails->id ?>"><button class="btn btn-primary"> Vis</button></a>
+                        <a href="?side=sletEmail&id=<?= $emails->id ?>"><button class="btn btn-danger" > Slet</button></a>
                     </td>
                 </tr>
             <?php }

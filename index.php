@@ -15,6 +15,7 @@ $setting = new settings($db);
 $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
+$notification = new Notifications($db);
 
 if ($user->is_loggedin() == true) {
     $users = $user->getOne($_SESSION['user_id']);
@@ -44,6 +45,7 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
     if (isset($get['side']) && !empty($get['side'])) {
         switch ($get['side']) {
 
+            /** Hovedsider */
             case 'forside';
                 include_once './home.php';
                 break;
@@ -53,50 +55,39 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'kontakt';
                 include_once './contact.php';
                 break;
+            case 'opdater';
+                include_once './update.php';
+                break;
+
+            /** Produkter */
+            case 'produkter';
+                include_once './products.php';
+                break;
+            case 'produkt';
+                include_once './partials/singleProduct.php';
+                break;
+            case 'search';
+                include_once './search.php';
+                break;
+
+            /** Brugere */
+            case 'sletBruger';
+                include_once './partials/deleteUser.php';
+                break;
+            case 'redigerBruger';
+                include_once './partials/editUser.php';
+                break;
+            case 'profil';
+                include_once './profile.php';
+                break;
+            case 'opret';
+                include_once './signup.php';
+                break;
             case 'logind';
                 include_once './login.php';
                 break;
             case 'logud';
                 include_once './logout.php';
-                break;
-            case 'opret';
-                include_once './signup.php';
-                break;
-            case 'beskeder';
-                include_once './messages.php';
-                break;
-            case 'sletEmail';
-                include_once './deleteEmail.php';
-                break;
-            case 'opdater';
-                include_once './update.php';
-                break;
-            case 'produkter';
-                include_once './products.php';
-                break;
-            case 'search';
-                include_once './search.php';
-                break;
-            case 'produkt';
-                include_once './singleProduct.php';
-                break;
-            case 'nytProdukt';
-                include_once './newProduct.php';
-                break;
-            case 'profil';
-                include_once './profile.php';
-                break;
-            case 'sletProdukt';
-                include_once './deleteProduct.php';
-                break;
-            case 'redigerProdukt';
-                include_once './editProduct.php';
-                break;
-            case 'sletBruger';
-                include_once './deleteUser.php';
-                break;
-            case 'redigerBruger';
-                include_once './editUser.php';
                 break;
 
             default:

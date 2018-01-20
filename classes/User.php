@@ -312,9 +312,11 @@ class User extends \PDO
 
     public function editUser($post)
     {
+        $avatar = mediaImageUploader('filUpload');
+        var_dump($avatar['name']);
 
-        if(empty($post['password'])) {
-            $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone 
+        if(empty($avatar['name'])) {
+            $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone
                           WHERE id = :id",
                 [
                     ':id' => $post['id'],
@@ -325,10 +327,66 @@ class User extends \PDO
                     ':address' => $post['address'],
                     ':phone' => $post['phone']
                 ]);
-        } if(!empty($post['password'])) {
+        } else if(empty($post['password']) && empty($avatar['name'])) {
+            $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone
+                          WHERE id = :id",
+                [
+                    ':id' => $post['id'],
+                    ':firstname' => $post['firstname'],
+                    ':lastname' => $post['lastname'],
+                    ':username' => $post['username'],
+                    ':email' => $post['email'],
+                    ':address' => $post['address'],
+                    ':phone' => $post['phone']
+                ]);
+        } else if(empty($post['password'])) {
+            $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone, `avatar`=:avatar
+                          WHERE id = :id",
+                [
+                    ':id' => $post['id'],
+                    ':firstname' => $post['firstname'],
+                    ':lastname' => $post['lastname'],
+                    ':username' => $post['username'],
+                    ':email' => $post['email'],
+                    ':address' => $post['address'],
+                    ':avatar' => $avatar['name'],
+                    ':phone' => $post['phone']
+                ]);
+        } else if(!empty($avatar['name'])) {
+            $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone, `avatar`=:avatar
+                          WHERE id = :id",
+                [
+                    ':id' => $post['id'],
+                    ':firstname' => $post['firstname'],
+                    ':lastname' => $post['lastname'],
+                    ':username' => $post['username'],
+                    ':email' => $post['email'],
+                    ':address' => $post['address'],
+                    ':avatar' => $avatar['name'],
+                    ':phone' => $post['phone']
+                ]);
+        } else if(!empty($post['password']) && !empty($avatar['name'])) {
+            $new_password = password_hash($post['password'], PASSWORD_BCRYPT, ['cost' => 12]);
+
+            $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone, `avatar` = :avatar, `password` = :password
+                          WHERE id = :id",
+                [
+                    ':id' => $post['id'],
+                    ':firstname' => $post['firstname'],
+                    ':lastname' => $post['lastname'],
+                    ':username' => $post['username'],
+                    ':email' => $post['email'],
+                    ':address' => $post['address'],
+                    ':phone' => $post['phone'],
+                     ':avatar' => $avatar['name'],
+                    ':password' => $new_password
+                ]);
+        }
+
+        if(!empty($post['password'])) {
         $new_password = password_hash($post['password'], PASSWORD_BCRYPT, ['cost' => 12]);
 
-        $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone, `password` = :password 
+        $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone, `avatar` = :avatar, `password` = :password 
                           WHERE id = :id",
             [
                 ':id' => $post['id'],
@@ -338,6 +396,7 @@ class User extends \PDO
                 ':email' => $post['email'],
                 ':address' => $post['address'],
                 ':phone' => $post['phone'],
+                ':avatar' => $avatar['name'],
                 ':password' => $new_password
             ]);
     }

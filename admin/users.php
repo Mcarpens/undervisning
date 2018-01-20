@@ -25,7 +25,7 @@
             <tbody>
             <?php foreach($user->getAll() as $users) { ?>
             <tr>
-                <td><img src="<?= $users->avatar ?>" style="width: 30px; height: 30px;"></td>
+                <td><a href="../assets/img/users/<?= $users->avatar ?>" target="_blank"><img src="../assets/img/users/<?= $users->avatar ?>" style="width: 30px; height: 30px;"></a></td>
                 <td><?= $users->id ?></td>
                 <td><?= $users->firstname . ' ' . $users->lastname ?></td>
                 <td><?= $users->username ?></td>

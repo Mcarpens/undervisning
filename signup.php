@@ -35,7 +35,8 @@ if(isset($_POST['btn-signup']))
             $stmt = $user->checkUsername($username);
             if($stmt == false) {
                 if($user->register($firstname, $lastname, $username, $password) == true){
-                       $user->redirect('logind');
+                    $notification->setNewUserNotification();
+                    $user->redirect('logind');
                 }
             }
             else

@@ -34,7 +34,7 @@
                                 $userrole = "Medarbejder";
                             }
                             if ($u->id === $_SESSION['user_id']) {
-                                echo '<img src="' . $users->avatar . '" style="width: 30px; height: 30px;" class="rounded"> ' . $u->username;
+                                echo '<img src="./assets/img/users/' . $users->avatar . '" style="width: 30px; height: 30px;" class="rounded"> ' . $u->username;
                             }
                         }
                     } else {

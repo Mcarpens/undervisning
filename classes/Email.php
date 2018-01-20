@@ -58,7 +58,7 @@ class Email extends \PDO {
     }
 
     public function getAllEmails() {
-        return $this->db->toList('SELECT * FROM `messages`');
+        return $this->db->toList('SELECT * FROM `messages` ORDER BY `id` DESC');
     }
     
     public function deleteEmail($id)
@@ -66,7 +66,7 @@ class Email extends \PDO {
         return $this->db->query("DELETE FROM `messages` WHERE id = :id", [':id' => $id]);
     }
 
-    public function getLastesEmail()
+    public function getLatestEmail()
     {
         return $this->db->toList("SELECT * FROM `messages` ORDER BY `id` DESC LIMIT 3");
     }

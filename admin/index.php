@@ -15,6 +15,7 @@ $setting = new settings($db);
 $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
+$notification = new Notifications($db);
 
 if ($user->is_loggedin() == true) {
     $users = $user->getOne($_SESSION['user_id']);
@@ -51,22 +52,16 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'dashboard';
                 include_once './dashboard.php';
                 break;
-            case 'logind';
-                include_once './login.php';
-                break;
-            case 'logud';
-                include_once './logout.php';
-                break;
 
             /** Beskeder */
             case 'beskeder';
                 include_once './messages.php';
                 break;
             case 'sletEmail';
-                include_once './deleteEmail.php';
+                include_once './partials/deleteEmail.php';
                 break;
             case 'visBesked';
-                include_once './singleEmail.php';
+                include_once './partials/singleEmail.php';
                 break;
 
             /** Produkter */
@@ -74,16 +69,16 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './products.php';
                 break;
             case 'nytProdukt';
-                include_once './newProduct.php';
+                include_once './partials/newProduct.php';
                 break;
             case 'redigerProdukt';
-                include_once './editProduct.php';
+                include_once './partials/editProduct.php';
                 break;
             case 'sletProdukt';
-                include_once './deleteProduct.php';
+                include_once './partials/deleteProduct.php';
                 break;
             case 'produkt';
-                include_once './singleProduct.php';
+                include_once './partials/singleProduct.php';
                 break;
 
             /** Bruger */
@@ -91,18 +86,28 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './users.php';
                 break;
             case 'sletBruger';
-                include_once './deleteUser.php';
+                include_once './partials/deleteUser.php';
                 break;
+            case 'logind';
+                include_once './login.php';
+                break;
+            case 'logud';
+                include_once './logout.php';
+                break;
+
 
             /** Notifikationer */
             case 'notifikationer';
                 include_once './notifications.php';
                 break;
             case 'sletNotifikation';
-                include_once './deleteNotification.php';
+                include_once './partials/deleteNotification.php';
                 break;
             case 'visNotifikation';
-                include_once './singleNotification.php';
+                include_once './partials/singleNotification.php';
+                break;
+            case 'sletAlleNotifikationer';
+                include_once './partials/deleteAllNotifications.php';
                 break;
 
             default:

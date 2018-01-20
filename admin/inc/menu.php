@@ -154,9 +154,9 @@
                     <h6 class="dropdown-header">Seneste beskeder:</h6>
                     <div class="dropdown-divider"></div>
                     <?php
-                    foreach ($email->getLastesEmail() as $emails) {
+                    foreach ($email->getLatestEmail() as $emails) {
                     ?>
-                    <a class="dropdown-item" href="?side=visBesked&id<?= $emails->id ?>">
+                    <a class="dropdown-item" href="?side=visBesked&id=<?= $emails->id ?>">
                         <strong><?= $emails->name ?></strong>
                         <span class="small float-right text-muted"><?= $emails->timestamp ?></span>
                         <div class="dropdown-message small"><?= $emails->message ?></div>
@@ -170,7 +170,7 @@
                 <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-bell"></i>
                     <span class="d-lg-none">Notifikationer
-              <span class="badge badge-pill badge-warning"><?= $setting->rowCountNotifications() ?></span>
+              <span class="badge badge-pill badge-warning"><?= $notification->rowCountNotifications() ?></span>
             </span>
             <span class="indicator text-warning d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
@@ -180,14 +180,14 @@
                     <h6 class="dropdown-header">Nyeste Notifikationer:</h6>
                     <div class="dropdown-divider"></div>
                     <?php
-                    foreach ($setting->getLastesNotifications() as $notification) {
+                    foreach ($notification->getLastesNotifications() as $notifications) {
                         ?>
-                        <a class="dropdown-item" href="?side=visNotifikation&id=<?= $notification->id ?>">
-                            <span class="text-<?= $notification->status ?>">
-                              <strong><i class="<?= $notification->link ?>"></i> <?= $notification->name ?></strong>
+                        <a class="dropdown-item" href="?side=visNotifikation&id=<?= $notifications->id ?>">
+                            <span class="text-<?= $notifications->status ?>">
+                              <strong><i class="<?= $notifications->link ?>"></i> <?= $notifications->name ?></strong>
                             </span>
-                            <span class="small float-right text-muted"><?= $notification->timestamp ?></span>
-                            <div class="dropdown-message small"><?= $notification->description ?></div>
+                            <span class="small float-right text-muted"><?= $notifications->timestamp ?></span>
+                            <div class="dropdown-message small"><?= $notifications->description ?></div>
                         </a>
                     <div class="dropdown-divider"></div>
                     <?php } ?>

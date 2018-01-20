@@ -43,46 +43,4 @@ class Settings extends \PDO {
         return $this->db->toList("SELECT * FROM `settings`");
     }
 
-
-    /**
-     * Notifikationer
-     * @return mixed
-     */
-
-    public function  getAllNotifications()
-    {
-        return $this->db->toList("SELECT * FROM `notifications`");
-    }
-
-    public function getLastesNotifications()
-    {
-        return $this->db->toList("SELECT * FROM `notifications` ORDER BY `id` DESC LIMIT 3");
-    }
-
-    public function deleteNotification($id)
-    {
-        return $this->db->query("DELETE FROM `notifications` WHERE id = :id", [':id' => $id]);
-    }
-
-    public function setUpdateNotificationSuccess()
-    {
-        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Opdatering Succes', 'fa fa-check-circle', 'CMS er opdateret med succes. Alle filer er udpakket korrekt.', 'success')");
-    }
-
-    public function setUpdateNotificationFailed()
-    {
-        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Opdatering Fejlede', 'fa fa-exclamation-triangle', 'Opdateringen fejlede. Prøv venligst igen!', 'danger')");
-    }
-
-    public function singleNotification($id)
-    {
-        return $this->db->single("SELECT * FROM `notifications` WHERE id = :id", [':id' => $id]);
-    }
-
-    public function rowCountNotifications()
-    {
-        $result = $this->db->prepare("SELECT count(*) FROM `notifications`");
-        $result->execute();
-        return $notificationRows = $result->fetchColumn();
-    }
 }
