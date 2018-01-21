@@ -3,6 +3,16 @@ $blog = $blogs->singleBlog($_GET['id']);
 $author = $user->getOne($blog->fk_author);
 $category = $blogs->getCategory($blog->fk_category);
 $tags = $blogs->getTags($blog->fk_tags);
+
+if ($users->fk_userrole == 1) {
+    $userrole = "Super Admin";
+}
+else if ($users->fk_userrole == 2) {
+    $userrole = "Admin";
+}
+else if ($users->fk_userrole == 3) {
+    $userrole = "Medarbejder";
+}
 ?>
 <!-- Page Content -->
 <div class="container">
@@ -19,7 +29,7 @@ $tags = $blogs->getTags($blog->fk_tags);
 
             <!-- Author -->
             <p class="lead">
-                af <?= $author->firstname . ' ' . $author->lastname ?>
+                af <?= $author->firstname . ' ' . $author->lastname . ' (' . $userrole . ')'; ?>
             </p>
 
             <hr>
