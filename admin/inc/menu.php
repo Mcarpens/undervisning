@@ -20,12 +20,40 @@
                     </a>
                 </li>
             <?php } ?>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Produkter">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nyheder">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                    <i class="fa fa-product-hunt"></i>
-                    <span class="nav-link-text">Produkter</span>
+                    <i class="fa fa-newspaper-o"></i>
+                    <span class="nav-link-text">Nyheder</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseComponents">
+                    <li>
+                        <a href="./index.php?side=nyheder">Alle Nyheder</a>
+                    </li>
+                    <li>
+                        <a href="./index.php?side=opretNyhed">Opret Nyhed</a>
+                    </li>
+                    <hr width="80%" style="color: #888">
+                    <li>
+                        <a href="./index.php?side=kategorier">Alle Kategorier</a>
+                    </li>
+                    <li>
+                        <a href="./index.php?side=opretKategori">Opret Kategori</a>
+                    </li>
+                    <hr width="80%" style="color: #888">
+                    <li>
+                        <a href="./index.php?side=tags">Alle Tags</a>
+                    </li>
+                    <li>
+                        <a href="./index.php?side=opretTag">Opret Tag</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Produkter">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents1" data-parent="#exampleAccordion1">
+                    <i class="fa fa-briefcase"></i>
+                    <span class="nav-link-text">Produkter</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseComponents1">
                     <li>
                         <a href="./index.php?side=produkter">Alle Produkter</a>
                     </li>

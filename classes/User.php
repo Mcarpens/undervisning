@@ -313,7 +313,6 @@ class User extends \PDO
     public function editUser($post)
     {
         $avatar = mediaImageUploader('filUpload');
-        var_dump($avatar['name']);
 
         if(empty($avatar['name'])) {
             $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone

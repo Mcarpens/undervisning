@@ -10,23 +10,26 @@
         </ol>
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-users"></i> Brugere</div>
+                <i class="fa fa-briefcase"></i> Produkter</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <tr>
-                        <th scope="col">Navn</th>
-                        <th scope="col">Pris</th>
-                        <th scope="col">Vare nummer</th>
-                        <th scope="col">Beskrivelse</th>
-                        <th scope="col">Handling</th>
-                    </tr>
-                    </thead>
+                        <thead>
+                            <tr>
+                                <th scope="col">Thumbnail</th>
+                                <th scope="col">Navn</th>
+                                <th scope="col">Pris</th>
+                                <th scope="col">Vare nummer</th>
+                                <th scope="col">Beskrivelse</th>
+                                <th scope="col">Handling</th>
+                            </tr>
+                        </thead>
                     <tbody>
                     <?php
                     if(isset($_GET['search'])) {
                         foreach($products->searchProduct($_GET['search']) as $product) { ?>
                             <tr>
+                                <td style="text-align: center"><a href="../assets/img/products/<?= $product->image ?>" target="_blank"><img src="<?= $product->image ?>" style="width: 30px; height: 30px;"></a></td>
                                 <td><?= $product->name ?></td>
                                 <td><?= $product->price ?></td>
                                 <td><?= $product->product_number ?></td>
@@ -41,6 +44,7 @@
                     } else {
                         foreach($products->allProducts() as $product) { ?>
                             <tr>
+                                <td style="text-align: center"><a href="../assets/img/products/<?= $product->image ?>" target="_blank"><img src="<?= $product->image ?>" style="width: 30px; height: 30px;"></a></td>
                                 <td><?= $product->name ?></td>
                                 <td><?= $product->price ?></td>
                                 <td><?= $product->product_number ?></td>

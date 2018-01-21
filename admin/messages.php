@@ -15,14 +15,14 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                        <tr>
-                        <th scope="col">Navn</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Besked</th>
-                        <th scope="col">Tidspunkt</th>
-                        <th scope="col" style="text-align: center">Handling</th>
-                    </tr>
-                    </thead>
+                            <tr>
+                                <th scope="col">Navn</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Besked</th>
+                                <th scope="col">Tidspunkt</th>
+                                <th scope="col" style="text-align: center">Handling</th>
+                            </tr>
+                        </thead>
                     <tbody>
                     <?php
                     foreach($email->getAllEmails() as $emails) { ?>

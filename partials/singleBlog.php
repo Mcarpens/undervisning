@@ -4,14 +4,12 @@ $author = $user->getOne($blog->fk_author);
 $category = $blogs->getCategory($blog->fk_category);
 $tags = $blogs->getTags($blog->fk_tags);
 
-if ($users->fk_userrole == 1) {
+if ($author->fk_userrole == 1) {
     $userrole = "Super Admin";
-}
-else if ($users->fk_userrole == 2) {
+} else if ($author->fk_userrole == 2) {
     $userrole = "Admin";
-}
-else if ($users->fk_userrole == 3) {
-    $userrole = "Medarbejder";
+} else {
+    $userrole = "Anonymous";
 }
 ?>
 <!-- Page Content -->
@@ -25,11 +23,11 @@ else if ($users->fk_userrole == 3) {
             <!-- Blog Post -->
 
             <!-- Title -->
-            <h1><?= $blog->name ?></h1>
+            <h1><?= $blog->title ?></h1>
 
             <!-- Author -->
             <p class="lead">
-                af <?= $author->firstname . ' ' . $author->lastname . ' (' . $userrole . ')'; ?>
+                af <?= $author->firstname . ' ' . $author->lastname . ' <small>(' . $userrole . ')</small>'; ?>
             </p>
 
             <hr>
@@ -42,7 +40,7 @@ else if ($users->fk_userrole == 3) {
             <hr>
 
             <!-- Preview Image -->
-            <img class="img-responsive" src="<?= $blog->images ?>" style="width: 600px; height: auto;" alt="">
+            <img class="img-responsive" src="./assets/img/blogs/<?= $blog->images ?>" style="width: 600px; height: auto;" alt="">
 
             <hr>
 

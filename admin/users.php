@@ -1,3 +1,6 @@
+<?php
+
+?>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <div class="content-wrapper">
     <div class="container-fluid">
@@ -14,26 +17,35 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <tr>
-                        <th scope="col">Avatar</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Navn</th>
-                        <th scope="col">Brugernavn</th>
-                        <th scope="col">Niveau</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Adresse</th>
-                        <th scope="col">Telefon</th>
-                        <th scope="col">Handling</th>
-                    </tr>
-                    </thead>
+                        <thead>
+                            <tr>
+                                <th scope="col">Avatar</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Navn</th>
+                                <th scope="col">Brugernavn</th>
+                                <th scope="col">Niveau</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">Telefon</th>
+                                <th scope="col">Handling</th>
+                            </tr>
+                        </thead>
                     <tbody>
-                    <?php foreach($user->getAll() as $users) { ?>
+                    <?php foreach($user->getAll() as $users) {
+                        if ($users->fk_userrole == 1) {
+                            $userrole = "Super Admin";
+                        } else if ($users->fk_userrole == 2) {
+                            $userrole = "Admin";
+                        } else ($users->fk_userrole == 3){
+                            $userrole = "Bruger"
+                        }
+                        ?>
                     <tr>
                         <td style="text-align: center"><a href="../assets/img/users/<?= $users->avatar ?>" target="_blank"><img src="../assets/img/users/<?= $users->avatar ?>" style="width: 30px; height: 30px;"></a></td>
                         <td><?= $users->id ?></td>
                         <td><?= $users->firstname . ' ' . $users->lastname ?></td>
                         <td><?= $users->username ?></td>
-                        <td><?= $users->fk_userrole ?></td>
+                        <td><?= $userrole ?></td>
                         <td><?= $users->email ?></td>
                         <td><?= $users->address ?></td>
                         <td><?= $users->phone ?></td>

@@ -19,6 +19,7 @@ $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
 $notification = new Notifications($db);
+$blogs = new Blogs($db);
 
 // Require vores session fil //
 require_once './inc/session.php';
@@ -84,6 +85,17 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'produkt';
                 include_once './partials/singleProduct.php';
+                break;
+
+            /** Blogs-Nyheder */
+            case 'nyheder';
+                include_once './blogs.php';
+                break;
+            case 'opretNyhed';
+                include_once './partials/newBlog.php';
+                break;
+            case 'sletNyhed';
+                include_once './partials/deleteBlog.php';
                 break;
 
             /** Bruger */
