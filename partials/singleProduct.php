@@ -1,20 +1,16 @@
 <?php $singleProd = $products->singleProduct($_GET['id']); ?>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="./index.php?side=dashboard">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">Produktet: <?= $singleProd->name ?></li>
-        </ol>
-
-        <img src="https://placehold.it/350x150" alt="Placeholder Image">
-        <h3><?= $singleProd->name ?></h3><br>
-        <p>Pris: <?= $singleProd->price ?></p><br>
-        <p>Varenummer: <?= $singleProd->product_number ?></p><br>
-        <hr>
-        <p><?= $singleProd->description ?></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 25px">
+            <img src="<?= $singleProd->image ?>" style="height: 250px; width: auto;" alt="Placeholder Image">
+            <h3><?= $singleProd->name ?></h3>
+            <p>Pris: <?= $singleProd->price ?></p>
+            <p>Varenummer: <?= $singleProd->product_number ?></p>
+            <hr>
+            <p><?= $singleProd->description ?></p>
+        </div>
+        <div class="col-md-12">
+            <a href="./index.php?side=produkter" class="btn btn-outline-primary">Gå tilbage</a>
+        </div>
     </div>
 </div>

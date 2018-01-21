@@ -19,13 +19,11 @@
                         <th scope="col">Pris</th>
                         <th scope="col">Vare nummer</th>
                         <th scope="col">Beskrivelse</th>
-                        <th scope="col" style="text-align: center">Handling</th>
+                        <th scope="col">Handling</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-
-
                     if(isset($_GET['search'])) {
                         foreach($products->searchProduct($_GET['search']) as $product) { ?>
                             <tr>

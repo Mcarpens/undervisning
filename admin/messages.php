@@ -1,12 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mcarp
- * Date: 15-01-2018
- * Time: 09:13
- */
-if($user->secCheckLevel() >= 90) {
-?>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <div class="content-wrapper">
     <div class="container-fluid">
@@ -41,15 +32,11 @@ if($user->secCheckLevel() >= 90) {
                         <td><?= $emails->message ?></td>
                         <td><?= $emails->timestamp ?></td>
                         <td style="text-align: center">
-                            <a href="?side=visBesked&id=<?= $emails->id ?>" data-toggle="tooltip" data-placement="bottom" title="Vis besked"><button class="btn btn-primary"> Vis</button></a>
+                            <a href="?side=visBesked&id=<?= $emails->id ?>" data-toggle="tooltip" data-placement="bottom" title="Slet produkt"><button class="btn btn-primary"> Vis</button></a>
                             <a href="?side=sletEmail&id=<?= $emails->id ?>" data-toggle="tooltip" data-placement="bottom" title="Slet besked"><button class="btn btn-danger" > Slet</button></a>
                         </td>
                     </tr>
-                    <?php }
-                        } else {
-                            $user->redirect('forside');
-                        }
-                        ?>
+                    <?php } ?>
                     </tbody>
                     </table>
                 </div>

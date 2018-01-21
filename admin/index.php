@@ -6,31 +6,35 @@
  * Time: 10:22
  */
 
+// Start session & overbuffer //
 ob_start();
 session_start();
 
+// Require configfilen //
 require_once '../config.php';
 
+// Instantiering af klasser //
 $setting = new settings($db);
 $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
 $notification = new Notifications($db);
 
+// Require vores session fil //
+require_once './inc/session.php';
+
+// Hvis vi er logget ind, fetch vores user id //
+// inkludere vores head fil //
 if ($user->is_loggedin() == true) {
     $users = $user->getOne($_SESSION['user_id']);
-}
-
-include_once './inc/head.php';
-
-if ($user->is_loggedin() == true) {
+    include_once './inc/head.php';
     include_once './inc/menu.php';
-};
-
-if ($user->is_loggedin() == true && $debug == 1){
-    include_once './inc/debug.php';
+    if ($debug == 1) {
+        include_once './inc/debug.php';
+    }
 }
 
+// Vores Søgefelt i top menuen, så vi kan søge på vores produkter //
 if(isset($_POST['search'])) {
     if(strlen($_POST['navn']) > 6 || strlen($_POST['navn']) < 1) {
         $error['navn'] = '<div class="alert alert-danger alert-dismissible" id="myAlert">
@@ -43,6 +47,7 @@ if(isset($_POST['search'])) {
     }
 }
 
+// Håndter vores undersider via en switch case //
 if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
     $get = $user->secGetInputArray(INPUT_GET);
     if (isset($get['side']) && !empty($get['side'])) {
@@ -88,9 +93,6 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'sletBruger';
                 include_once './partials/deleteUser.php';
                 break;
-            case 'logind';
-                include_once './login.php';
-                break;
             case 'logud';
                 include_once './logout.php';
                 break;
@@ -118,6 +120,7 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
         header('Location: index.php?side=dashboard');
     }
 }
+// inkludere vores footer hvis logget ind
 if ($user->is_loggedin() == true) {
     include_once './inc/footer.php';
 }

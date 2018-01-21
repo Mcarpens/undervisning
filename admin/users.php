@@ -40,7 +40,7 @@
                         <?php if ($users->id != 1) { ?>
                         <td style="text-align: center"><a href="?side=sletBruger&id=<?=$users->id?>" data-toggle="tooltip" data-placement="bottom" title="Slet denne bruger"><button class="btn btn-danger" ><i class="fa fa-user-times"></i></button></a></td>
                         <?php } else { ?>
-                        <td style="text-align: center">Kan ikke slettes</td>
+                            <td style="text-align: center; font-weight: 500;" <span style="text-decoration: underline">Kan ikke slettes</span></td>
                         <?php } ?>
                     </tr>
                     <?php } ?>

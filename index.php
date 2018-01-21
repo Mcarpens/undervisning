@@ -16,6 +16,7 @@ $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
 $notification = new Notifications($db);
+$blogs = new Blogs($db);
 
 if ($user->is_loggedin() == true) {
     $users = $user->getOne($_SESSION['user_id']);
@@ -88,6 +89,14 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'logud';
                 include_once './logout.php';
+                break;
+
+            /** Blogs-Nyheder */
+            case 'nyheder';
+                include_once './blogs.php';
+                break;
+            case 'nyhed';
+                include_once './partials/singleBlog.php';
                 break;
 
             default:
