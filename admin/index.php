@@ -98,6 +98,17 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './partials/deleteBlog.php';
                 break;
 
+            /** Blog - Kategorier */
+            case 'opretKategori';
+                include_once './partials/newCategory.php';
+                break;
+            case 'kategorier';
+                include_once './categories.php';
+                break;
+            case 'sletKategori';
+                include_once './partials/deleteCategory.php';
+                break;
+
             /** Bruger */
             case 'brugere';
                 include_once './users.php';

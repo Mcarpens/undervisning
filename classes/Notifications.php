@@ -184,4 +184,17 @@ class Notifications extends \PDO
         return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Nyhed Slettet', 'fa fa-check-circle', 'En nyhed er blevet slettet', 'success')");
     }
 
+    /**
+     * Opret Kategori
+     * @return mixed
+     */
+    public function setNewCategoryNotification()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Kategori Oprettet', 'fa fa-check-circle', 'En ny kategori er blevet oprettet', 'success')");
+    }
+
+    public function setDeleteCategoryNotification()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Kategori Slettet', 'fa fa-check-circle', 'En kategori er blevet slettet', 'success')");
+    }
 }

@@ -103,6 +103,20 @@ class Blogs extends \PDO
         );
     }
 
+    public function newCategory($post)
+    {
+        return $this->db->query("INSERT INTO `blog_categories` (`name`) VALUES (:name)",
+            [
+                ':name' => $post['name']
+            ]
+        );
+    }
+
+    public function deleteCategory($id)
+    {
+        return $this->db->query("DELETE FROM `blog_categories` WHERE id = :id", [':id' => $id]);
+    }
+
     public function getAllCategory()
     {
         return $this->db->toList("SELECT * FROM `blog_categories`");

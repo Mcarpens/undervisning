@@ -1,6 +1,3 @@
-<?php
-
-?>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <div class="content-wrapper">
     <div class="container-fluid">
@@ -36,8 +33,8 @@
                             $userrole = "Super Admin";
                         } else if ($users->fk_userrole == 2) {
                             $userrole = "Admin";
-                        } else ($users->fk_userrole == 3){
-                            $userrole = "Bruger"
+                        } else if ($users->fk_userrole == 3){
+                            $userrole = "Bruger";
                         }
                         ?>
                     <tr>

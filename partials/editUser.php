@@ -143,13 +143,13 @@ if(isset($_POST['btn-edit']))
                     <input type="text" class="form-control" name="address" placeholder="Indtast Adresse" value="<?= @$users->address ?>">
                 </div>
                 <div class="form-group">
-                    <input type="number" class="form-control" name="phone" placeholder="Indtast Email" value="<?= @$users->phone ?>">
+                    <input type="number" class="form-control" name="phone" placeholder="Indtast Tlf.nr" value="<?= @$users->phone ?>">
                 </div>
 
 
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="filUpload" type="file" value="<?= @$users->avatar ?>">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" name="filUpload" value="<?= @$users->avatar ?>">
                         <label class="custom-file-label" for="inputGroupFile01">
                             <?php
                             if (empty($users->avatar)) {
