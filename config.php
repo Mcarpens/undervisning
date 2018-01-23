@@ -36,4 +36,4 @@ $debug = 0;
 
 // Build Nummer
 // Ændres for hver gang vi har opdateret vores kode
-$buildnr = 130;
+$buildnr = 131;

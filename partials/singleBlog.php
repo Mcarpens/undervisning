@@ -8,8 +8,6 @@ if ($author->fk_userrole == 1) {
     $userrole = "Super Admin";
 } else if ($author->fk_userrole == 2) {
     $userrole = "Admin";
-} else {
-    $userrole = "Anonymous";
 }
 ?>
 <!-- Page Content -->

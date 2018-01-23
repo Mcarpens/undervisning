@@ -37,7 +37,7 @@ if (isset($_POST['btn_opret'])) {
                         ?>
                         <div class="alert alert-danger alert-dismissible" data-dismiss="alert" id="myAlert">
                             <a href="#" class="close">&times;</a>
-                            <i class="glyphicon glyphicon-warning-sign"></i> &nbsp;<?php echo $error; ?>
+                            <i class="fa fa-warning"></i> &nbsp;<?php echo $error; ?>
                         </div>
                         <?php
                     }

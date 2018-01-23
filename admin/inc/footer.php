@@ -23,7 +23,7 @@
             <div class="modal-body">Er du parat til at opdatere hele siden?</div>
             <div class="modal-footer">
                 <button class="btn btn-danger" type="button" data-dismiss="modal">Fortryd</button>
-                <a class="btn btn-primary" href="../index.php?side=opdater">Opdater</a>
+                <a class="btn btn-primary" data-label="do it!" href="../index.php?side=opdater">Opdater</a>
             </div>
         </div>
     </div>

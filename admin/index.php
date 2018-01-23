@@ -97,6 +97,12 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'sletNyhed';
                 include_once './partials/deleteBlog.php';
                 break;
+            case 'redigerNyhed';
+                include_once './partials/editBlog.php';
+                break;
+            case 'nyhed';
+                include_once './partials/singleBlog.php';
+                break;
 
             /** Blog - Kategorier */
             case 'opretKategori';
@@ -107,6 +113,23 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'sletKategori';
                 include_once './partials/deleteCategory.php';
+                break;
+            case 'redigerKategori';
+                include_once './partials/editCategory.php';
+                break;
+
+            /** Blog - Tags */
+            case 'tags';
+                include_once './tags.php';
+                break;
+            case 'redigerTag';
+                include_once './partials/editTag.php';
+                break;
+            case 'sletTag';
+                include_once './partials/deleteTag.php';
+                break;
+            case 'opretTag';
+                include_once './partials/newTag.php';
                 break;
 
             /** Bruger */

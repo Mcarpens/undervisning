@@ -176,9 +176,7 @@ class Notifications extends \PDO
     {
         return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Nyhed Oprettet', 'fa fa-check-circle', 'En nyhed er blevet oprettet', 'success')");
     }
-    /**
-     * @return mixed
-     */
+
     public function setDeleteBlogNotification()
     {
         return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Nyhed Slettet', 'fa fa-check-circle', 'En nyhed er blevet slettet', 'success')");
@@ -197,4 +195,29 @@ class Notifications extends \PDO
     {
         return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Kategori Slettet', 'fa fa-check-circle', 'En kategori er blevet slettet', 'success')");
     }
+
+    public function setEditBlogNotification()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Kategori Redigeret', 'fa fa-check-circle', 'En kategori er blevet redigeret', 'success')");
+    }
+
+    /**
+     * Tag Notifikationer
+     * @return mixed
+     */
+    public function setEditTagNotification()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Tag Redigeret', 'fa fa-check-circle', 'Et tag er blevet redigeret', 'success')");
+    }
+
+    public function setNewTagNotification()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Tag Oprettet', 'fa fa-check-circle', 'Et nyt tag er blevet oprettet', 'success')");
+    }
+
+    public function setDeleteTagNotification()
+    {
+        return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Tag Slettet', 'fa fa-check-circle', 'Et tag er blevet slettet', 'success')");
+    }
+
 }

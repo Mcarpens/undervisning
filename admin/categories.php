@@ -25,8 +25,8 @@
                             <tr>
                                 <td><?= $cat->name ?></td>
                                 <td style="text-align: center">
-                                    <a href="?side=redigerKategori&id=<?=$cat->id?>"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Rediger nyhed"><i class="fa fa-edit"></i> </button></a>
-                                    <a href="?side=sletKategori&id=<?=$cat->id?>"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Slet nyhed"><i class="fa fa-ban"></i> </button></a>
+                                    <a href="?side=redigerKategori&id=<?=$cat->id?>"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Rediger kategori"><i class="fa fa-edit"></i> </button></a>
+                                    <a href="?side=sletKategori&id=<?=$cat->id?>"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Slet kategori"><i class="fa fa-ban"></i> </button></a>
                                 </td>
                             </tr>
                         <?php } ?>
