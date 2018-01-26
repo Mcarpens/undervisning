@@ -28,6 +28,7 @@ if(isset($_POST['btn-signup']))
     else if(strlen($password) < 6){
         $error[] = "Adgangskoden skal mindst være på 6 karaktere";
     }
+
     else
     {
         try
@@ -51,66 +52,93 @@ if(isset($_POST['btn-signup']))
     }
 }
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <form method="post" class="form-signin">
-                <h2 class="form-signin-heading">Opret en bruger</h2><hr />
-                <?php
-                if(isset($error))
-                {
-                    foreach($error as $error)
+
+<!-- Page Title
+    ============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>Ny Konto</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Pages</a></li>
+            <li class="active">Ny Konto</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->
+
+<!-- Content
+============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <div class="col_two_third col_last nobottommargin">
+
+
+                <h3>Har du ikke en konto endnu? Opret en her!</h3>
+
+                <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
+                    <?php
+                    if(isset($error))
+                    {
+                        foreach($error as $error)
+                        {
+                            ?>
+                            <div class="alert alert-danger alert-dismissible" data-dismiss="alert" id="myAlert">
+                                <a href="#" class="close">&times;</a>
+                                <i class="glyphicon glyphicon-warning-sign"></i> &nbsp;<?php echo $error; ?>
+                            </div>
+                            <?php
+                        }
+                    }
+                    else if(isset($_GET['joined']))
                     {
                         ?>
-                        <div class="alert alert-danger alert-dismissible" data-dismiss="alert" id="myAlert">
+                        <div class="alert alert-success alert-dismissible" id="myAlert">
                             <a href="#" class="close">&times;</a>
-                            <i class="glyphicon glyphicon-warning-sign"></i> &nbsp;<?php echo $error; ?>
+                            <i class="glyphicon glyphicon-check"></i> &nbsp;Registreringen er gemmeført, <a href='?joined'>log ind</a> her
                         </div>
                         <?php
                     }
-                }
-                else if(isset($_GET['joined']))
-                {
                     ?>
-                    <div class="alert alert-success alert-dismissible" id="myAlert">
-                        <a href="#" class="close">&times;</a>
-                        <i class="glyphicon glyphicon-check"></i> &nbsp;Registreringen er gemmeført, <a href='?joined'>log ind</a> her
+                    <div class="col_half">
+                        <label for="register-form-name">Fornavn:</label>
+                        <input type="text" id="register-form-name" name="txt_fname" value="<?= @$_POST['txt_fname'] ?>" class="form-control" />
                     </div>
-                    <?php
-                }
-                ?>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="txt_fname" placeholder="Indtast Fornavn" value="<?= @$_POST['txt_fname'] ?>" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="txt_lname" placeholder="Indtast Efternavn" value="<?= @$_POST['txt_lname'] ?>" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="txt_uname" placeholder="Indtast Brugernavn" value="<?= @$_POST['txt_uname'] ?>" />
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="txt_upass" placeholder="Indtast Adgangskode" />
-                </div>
-                <div class="clearfix"></div><hr />
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="btn-signup">
-                        <i class="fa fa-user-plus"></i>&nbsp;OPRET
-                    </button>
-                    <button type="reset" class="btn btn-danger">
-                        <i class="fa fa-ban"></i>&nbsp;FORTRYD
-                    </button>
-                </div>
-                <br />
-                <label>Har du allerede en konto? <a href="./index.php?side=logind">Log ind her</a></label>
-            </form>
-        </div>
-    </div>
-</div>
 
-<script>
-    $(document).ready(function(){
-        $(".close").click(function(){
-            $("#myAlert").alert("close");
-        });
-    });
-</script>
+                    <div class="col_half col_last">
+                        <label for="register-form-phone">Efternavn:</label>
+                        <input type="text" id="register-form-phone" name="txt_lname" value="<?= @$_POST['txt_lname'] ?>" class="form-control" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="col_half">
+                        <label for="register-form-username">Brugernavn:</label>
+                        <input type="text" id="register-form-username" name="txt_uname" value="<?= @$_POST['txt_uname'] ?>" class="form-control" />
+                    </div>
+
+                    <div class="col_half col_last">
+                        <label for="register-form-password">Adgangskode:</label>
+                        <input type="password" id="register-form-password" name="txt_upass" value="<?= @$_POST['txt_uname'] ?>" class="form-control" />
+                    </div>
+
+                    <div class="clear"></div>
+
+                    <div class="col_full nobottommargin">
+                        <button class="button button-3d button-black nomargin" id="register-form-submit" name="btn-signup" value="register">Opret bruger</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section><!-- #content end -->

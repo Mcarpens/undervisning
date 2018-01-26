@@ -9,87 +9,187 @@ if ($author->fk_userrole == 1) {
 } else if ($author->fk_userrole == 2) {
     $userrole = "Admin";
 }
+
+if(isset($_POST['btn_comment'])) {
+    if (isset($_POST['fk_user'])) {
+        $fk_user = strip_tags($_POST['fk_user']);
+    } else {
+        $name = strip_tags($_POST['name']);
+    }
+    $fk_blog = strip_tags($_POST['fk_blog']);
+    $text = strip_tags($_POST['text']);
+
+    $comments->newComment($_POST);
+    $notification->setNewCommentNotification();
+}
 ?>
-<!-- Page Content -->
-<div class="container">
+<!-- Page Title
+		============================================= -->
+<section id="page-title">
 
-    <div class="row" style="margin-top: 25px;">
+    <div class="container clearfix">
+        <h1>Blog Single</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li class="active">Blog Single</li>
+        </ol>
+    </div>
 
-        <!-- Blog Post Content Column -->
-        <div class="col-md-8">
+</section><!-- #page-title end -->
 
-            <!-- Blog Post -->
+<!-- Content
+============================================= -->
+<section id="content">
 
-            <!-- Title -->
-            <h1><?= $blog->title ?></h1>
+    <div class="content-wrap">
 
-            <!-- Author -->
-            <p class="lead">
-                af <?= $author->firstname . ' ' . $author->lastname . ' <small>(' . $userrole . ')</small>'; ?>
-            </p>
+        <div class="container clearfix">
 
-            <hr>
+            <div class="single-post nobottommargin">
 
-            <!-- Date/Time -->
-            <p><span class="glyphicon glyphicon-user"></span> Publiceret: <?= $blog->timestamp ?></p>
-            <p><span class="glyphicon glyphicon-time"></span> Tags: <span class="label label-default"><?= $tags->name ?></span></p>
-            <p><span class="glyphicon glyphicon-category"></span> Kategori: <?= $category->name ?></p>
+                <!-- Single Post
+                ============================================= -->
+                <div class="entry clearfix">
 
-            <hr>
+                    <!-- Entry Title
+                    ============================================= -->
+                    <div class="entry-title">
+                        <h2><?= $blog->title ?></h2>
+                    </div><!-- .entry-title end -->
 
-            <!-- Preview Image -->
-            <img class="img-responsive" src="./assets/img/blogs/<?= $blog->images ?>" style="width: 600px; height: auto;" alt="">
+                    <!-- Entry Meta
+                    ============================================= -->
+                    <ul class="entry-meta clearfix">
+                        <li><i class="icon-calendar3"></i> <?= $blog->timestamp ?></li>
+                        <li><a href="#"><i class="icon-user"></i> <?= $author->firstname . ' ' . $author->lastname . ' <small>(' . $userrole . ')</small>'; ?></a></li>
+                        <li><i class="icon-folder-open"></i> <a href="#"><?= $category->name ?></a></li>
+                        <!--                                <li><a href="#"><i class="icon-comments"></i> 43 Comments</a></li>-->
+                        <li><a href="#"><i class="icon-camera-retro"></i></a></li>
+                    </ul><!-- .entry-meta end -->
 
-            <hr>
+                    <!-- Entry Image
+                    ============================================= -->
+                    <div class="entry-image bottommargin">
+                        <a href="#"><img src="./assets/img/blogs/<?= $blog->images ?>" alt="Blog Single"></a>
+                    </div><!-- .entry-image end -->
 
-            <!-- Post Content -->
-            <p class="lead"><?= $blog->text ?></p>
+                    <!-- Entry Content
+                    ============================================= -->
+                    <div class="entry-content notopmargin">
 
-            <hr>
+                        <p><?= $blog->text ?></p>
+                        <!-- Post Single - Content End -->
 
-            <!-- Blog Comments -->
+                        <!-- Tag Cloud
+                        ============================================= -->
+                        <div class="tagcloud clearfix bottommargin">
+                            <a href="#"><i class="icon-tags"></i> <?= $tags->name ?></a>
+                        </div><!-- .tagcloud end -->
 
-            <!-- Comments Form -->
-            <div class="well" style="margin-bottom: 25px">
-                <h4>Skriv en kommentar:</h4>
-                <form role="form">
-                    <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </form>
+                </div><!-- .entry end -->
+
+                <!-- Comments
+                ============================================= -->
+                <div id="comments">
+
+                    <!-- Comment Form
+                    ============================================= -->
+                    <div id="respond" class="clearfix">
+
+                        <h3>Skriv en <span>Kommentar</span></h3>
+
+                        <form class="clearfix" action="#" method="post" id="commentform" >
+                            <?php if ($user->is_loggedin() == true) {
+                                $users = $user->getOne($_SESSION['user_id']);
+                                ?>
+                                <div class="col_one_third">
+                                    <input type="text" class="sm-form-control" value="<?= $users->firstname . ' ' . $users->lastname ?>" readonly>
+                                    <input type="hidden" name="fk_user" value="<?= $users->id ?>">
+                                </div>
+                            <?php } else { ?>
+                                <div class="col_one_third">
+                                    <input type="text" class="sm-form-control" name="name" placeholder="Navn">
+                                </div>
+                            <?php } ?>
+
+                            <div class="clear"></div>
+
+                            <div class="col_full">
+                                <input type="hidden" name="fk_blog" value="<?= $blog->id ?>">
+                                <textarea name="text" type="text" cols="58" rows="7" tabindex="4" placeholder="Kommentar" class="sm-form-control"></textarea>
+                            </div>
+
+                            <div class="col_full nobottommargin">
+                                <button name="btn_comment" type="submit" id="submit-button" tabindex="5" value="Submit" class="button button-3d nomargin">Send</button>
+                            </div>
+
+                        </form>
+
+                    </div><!-- #respond end -->
+
+                    <div class="clear"></div>
+                    <div class="line"></div>
+
+                    <!-- Comments List
+                    ============================================= -->
+                    <ol class="commentlist clearfix">
+                        <?php
+                        foreach ($comments->getAllComments() as $comment) {
+                            $comUser = $user->getOne($comment->fk_user);
+                            if ($comment->fk_blog == $blog->id) { ?>
+                                <li class="comment even thread-even depth-1" id="li-comment-1">
+
+                                    <div id="comment-1" class="comment-wrap clearfix">
+
+                                        <div class="comment-meta">
+
+                                            <div class="comment-author vcard">
+
+												<span class="comment-avatar clearfix">
+                                                    <?php if(isset($comment->fk_user)) {
+                                                        echo '<img src="./assets/img/users/' . $comUser->avatar . '" class="avatar avatar-60 photo avatar-default" height="60" width="60">';
+                                                    } else {
+                                                        echo '<img src="./assets/img/users/0487a3c256d7318de93d26e183667ac9b56be46f" class="avatar avatar-60 photo avatar-default" height="60" width="60">';
+                                                    }
+                                                    ?>
+												</span>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="comment-content clearfix">
+
+                                            <div class="comment-author">
+                                                <?php
+                                                    if(isset($comment->fk_user)){
+                                                        echo $comUser->firstname . ' ' . $comUser->lastname;
+                                                    } else {
+                                                        echo $comment->name;
+                                                    }
+                                                 ?>
+                                                <span><a href="#" title="Permalink to this comment"><?= $comment->timestamp ?></a></span></div>
+
+                                            <p><?= $comment->text ?></p>
+
+                                            <a class='comment-reply-link' href='#'><i class="icon-reply"></i></a>
+
+                                        </div>
+
+                                    </div>
+
+                                </li>
+                            <?php  } } ?>
+                    </ol> <!-- .commentlist end -->
+
+                </div><!-- #comments end -->
+
             </div>
 
-            <!--            <hr>-->
-
-            <!-- Posted Comments -->
-
-            <!-- Comment -->
-            <!--            <div class="media">-->
-            <!--                <a class="pull-left btn-lg" href="#">-->
-            <!--                    <span class="glyphicon glyphicon-comment"></span>-->
-            <!--                </a>-->
-            <!--                <div class="media-body">-->
-            <!--                    <h4 class="media-heading">User One says:-->
-            <!--                        <small>August 25, 2014 at 9:30 PM</small>-->
-            <!--                    </h4>-->
-            <!--                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.-->
-            <!--                </div>-->
-            <!--            </div>-->
-
-            <!-- Comment -->
-            <!--            <div class="media">-->
-            <!--                <a class="pull-left btn-lg" href="#">-->
-            <!--                    <span class="glyphicon glyphicon-comment"></span>-->
-            <!--                </a>-->
-            <!--                <div class="media-body">-->
-            <!--                    <h4 class="media-heading">User Two says:-->
-            <!--                        <small>August 25, 2014 at 9:30 PM</small>-->
-            <!--                    </h4>-->
-            <!--                    Cras sit amet nibh libero, in gravida nulla.-->
-            <!---->
-            <!--                </div>-->
-            <!--            </div>-->
-
         </div>
-        <?php include_once './inc/blogSidebar.php'; ?>
+
+    </div>
+
+</section><!-- #content end -->

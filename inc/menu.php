@@ -1,70 +1,131 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="./index.php?side=forside">Navbar - <?php foreach ($setting->getAllSettings() as $settings) {echo $settings->site_name;} ?></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<!----------------------->
+<body class="stretched">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <?php
-            foreach ($setting->getAllMenu() as $menu) {
-                echo '<li class="nav-item">';
-                echo '<a class="nav-link" href="./index.php?side=' . $menu->link . '">' . $menu->name . '</a>';
-                echo '</li>';
-            }
-            ?>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" method="post">
-            <input class="form-control mr-sm-2" type="search" name="navn" placeholder="Søgning..." aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" name="search" type="submit">Søg</button>
-        </form>
-        <ul class="navbar-nav mr-right">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php
-                    if($user->is_loggedin() === TRUE) {
-                        foreach ($user->getAll() as $u){
-                            if ($u->fk_userrole == 1) {
-                                $userrole = "Super Admin";
-                            }
-                            else if ($u->fk_userrole == 2) {
-                                $userrole = "Admin";
-                            }
-                            else if ($u->fk_userrole == 3) {
-                                $userrole = "Medarbejder";
-                            }
-                            if ($u->id === $_SESSION['user_id']) {
-                                echo '<img src="./assets/img/users/' . $users->avatar . '" style="width: 30px; height: 30px;" class="rounded"> ' . $u->username;
-                            }
+<!-- Document Wrapper
+============================================= -->
+<div id="wrapper" class="clearfix">
+
+    <!-- Header
+    ============================================= -->
+    <header id="header" class="transparent-header full-header" data-sticky-class="not-dark">
+
+        <div id="header-wrap">
+
+            <div class="container clearfix">
+
+                <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+                <!-- Logo
+                ============================================= -->
+                <div id="logo">
+                    <a href="index.php" class="standard-logo" data-dark-logo="./assets/img/logo-new.png"><img src="./assets/img/logo.png" alt="Canvas Logo"></a>
+                    <a href="index.php" class="retina-logo" data-dark-logo="./assets/img/logo-dark@2x.png"><img src="./assets/img/logo@2x.png" alt="Canvas Logo"></a>
+                </div><!-- #logo end -->
+
+                <!-- Primary Navigation
+                ============================================= -->
+                <nav id="primary-menu">
+
+                    <ul>
+                        <?php
+                        foreach ($setting->getAllMenu() as $menu) {
+                            echo '<li>';
+                            echo '<a href="./index.php?side=' . $menu->link . '">' . $menu->name . '</a>';
+                            echo '</li>';
                         }
-                    } else {
-                        echo 'Log Ind';
-                    }
-                    ?>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown"  style="overflow: hidden">
+                        ?>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <?php
+                                    if($user->is_loggedin() === TRUE) {
+                                        foreach ($user->getAll() as $u){
+                                            if ($u->fk_userrole == 1) {
+                                                $userrole = "Super Admin";
+                                            }
+                                            else if ($u->fk_userrole == 2) {
+                                                $userrole = "Admin";
+                                            }
+                                            else if ($u->fk_userrole == 3) {
+                                                $userrole = "Medarbejder";
+                                            }
+                                            if ($u->id === $_SESSION['user_id']) {
+                                                echo '<img src="./assets/img/users/' . $users->avatar . '" style="width: 30px; height: 30px;" class="rounded"> ' . $u->username;
+                                            }
+                                        }
+                                    } else {
+                                        echo 'Log Ind';
+                                    }
+                                    ?>
+                                </div>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <?php
+                                        if($user->secCheckLevel() >= 50) {
+                                            echo '<li><a class="dropdown-item" href="index.php?side=profil"><i class="fa fa-user"></i> Profil</a></li>';
+                                        }
 
-                    <?php
-                    if($user->secCheckLevel() >= 50) {
-                        echo '<a class="dropdown-item" href="index.php?side=profil"><i class="fa fa-user"></i> Profil</a>';
-                    }
+                                        if($user->secCheckLevel() >= 90) {
+                                            echo '<li><a class="dropdown-item" href="./admin/index.php?side=dashboard"><i class="fab fa-connectdevelop"></i> Admin CP</a></li>';
+                                        }
 
-                    if($user->secCheckLevel() >= 90) {
-                        echo '<a class="dropdown-item" href="./admin/index.php?side=dashboard"><i class="fab fa-connectdevelop"></i> Admin CP</a>';
-                    }
+                                        if($user->is_loggedin() === TRUE) {
+                                            echo '<div class="dropdown-divider"></div>';
+                                            echo '<li><a class="dropdown-item" href="index.php?side=logud"><i class="fas fa-sign-out-alt"></i>Log ud</a></li>';
+                                        } else {
+                                            echo '<li><a class="dropdown-item" href="index.php?side=logind"><i class="fas fa-sign-in-alt"></i> Log ind</a></li>';
+                                            echo '<div class="dropdown-divider"></div>';
+                                            echo '<li><a class="dropdown-item" href="index.php?side=opret"><i class="fas fa-user-plus"></i> Opret en bruger</a></li>';
+                                        }
+                                        ?>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-                    if($user->is_loggedin() === TRUE) {
-                        echo '<div class="dropdown-divider"></div>';
-                        echo '<a class="dropdown-item" href="index.php?side=logud"><i class="fas fa-sign-out-alt"></i>Log ud</a>';
-                    } else {
-                        echo '<a class="dropdown-item" href="index.php?side=logind"><i class="fas fa-sign-in-alt"></i> Log ind</a>';
-                        echo '<div class="dropdown-divider"></div>';
-                        echo '<a class="dropdown-item" href="index.php?side=opret"><i class="fas fa-user-plus"></i> Opret en bruger</a>';
-                    }
-                    ?>
-                </div>
-            </li>
+                    <!-- Top Cart
+                    ============================================= -->
+                    <div id="top-cart">
+                        <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart"></i><span>1</span></a>
+                        <div class="top-cart-content">
+                            <div class="top-cart-title">
+                                <h4>Indkøbskurv</h4>
+                            </div>
+                            <div class="top-cart-items">
+                                <div class="top-cart-item clearfix">
+                                    <div class="top-cart-item-image">
+                                        <a href="#"><img src="./assets/img/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+                                    </div>
+                                    <div class="top-cart-item-desc">
+                                        <a href="#">Blue Round-Neck Tshirt</a>
+                                        <span class="top-cart-item-price">$19.99</span>
+                                        <span class="top-cart-item-quantity">x 2</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="top-cart-action clearfix">
+                                <span class="fleft top-checkout-price">114.95 DKK</span>
+                                <button class="button button-3d button-small nomargin fright">Se Kurv</button>
+                            </div>
+                        </div>
+                    </div><!-- #top-cart end -->
 
-        </ul>
-    </div>
-</nav>
+                    <!-- Top Search
+                    ============================================= -->
+                    <div id="top-search">
+                        <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+                        <form action="search.html" method="get">
+                            <input type="text" name="q" class="form-control" value="" placeholder="Skriv &amp; Tryk Enter..">
+                        </form>
+                    </div><!-- #top-search end -->
+
+                </nav><!-- #primary-menu end -->
+
+            </div>
+
+        </div>
+
+    </header><!-- #header end -->

@@ -11,11 +11,13 @@ class User extends \PDO
 {
 
     /**
+     * Gør brug af en variabel som er privat. Bruges kun i dette objekt
      * @var
      */
     private $username;
 
     /**
+     * Gør brug af en variabel som er privat. Bruges kun i dette objekt
      * @var
      */
     private $password;
@@ -60,6 +62,7 @@ class User extends \PDO
     ## Login Method Filter Function
 
     /**
+     * Tjekker hvilken input metoder der er angivet i url'en. (POST eller GET)
      * @param $method
      * @return bool
      */
@@ -75,7 +78,7 @@ class User extends \PDO
     ## Token Generator
 
     /**
-     *
+     *  Generere vi en tilfældig token til vores user logind og opret.
      */
     private function generateToken() {
         if ($this->isSessionStarted() == false) {
@@ -141,6 +144,7 @@ class User extends \PDO
     ## Is session started
 
     /**
+     * Er en session staret
      * @return bool
      */
     public function isSessionStarted() {
@@ -219,8 +223,10 @@ class User extends \PDO
     {
         try
         {
+            // Krypter adgangskoden med BCrypt på en cost af 12. (12 er højt sat)
             $new_password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
 
+            // 3 er vores userrole niveau. som er i vores tilfælde en alm. bruger (50)
             $this->db->query("INSERT INTO users (firstname, lastname, username, password, fk_userrole) 
                                 VALUES (:fname, :lname, :uname, :upass, 3)",
                                 [
@@ -253,6 +259,7 @@ class User extends \PDO
             $stmt = $this->db->single("SELECT id, username, password FROM users WHERE username = :uname", [':uname' => $username]);
             if($stmt == true)
             {
+                // Validere adgangskoden ved logind med den i db.
                 if(password_verify($password, $stmt->password))
                 {
                     $_SESSION['user_id'] = $stmt->id;
@@ -314,6 +321,7 @@ class User extends \PDO
     {
         $avatar = mediaImageUploader('filUpload');
 
+        // Tjekker om både password og eller billede er sat.
         if(empty($avatar['name'])) {
             $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone
                           WHERE id = :id",

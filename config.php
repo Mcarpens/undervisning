@@ -36,4 +36,7 @@ $debug = 0;
 
 // Build Nummer
 // Ændres for hver gang vi har opdateret vores kode
-$buildnr = 131;
+$buildnr = 133;
+
+// PHP Error reporting //
+ini_set('error_reporting', E_ALL);

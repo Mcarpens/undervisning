@@ -20,6 +20,7 @@ $email = new Email($db);
 $products = new Products($db);
 $notification = new Notifications($db);
 $blogs = new Blogs($db);
+$comments = new Comments($db);
 
 // Require vores session fil //
 require_once './inc/session.php';
@@ -57,6 +58,9 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             /** Hovedsider */
             case 'dashboard';
                 include_once './dashboard.php';
+                break;
+            case 'indstillinger';
+                include_once './settings.php';
                 break;
 
             /** Beskeder */
@@ -156,6 +160,14 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'sletAlleNotifikationer';
                 include_once './partials/deleteAllNotifications.php';
+                break;
+
+            /** Kommentarer */
+            case 'kommentarer';
+                include_once './comments.php';
+                break;
+            case 'sletKommentar';
+                include_once './partials/deleteComment.php';
                 break;
 
             default:

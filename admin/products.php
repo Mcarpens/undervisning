@@ -29,7 +29,7 @@
                     if(isset($_GET['search'])) {
                         foreach($products->searchProduct($_GET['search']) as $product) { ?>
                             <tr>
-                                <td style="text-align: center"><a href="../assets/img/products/<?= $product->image ?>" target="_blank"><img src="<?= $product->image ?>" style="width: 30px; height: 30px;"></a></td>
+                                <td style="text-align: center"><a href="../assets/img/produkter/<?= $product->image ?>" target="_blank"><img src="../assets/img/produkter/<?= $product->image ?>" style="width: 30px; height: 30px;"></a></td>
                                 <td><?= $product->name ?></td>
                                 <td><?= $product->price ?></td>
                                 <td><?= $product->product_number ?></td>
@@ -44,7 +44,7 @@
                     } else {
                         foreach($products->allProducts() as $product) { ?>
                             <tr>
-                                <td style="text-align: center"><a href="../assets/img/products/<?= $product->image ?>" target="_blank"><img src="<?= $product->image ?>" style="width: 30px; height: 30px;"></a></td>
+                                <td style="text-align: center"><a href="../assets/img/produkter/<?= $product->image ?>" target="_blank"><img src="../assets/img/produkter/<?= $product->image ?>" style="width: 30px; height: 30px;"></a></td>
                                 <td><?= $product->name ?></td>
                                 <td><?= $product->price ?></td>
                                 <td><?= $product->product_number ?></td>

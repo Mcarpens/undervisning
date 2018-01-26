@@ -21,6 +21,7 @@
                                 <th scope="col">Skribent</th>
                                 <th scope="col">Kategori</th>
                                 <th scope="col">Tags</th>
+                                <th scope="col">Kommentarer</th>
                                 <th scope="col">Tidspunkt</th>
                                 <th scope="col">Tekst</th>
                                 <th scope="col" style="text-align: center">Handling</th>
@@ -30,13 +31,24 @@
                             <?php foreach($blogs->getAllBlogs() as $blog) {
                                 $author = $user->getOne($blog->fk_author);
                                 $category = $blogs->getCategory($blog->fk_category);
-                                $tags = $blogs->getTags($blog->fk_tags);?>
+                                $tags = $blogs->getTags($blog->fk_tags);
+//                                $comment = $comments->rowCountCommentsFromBlog($blog->id);
+//                                var_dump($comment);
+                                ?>
                                 <tr>
                                     <td style="text-align: center"><a href="../assets/img/blogs/<?= $blog->images ?>" target="_blank"><img src="../assets/img/blogs/<?= $blog->images ?>" class="img-thumbnail" height="30" width="30"></a></td>
                                     <td><?= $blog->title ?></td>
                                     <td><?= $author->firstname . ' ' . $author->lastname ?></td>
                                     <td><?= $category->name ?></td>
                                     <td><?= $tags->name ?></td>
+<!--                                    <td>-->
+<!--                                        --><?php //foreach($comments->rowCountCommentsFromBlog($blog->id) as $row) {
+//                                            if ($row->fk_blog == $blog->id) {
+//                                                echo $row;
+//                                            }
+//                                        }
+//                                        ?>
+<!--                                    </td>-->
                                     <td><?= $blog->timestamp ?></td>
                                     <td><?= substr($blog->text,"0", "100") ?></td>
                                     <td style="text-align: center">

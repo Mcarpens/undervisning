@@ -66,9 +66,9 @@ require_once './inc/session.php';
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-comments"></i>
                         </div>
-                        <div class="mr-5">Kommentarer</div>
+                        <div class="mr-5"><?= $comments->rowCountComments() ?> Kommentarer</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#">
+                    <a class="card-footer text-white clearfix small z-1" href="?side=kommentarer">
                         <span class="float-left">Se mere</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>

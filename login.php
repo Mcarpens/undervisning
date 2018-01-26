@@ -25,48 +25,54 @@ if(isset($_POST['btn-login']))
 $user->destroyToken();
 ?>
 
-<div>
+<!-- Content
+    ============================================= -->
+<section id="content">
 
-    <div class="container">
+    <div class="content-wrap nopadding">
 
-        <form class="form-signin" method="post" id="login-form">
-            <input type="hidden" name="token" value="<?php echo $user->getToken() ?>">
-            <h2 class="form-signin-heading">Log Ind</h2><hr />
+        <div class="section nopadding nomargin" style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: url('assets/img/parallax/home/1.jpg') center center no-repeat; background-size: cover;"></div>
 
-            <div id="error">
-                <?php
-                if(isset($error))
-                {
-                    ?>
-                    <div class="alert alert-danger alert-dismissible" id="myAlert">
-                        <a href="#" class="close">&times;</a>
-                        <i class="glyphicon glyphicon-warning-sign"></i> &nbsp;<?php echo $error; ?>
+        <div class="section nobg full-screen nopadding nomargin">
+            <div class="container vertical-middle divcenter clearfix">
+
+                <div class="row center">
+                    <a href="index.php"><img src="./assets/img/logo-new.png" alt="Canvas Logo"></a>
+                </div>
+
+                <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">
+                    <div class="panel-body" style="padding: 40px;">
+                        <form id="login-form" name="login-form" class="nobottommargin" action="#" method="post">
+                            <input type="hidden" name="token" value="<?php echo $user->getToken() ?>">
+                            <h3>Login to your Account</h3>
+
+                            <div class="col_full">
+                                <label for="login-form-username">Username:</label>
+                                <input type="text" id="login-form-username" name="txt_uname_email" value="" class="form-control not-dark" />
+                            </div>
+
+                            <div class="col_full">
+                                <label for="login-form-password">Password:</label>
+                                <input type="password" id="login-form-password" name="txt_password" value="" class="form-control not-dark" />
+                            </div>
+
+                            <div class="col_full nobottommargin">
+                                <button class="button button-3d button-black nomargin" id="login-form-submit" name="btn-login"  value="login">Login</button>
+                                <a href="#" class="fright">Forgot Password?</a>
+                            </div>
+                        </form>
                     </div>
-                    <?php
-                }
-                ?>
-            </div>
+                </div>
 
-            <div class="form-group">
-                <input type="text" class="form-control" name="txt_uname_email" placeholder="Brugernavn eller E-mail" value="<?= @$_POST['txt_uname_email'] ?>" required />
-                <span id="check-e"></span>
-            </div>
+                <!--                    <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by Canvas Inc.</small></div>-->
 
-            <div class="form-group">
-                <input type="password" class="form-control" name="txt_password" placeholder="Din adgangskode" requried />
             </div>
-
-            <hr />
-
-            <div class="form-group">
-                <button type="submit" name="btn-login" class="btn btn-success">
-                    <i class="fa fa-sign-in-alt"></i> &nbsp; LOG IND
-                </button>
-            </div>
-            <br />
-            <label>Har du ikke en konto endnu? <a href="./index.php?side=opret">Opret en konto</a></label>
-        </form>
+        </div>
 
     </div>
 
-</div>
+</section><!-- #content end -->
+
+<!-- Go To Top
+============================================= -->
+<div id="gotoTop" class="icon-angle-up"></div>

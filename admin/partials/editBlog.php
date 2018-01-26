@@ -5,6 +5,7 @@
  * Date: 23-01-2018
  * Time: 09:11
  */
+// HUSK AT ÆNDRE STIEN TIL HVOR DEN SKAL UPLOAD TIL ($folder) //
 function mediaImageUploader($inputFieldName, $mimeType = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/bmp'], $folder = '../assets/img/blogs'){
     $uploadError = array(
         1 => 'Filens størrelse overskrider \'upload_max_filesize\' directivet i php.ini.',
@@ -42,6 +43,7 @@ function mediaImageUploader($inputFieldName, $mimeType = ['image/jpeg', 'image/j
     }
 }
 $blog = $blogs->singleBlog($_GET['id']);
+$author = $user->getOne($_SESSION['user_id']);
 if(isset($_POST['btn_edit'])) {
 
     $title = strip_tags($_POST['title']);
@@ -77,14 +79,16 @@ if(isset($_POST['btn_edit'])) {
             </div>
 
             <div class="form-group">
-                <input type="hidden" name="author" value="<?= $_SESSION['user_id'] ?>"
+                <label for="author">Author</label>
+                <input class="form-control" id="author" type="text" name="author" placeholder="<?= $author->firstname . ' ' . $author->lastname ?>" readonly>
+                <input type="hidden" name="author" value="<?= $_SESSION['user_id'] ?>"/>
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Kategori</label>
                 <select class="form-control" name="category" id="exampleFormControlSelect1">
                     <?php foreach ($blogs->getAllCategory() as $cat) { ?>
-                        <option value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                        <option value="<?= $cat->id ?>" selected><?= $cat->name ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -93,7 +97,7 @@ if(isset($_POST['btn_edit'])) {
                 <label for="exampleFormControlSelect2">Tags</label>
                 <select class="form-control" name="tags" id="exampleFormControlSelect2">
                     <?php foreach ($blogs->getAllTags() as $tag) { ?>
-                        <option value="<?= $tag->id ?>"><?= $tag->name ?></option>
+                        <option value="<?= $tag->id ?>" selected><?= $tag->name ?></option>
                     <?php } ?>
                 </select>
             </div>

@@ -6,43 +6,42 @@
  * Time: 09:56
  */
 
-ob_start();
+// Start sessions //
+ob_start(); // Over buffering start (RAM)
 session_start();
 
+// Require config filen //
 require_once './config.php';
 
+// Instantisering af objekterne //
 $setting = new settings($db);
 $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
 $notification = new Notifications($db);
 $blogs = new Blogs($db);
+$comments = new Comments($db);
 
+// Hvis du er logget ind, hent brugerens oplysninger med session //
 if ($user->is_loggedin() == true) {
     $users = $user->getOne($_SESSION['user_id']);
 }
 
+// Inkludere head og menu filerne fra inc mappen //
 include_once './inc/head.php';
 include_once './inc/menu.php';
 
+// Hvis du er logget ind, så vis debug menuen, hvis sat til //
 if ($user->is_loggedin() == true && $debug == 1){
     include_once './inc/debug.php';
 }
 
-if(isset($_POST['search'])) {
-    if(strlen($_POST['navn']) > 6 || strlen($_POST['navn']) < 1) {
-        $error['navn'] = '<div class="alert alert-danger alert-dismissible" id="myAlert">
-            <a href="#" class="close">&times;</a>
-            <i class="glyphicon glyphicon-warning-sign"></i>
-            Din søgning skal være mellem 1 og 6 tegn.
-            </div>';
-    } else {
-        $user->redirect('produkter&search='.$_POST['navn'].'');
-    }
-}
-
+// Vores switchcase til alle vores undersider //
+// Vi tjekker på URL og POST inputs, for at sanitize det //
 if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
+    // GET håndtere vores inputs //
     $get = $user->secGetInputArray(INPUT_GET);
+    // Laver url'en om til ?side= //
     if (isset($get['side']) && !empty($get['side'])) {
         switch ($get['side']) {
 
@@ -99,15 +98,18 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './partials/singleBlog.php';
                 break;
 
+            /** Default rollback */
             default:
                 header('Location: index.php?side=forside');
                 break;
         }
+    /** Hvis url inputtet er skrevet forkert, rollback til denne */
     } else {
         header('Location: index.php?side=forside');
     }
 }
 
+// Inkludere vores footer fil fra inc mappen //
 include_once './inc/footer.php';
 
 

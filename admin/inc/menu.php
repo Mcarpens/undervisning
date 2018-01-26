@@ -83,11 +83,11 @@
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-envelope"></i>
                     <span class="d-lg-none">Beskeder
-              <span class="badge badge-pill badge-primary"><?= $email->rowCountEmail() ?></span>
-            </span>
-                    <span class="indicator text-primary d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
+                        <span class="badge badge-pill badge-primary"><?= $email->rowCountEmail() ?></span>
+                    </span>
+                    <span class="badge badge-pill badge-primary">
+                        <?= $email->rowCountEmail() ?>
+                    </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="messagesDropdown">
                     <h6 class="dropdown-header">Seneste beskeder:</h6>
@@ -111,12 +111,10 @@
                     <span class="d-lg-none">Notifikationer
               <span class="badge badge-pill badge-warning"><?= $notification->rowCountNotifications() ?></span>
             </span>
-            <span class="indicator text-warning d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
-            </span>
+                    <span class="badge badge-pill badge-warning"><?= $notification->rowCountNotifications() ?></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">Nyeste Notifikationer:</h6>
+                    <h6 class="dropdown-header">Seneste Notifikationer: </h6>
                     <div class="dropdown-divider"></div>
                     <?php
                     foreach ($notification->getLastesNotifications() as $notifications) {

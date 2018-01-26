@@ -1,27 +1,101 @@
-<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-<?php if(isset($_GET['search'])) {
-    foreach($products->searchProduct($_GET['search']) as $product) { ?>
-        <tr>
-            <td><?= $product->name ?></td>
-            <td><?= $product->price ?></td>
-            <td><?= $product->product_number ?></td>
-            <td><?= $product->description ?></td>
-            <td>
-                <a href="?side=produkt&id=<?=$product->id?>"><button class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Vis produkt"><i class="fas fa-external-link-alt"></i> </button></a>
-            </td>
-        </tr>
-    <?php }
-} else {
-    foreach($products->allProducts() as $product) { ?>
-        <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-            <div class="my-3 p-3">
-                <h2 class="display-5"><?= $product->name ?></h2>
-                <p class="lead"><?= $product->description ?></p>
-                <p><?= $product->price ?> DKK</p>
-                <a href="#" class="btn btn-outline-success">Tilføj til kurv</a> &nbsp; <a href="?side=produkt&id=<?=$product->id?>" class="btn btn-outline-info">Se produktet</a>
-            </div>
-            <div class="bg-white box-shadow mx-auto" style="width: auto; height: 300px; border-radius: 21px 21px 0 0;"><img src="<?= $product->image ?>" style="height: 300px; width: auto; border-radius: 21px 21px 0 0; overflow: hidden"></div>
+<!-- Page Title
+    ============================================= -->
+<section id="page-title">
+
+    <div class="container clearfix">
+        <h1>Shop</h1>
+        <span>Produkter med filter</span>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Filters</a></li>
+            <li class="active">Produkter</li>
+        </ol>
+    </div>
+
+</section><!-- #page-title end -->
+
+<!-- Content
+============================================= -->
+<section id="content">
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <!-- Post Content
+            ============================================= -->
+            <div class="postcontent nobottommargin col_last">
+
+                <!-- Shop
+                ============================================= -->
+                <div id="shop" class="shop product-3 grid-container clearfix">
+
+                    <?php foreach($products->allProducts() as $product) { ?>
+                        <div class="product sf-dress clearfix">
+                            <div class="product-image">
+                                <a href="#"><img src="./assets/img/produkter/<?= $product->image ?>" alt="<?= $product->name ?>"></a>
+                                <!--                                <div class="sale-flash">50% Off*</div>-->
+                                <div class="product-overlay">
+                                    <a href="#" class="add-to-cart"><i class="icon-shopping-cart"></i><span> Tilføj til kurv</span></a>
+                                    <a href="?side=produkt&id=<?=$product->id?>" class="item-quick-view"><i class="icon-zoom-in2"></i><span> Se mere</span></a>
+                                </div>
+                            </div>
+                            <div class="product-desc center">
+                                <div class="product-title"><h3><a href="#"><?= $product->name ?></a></h3></div>
+                                <div class="product-price"><?= $product->price ?> DKK</div>
+                                <div class="product-rating">
+                                    <i class="icon-star3"></i>
+                                    <i class="icon-star3"></i>
+                                    <i class="icon-star3"></i>
+                                    <i class="icon-star3"></i>
+                                    <i class="icon-star-half-full"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+
+                </div><!-- #shop end -->
+
+            </div><!-- .postcontent end -->
+
+            <!-- Sidebar
+            ============================================= -->
+            <div class="sidebar nobottommargin">
+                <div class="sidebar-widgets-wrap">
+
+                    <div class="widget widget-filter-links clearfix">
+
+                        <h4>Vælg Kategori</h4>
+                        <ul class="custom-filter" data-container="#shop" data-active-class="active-filter">
+                            <li class="widget-filter-reset active-filter"><a href="#" data-filter="*">Ryd</a></li>
+                            <!--                                <li><a href="#" data-filter=".sf-dress">Dress</a></li>-->
+                            <!--                                <li><a href="#" data-filter=".sf-tshirt">Tshirts</a></li>-->
+                            <!--                                <li><a href="#" data-filter=".sf-pant">Pants</a></li>-->
+                            <!--                                <li><a href="#" data-filter=".sf-sunglass">Sunglasses</a></li>-->
+                            <!--                                <li><a href="#" data-filter=".sf-shoes">Shoes</a></li>-->
+                            <!--                                <li><a href="#" data-filter=".sf-watch">Watches</a></li>-->
+                        </ul>
+
+                    </div>
+
+                    <div class="widget widget-filter-links clearfix">
+
+                        <h4>Sorter efter</h4>
+                        <ul class="shop-sorting">
+                            <li class="widget-filter-reset active-filter"><a href="#" data-sort-by="original-order">Ryd</a></li>
+                            <li><a href="#" data-sort-by="name">Navn</a></li>
+                            <li><a href="#" data-sort-by="price_lh">Pris: Lav til Høj</a></li>
+                            <li><a href="#" data-sort-by="price_hl">Pris: Høj til Lav</a></li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div><!-- .sidebar end -->
+
         </div>
-    <?php }
-}
-?>
+
+    </div>
+
+</section><!-- #content end -->

@@ -9,6 +9,8 @@ class Products extends \PDO
         $this->db = $db;
     }
 
+    // Generer en tilfældig nøgle udfra nogle parameter, som er angivet forneden.
+    // Dette bruges til vores produkt nummer i metoden newProducts.
     private function generateRandomString($length = 10) {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $charactersLength = strlen($characters);
@@ -21,15 +23,31 @@ class Products extends \PDO
 
     public function newProducts($post)
     {
+        $image = mediaImageUploader('filUpload');
+        // Her gøres brug af vores tilfældigt generet produktnøgle, som nu er sæt til kun at være 6 karaktere lang.
         $randomString = $this->generateRandomString(6);
-        $this->db->query("INSERT INTO products (name, price, product_number, description) 
+        if (!empty($image['name'])) {
+            $this->db->query("INSERT INTO products (name, price, product_number, description, image) 
+                             VALUES (:name, :price, :product_number, :description, :image)",
+                [
+                    ':name' => $post['name'],
+                    ':price' => $post['price'],
+                    ':product_number' => $randomString,
+                    ':description' => $post['description'],
+                    ':image' => $image['name']
+                ]
+            );
+        } else {
+            $this->db->query("INSERT INTO products (name, price, product_number, description) 
                              VALUES (:name, :price, :product_number, :description)",
-                             [
-                                 ':name' => $post['name'],
-                                 ':price' => $post['price'],
-                                 ':product_number' => $randomString,
-                                 ':description' => $post['description']
-                             ]);
+                [
+                    ':name' => $post['name'],
+                    ':price' => $post['price'],
+                    ':product_number' => $randomString,
+                    ':description' => $post['description']
+                ]
+            );
+        }
         return true;
     }
 
@@ -56,14 +74,27 @@ class Products extends \PDO
 
     public function editProduct($post)
     {
-        $this->db->query("UPDATE `products` SET `name`=:name,`price`=:price,`description`=:description 
+        $image = mediaImageUploader('filUpload');
+        if (!empty($image['name'])) {
+            $this->db->query("UPDATE `products` SET `name`=:name,`price`=:price,`description`=:description, `image`=:image 
                           WHERE id = :id",
-            [
-                ':id' => $post['id'],
-                ':name' => $post['name'],
-                ':price' => $post['price'],
-                ':description' => $post['description']
-            ]);
+                [
+                    ':id' => $post['id'],
+                    ':name' => $post['name'],
+                    ':price' => $post['price'],
+                    ':description' => $post['description'],
+                    ':image' => $image['name']
+                ]);
+        } else {
+            $this->db->query("UPDATE `products` SET `name`=:name,`price`=:price,`description`=:description 
+                          WHERE id = :id",
+                [
+                    ':id' => $post['id'],
+                    ':name' => $post['name'],
+                    ':price' => $post['price'],
+                    ':description' => $post['description']
+                ]);
+        }
         return true;
     }
 

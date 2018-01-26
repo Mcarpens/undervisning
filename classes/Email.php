@@ -8,16 +8,22 @@
 
 class Email extends \PDO {
 
+    /**
+     * DB er sat på forhånd, derfor null
+     * @var null
+     */
     private $db = null;
 
     /**
      * User constructor.
+     * Nødvendig for database håndtering
      * @param $db
      */
     public function __construct($db) {
         $this->db = $db;
     }
 
+    // Validere vores kontakt formular udfra post dataen fra formen //
     public function validateContact($postInfo) {
         $error = [];
         foreach($postInfo as $key => $value) {
@@ -31,9 +37,11 @@ class Email extends \PDO {
                             </div>';
             }
         }
+        // returnere en fejl, hvis valideringen fejlede //
         return $error;
     }
 
+    // Læg beskeden ind i messages tabellen, udfra post dataen fra formen //
     public function sendMail($postInfo)
     {
         try
@@ -46,10 +54,10 @@ class Email extends \PDO {
                     ':email' => $postInfo['email'],
                     ':message' => $postInfo['besked']
                 ]);
-
-
+            // Returnere vores data, hvis alt gik vel //
             return true;
         }
+        // Ellers returnere en PDO fejl //
         catch(PDOException $e)
         {
             echo $e->getMessage();
@@ -57,25 +65,30 @@ class Email extends \PDO {
         }
     }
 
+    // Hent alle emails fra messages i tabellen //
     public function getAllEmails() {
         return $this->db->toList('SELECT * FROM `messages` ORDER BY `id` DESC');
     }
-    
+
+    // Slet en email fra messages i tabellen, udfra ID'et //
     public function deleteEmail($id)
     {
         return $this->db->query("DELETE FROM `messages` WHERE id = :id", [':id' => $id]);
     }
 
+    // Hent seneste emails fra messages i tabellen, KUN 3 EMAILS, NYESTE FØRST //
     public function getLatestEmail()
     {
         return $this->db->toList("SELECT * FROM `messages` ORDER BY `id` DESC LIMIT 3");
     }
 
+    // Hent kun en email fra messages tabellen, udfra ID'et //
     public function singleEmail($id)
     {
         return $this->db->single("SELECT * FROM `messages` WHERE id = :id", [':id' => $id]);
     }
 
+    // Tæl hvor mange emails der er i messages tabellen //
     public function rowCountEmail()
     {
         $result = $this->db->prepare("SELECT count(*) FROM `messages`");
