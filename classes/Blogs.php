@@ -118,6 +118,12 @@ class Blogs extends \PDO
         return true;
     }
 
+    // Hent de 3 seneste blogs, som skal vises i footeren //
+    public function getNewestBlogs()
+    {
+        return $this->db->toList("SELECT * FROM `blogs` ORDER BY `timestamp` DESC LIMIT 3");
+    }
+
     /**
      * Blog - Kategori
      * @return mixed

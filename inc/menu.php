@@ -50,7 +50,7 @@
                                                 $userrole = "Medarbejder";
                                             }
                                             if ($u->id === $_SESSION['user_id']) {
-                                                echo '<img src="./assets/img/users/' . $users->avatar . '" style="width: 30px; height: 30px;" class="rounded"> ' . $u->username;
+                                                echo '<img src="./assets/img/users/' . $users->avatar . '" style="width: 25px; height: 25px;" class="rounded Responsive image"> ' . $u->username;
                                             }
                                         }
                                     } else {
@@ -117,7 +117,7 @@
                     ============================================= -->
                     <div id="top-search">
                         <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
-                        <form action="search.html" method="get">
+                        <form action="" method="get">
                             <input type="text" name="q" class="form-control" value="" placeholder="Skriv &amp; Tryk Enter..">
                         </form>
                     </div><!-- #top-search end -->

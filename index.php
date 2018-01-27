@@ -22,6 +22,9 @@ $notification = new Notifications($db);
 $blogs = new Blogs($db);
 $comments = new Comments($db);
 
+// Sæt indstiliinger her, så de kan kaldes på hele siden //
+foreach ($setting->getAllSettings() as $settings);
+
 // Hvis du er logget ind, hent brugerens oplysninger med session //
 if ($user->is_loggedin() == true) {
     $users = $user->getOne($_SESSION['user_id']);

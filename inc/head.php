@@ -3,7 +3,7 @@
 <head>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="SemiColonWeb" />
+    <meta name="author" content="Carpens Systems, PMV" />
 
     <!-- Stylesheets
     ============================================= -->
@@ -29,7 +29,7 @@
 
     <!-- Document Title
     ============================================= -->
-    <title><?php foreach ($setting->getAllSettings() as $settings) {echo $settings->site_name;} ?></title>
+    <title><?= $settings->site_name ?></title>
 
     <style>
 

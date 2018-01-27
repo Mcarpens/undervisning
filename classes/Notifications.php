@@ -265,5 +265,4 @@ class Notifications extends \PDO
     {
         return $this->db->query("INSERT INTO `notifications`(`name`, `link`, `description`, `status`) VALUES ('Kommentar Slettet', 'fa fa-check-circle', 'En kommentar er blevet slettet', 'success')");
     }
-
 }

@@ -41,8 +41,8 @@
                                     ?>
                                 </td>
                                 <td><?= $com->timestamp ?></td>
-                                <td><?= substr($blog->title, "0", "50") ?></td>
-                                <td><?= $com->text ?></td>
+                                <td><?= $blog->title ?></td>
+                                <td><?= substr($com->text, "0", "50") ?></td>
                                 <td style="text-align: center">
                                     <a href="?side=sletKommentar&id=<?= $com->id ?>" data-toggle="tooltip" data-placement="bottom" title="Slet kommentar"><button class="btn btn-danger" > Slet</button></a>
                                 </td>

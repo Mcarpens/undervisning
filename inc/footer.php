@@ -16,17 +16,16 @@
 
                         <img src="./assets/img/footer-widget-logo.png" alt="" class="footer-logo">
 
-                        <p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design Standards.</p>
+                        <p><?= $settings->footer_description ?></p>
 
-                        <div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">
+                        <div style="background: url('./assets/img/world-map.png') no-repeat center center; background-size: 100%;">
                             <address>
-                                <strong>Headquarters:</strong><br>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
+                                <strong>Hovedkvarter:</strong><br>
+                                <?= $settings->address ?><br>
+                                <?= $settings->city ?>, <?= $settings->country ?><br>
                             </address>
-                            <abbr title="Phone Number"><strong>Phone:</strong></abbr> (91) 8547 632521<br>
-                            <abbr title="Fax"><strong>Fax:</strong></abbr> (91) 11 4752 1433<br>
-                            <abbr title="Email Address"><strong>Email:</strong></abbr> info@canvas.com
+                            <abbr title="Phone Number"><strong>Telefon:</strong></abbr> (+45) <?= $settings->phone ?><br>
+                            <abbr title="Email Address"><strong>Email:</strong></abbr> <a href="mail:<?= $settings->email ?>"><?= $settings->email ?></a>
                         </div>
 
                     </div>
@@ -58,41 +57,23 @@
                 <div class="col_one_third col_last">
 
                     <div class="widget clearfix">
-                        <h4>Recent Posts</h4>
+                        <h4>Seneste Blogs</h4>
 
                         <div id="post-list-footer">
-                            <div class="spost clearfix">
-                                <div class="entry-c">
-                                    <div class="entry-title">
-                                        <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
-                                    </div>
-                                    <ul class="entry-meta">
-                                        <li>10th July 2014</li>
-                                    </ul>
-                                </div>
-                            </div>
 
+                            <?php foreach ($blogs->getNewestBlogs() as $blog) { ?>
                             <div class="spost clearfix">
                                 <div class="entry-c">
                                     <div class="entry-title">
-                                        <h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
+                                        <h4><a href="?side=nyhed&id=<?= $blog->id ?>"><?= $blog->title ?></a></h4>
                                     </div>
                                     <ul class="entry-meta">
-                                        <li>10th July 2014</li>
+                                        <li><?= $blog->timestamp ?></li>
                                     </ul>
                                 </div>
                             </div>
+                            <?php } ?>
 
-                            <div class="spost clearfix">
-                                <div class="entry-c">
-                                    <div class="entry-title">
-                                        <h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
-                                    </div>
-                                    <ul class="entry-meta">
-                                        <li>10th July 2014</li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -158,7 +139,7 @@
         <div class="container clearfix">
 
             <div class="col_half">
-                Copyrights &copy; 2017 - <?= date('Y') ?> All Rights Reserved by <?php foreach ($setting->getAllSettings() as $settings) {echo $settings->site_name;} ?>.<br>
+                Copyrights &copy; 2017 - <?= date('Y') ?>, Alle Rettigheder Overholdt af <?= $settings->site_name ?>.<br>
                 <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
             </div>
 
@@ -207,7 +188,7 @@
 
                 <div class="clear"></div>
 
-                <i class="icon-envelope2"></i> info@canvas.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype
+                <i class="icon-envelope2"></i> <?= $settings->email ?> <span class="middot">&middot;</span> <i class="icon-headphones"></i> +45 <?= $settings->phone ?>
             </div>
 
         </div>
