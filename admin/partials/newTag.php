@@ -18,38 +18,58 @@ if (isset($_POST['btn_opret'])) {
     }
 }
 ?>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="./index.php?side=dashboard">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">Opret et Tag</li>
-        </ol>
-        <?php
-        if(isset($error))
-        {
-            foreach($error as $error)
-            {
-                ?>
-                <div class="alert alert-danger alert-dismissible" data-dismiss="alert" id="myAlert">
-                    <a href="#" class="close">&times;</a>
-                    <i class="fa fa-warning"></i> &nbsp;<?php echo $error; ?>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <div class="page-header card">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <i class="ti-book bg-c-blue"></i>
+                                <div class="d-inline">
+                                    <h4>Opret et ny tag</h4>
+                                    <span>Her kan du oprette et nyt tag til nyhederne.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="?side=forside">
+                                            <i class="icofont icofont-home"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="?side=forside">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#!">Opret tag</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <?php
-            }
-        }
-        ?>
-
-        <form name="contactform" action="" method="post">
-            <div class="form-group">
-                <label for="name">Navn</label>
-                <input type="text" name="name" id="name" class="form-control" value="<?= @$_POST['name'] ?>">
+                <!-- Page-header end -->
+                <div class="page-body">
+                    <div class="col-md-8 offset-2">
+                        <form name="contactform" action="" method="post">
+                            <div class="form-group">
+                                <label for="name">Navn</label>
+                                <input type="text" name="name" id="name" class="form-control" value="<?= @$_POST['name'] ?>">
+                            </div>
+                            <div class="clearfix"></div><hr />
+                            <input type="submit" class="btn btn-success" value="Opret" name="btn_opret" />
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="clearfix"></div><hr />
-            <input type="submit" class="btn btn-success" value="Opret" name="btn_opret" />
-        </form>
+            <div id="styleSelector">
+
+            </div>
+        </div>
     </div>
+</div>
+</div>
 </div>

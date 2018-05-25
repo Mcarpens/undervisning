@@ -36,35 +36,35 @@ $user->destroyToken();
         <div class="section nobg full-screen nopadding nomargin">
             <div class="container vertical-middle divcenter clearfix">
 
-                <div class="row center">
-                    <a href="index.php"><img src="./assets/img/logo-new.png" alt="Canvas Logo"></a>
+                <div class="row center" style="margin-bottom: 10px">
+                    <a href="index.php"><img src="./assets/img/<?= $settings->footer_logo ?>" alt="Logo"></a>
                 </div>
 
                 <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">
                     <div class="panel-body" style="padding: 40px;">
                         <form id="login-form" name="login-form" class="nobottommargin" action="#" method="post">
                             <input type="hidden" name="token" value="<?php echo $user->getToken() ?>">
-                            <h3>Login to your Account</h3>
+                            <h3>Logind på din konto</h3>
 
                             <div class="col_full">
-                                <label for="login-form-username">Username:</label>
+                                <label for="login-form-username">Brugernavn:</label>
                                 <input type="text" id="login-form-username" name="txt_uname_email" value="" class="form-control not-dark" />
                             </div>
 
                             <div class="col_full">
-                                <label for="login-form-password">Password:</label>
+                                <label for="login-form-password">Adgangskode:</label>
                                 <input type="password" id="login-form-password" name="txt_password" value="" class="form-control not-dark" />
                             </div>
 
                             <div class="col_full nobottommargin">
-                                <button class="button button-3d button-black nomargin" id="login-form-submit" name="btn-login"  value="login">Login</button>
-                                <a href="#" class="fright">Forgot Password?</a>
+                                <button class="button button-3d button-black nomargin" id="login-form-submit" name="btn-login"  value="login">Logind</button>
+<!--                                <a href="#" class="fright">Forgot Password?</a>-->
                             </div>
                         </form>
                     </div>
                 </div>
 
-                <!--                    <div class="row center dark"><small>Copyrights &copy; All Rights Reserved by Canvas Inc.</small></div>-->
+                <div class="row center dark"><small>&copy; <?= date('Y') ?>, Carpens Systems, PMV. Alle Rettigheder Overholdt</small></div>
 
             </div>
         </div>

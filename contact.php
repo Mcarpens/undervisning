@@ -4,11 +4,13 @@ if(isset($_POST['btn_send'])){
     if(sizeof($error) == 0) {
         $email->sendMail($_POST);
         $notification->setMessageNotificationSuccess();
+
         $success = '<div class="alert alert-success alert-dismissible" data-dismiss="alert" id="myAlert">
                             <a href="#" class="close">&times;</a>
                             <i class="glyphicon glyphicon-warning-sign"></i>
                             Tak for din henvendelse, vi vender tilbage til dig hurtigst muligt!
                             </div>';
+        $user->redirect('kontakt');
     }
 }
 ?>
@@ -48,7 +50,7 @@ if(isset($_POST['btn_send'])){
                 <!-- Contact Form
                 ============================================= -->
                 <form class="nobottommargin" action="" method="post">
-                    <?=@$success?>
+                    <?= @$success ?>
                     <div class="col_full">
                         <label for="template-contactform-name">Navn <small>*</small></label>
                         <input type="text" id="template-contactform-name" name="navn" value="<?= @$_POST['navn'] ?>" class="sm-form-control required" />
@@ -86,4 +88,5 @@ if(isset($_POST['btn_send'])){
     </section>
 
 
-</section><!-- Contact Form & Map Overlay Section End -->
+</section>
+<!-- Contact Form & Map Overlay Section End -->

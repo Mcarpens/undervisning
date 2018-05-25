@@ -6,17 +6,15 @@
  * Time: 10:42
  */
 
-
 if (isset($_POST['btn_opret'])) {
-    $name = strip_tags($_POST['name']);
 
-    if ($name=="") {
-        $error[] = "Angiv et navn!";
-    } else {
-        $blogs->newCategory($_POST);
-        $notification->setNewCategoryNotification();
-        $user->redirect('kategorier');
-    }
+    $fileUploader = new FileUploader("../assets/img/farver/");
+
+    $newfile = $fileUploader->fileUpload($_FILES['filUpload'], 250, 250);
+
+    $products->newColor($_POST, $newfile['filename']);
+    $notification->setNewCategoryNotification();
+    $user->redirect('farver');
 }
 ?>
 <div class="pcoded-content">
@@ -28,10 +26,10 @@ if (isset($_POST['btn_opret'])) {
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-book bg-c-blue"></i>
+                                <i class="ti-shopping-cart bg-c-blue"></i>
                                 <div class="d-inline">
-                                    <h4>Opret en ny kategori</h4>
-                                    <span>Her kan du oprette en ny kategori til nyhederne.</span>
+                                    <h4>Opret en ny farve</h4>
+                                    <span>Her kan du oprette en ny farve til webshoppen.</span>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +43,7 @@ if (isset($_POST['btn_opret'])) {
                                     </li>
                                     <li class="breadcrumb-item"><a href="?side=forside">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#!">Opret kategori</a>
+                                    <li class="breadcrumb-item"><a href="#!">Opret Farve</a>
                                     </li>
                                 </ul>
                             </div>
@@ -55,11 +53,25 @@ if (isset($_POST['btn_opret'])) {
                 <!-- Page-header end -->
                 <div class="page-body">
                     <div class="col-md-8 offset-2">
-                        <form name="contactform" action="" method="post">
-                            <div class="form-group">
-                                <label for="name">Navn</label>
+                        <form action="" method="post" enctype="multipart/form-data">
+
+                            <label for="name">Navn</label>
+                            <div class="input-group">
                                 <input type="text" name="name" id="name" class="form-control" value="<?= @$_POST['name'] ?>">
                             </div>
+
+                            <!-- Image upload card start -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Billede Upload</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="sub-title">Vælg et billede</div>
+                                    <input type="file" name="filUpload" id="filer_input" multiple="multiple">
+                                </div>
+                            </div>
+                            <!-- Image upload card end -->
+
                             <div class="clearfix"></div><hr />
                             <input type="submit" class="btn btn-success" value="Opret" name="btn_opret" />
                         </form>

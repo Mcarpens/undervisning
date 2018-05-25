@@ -14,13 +14,17 @@ session_start();
 require_once './config.php';
 
 // Instantisering af objekterne //
-$setting = new settings($db);
+$setting = new Settings($db);
 $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
 $notification = new Notifications($db);
 $blogs = new Blogs($db);
 $comments = new Comments($db);
+$minKurv = new Basket();
+$payments = new Payments($db);
+//$update = new Update();
+$search = new Search($db);
 
 // Sæt indstiliinger her, så de kan kaldes på hele siden //
 foreach ($setting->getAllSettings() as $settings);
@@ -28,6 +32,12 @@ foreach ($setting->getAllSettings() as $settings);
 // Hvis du er logget ind, hent brugerens oplysninger med session //
 if ($user->is_loggedin() == true) {
     $users = $user->getOne($_SESSION['user_id']);
+}
+
+// Sætter vores indkøbskurv igang //
+$quantity = 0;
+foreach ($minKurv->VisKurv() as $key => $value){
+    $quantity = $quantity + $value['antal'];
 }
 
 // Inkludere head og menu filerne fra inc mappen //
@@ -61,9 +71,15 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
             case 'opdater';
                 include_once './update.php';
                 break;
+            case '404';
+                include_once './404.php';
+                break;
+            case 'soegning';
+                include_once './search.php';
+                break;
 
             /** Produkter */
-            case 'produkter';
+            case 'webshop';
                 include_once './products.php';
                 break;
             case 'produkt';
@@ -71,6 +87,12 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'search';
                 include_once './search.php';
+                break;
+            case 'kurv';
+                include_once './inc/basket.php';
+                break;
+            case 'checkud';
+                include_once './inc/checkout.php';
                 break;
 
             /** Brugere */
@@ -103,7 +125,7 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
 
             /** Default rollback */
             default:
-                header('Location: index.php?side=forside');
+                header('Location: index.php?side=404');
                 break;
         }
     /** Hvis url inputtet er skrevet forkert, rollback til denne */
@@ -114,28 +136,3 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
 
 // Inkludere vores footer fil fra inc mappen //
 include_once './inc/footer.php';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

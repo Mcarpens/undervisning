@@ -6,45 +6,10 @@
  * Time: 11:52
  */
 
-function mediaImageUploader($inputFieldName, $mimeType = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/bmp'], $folder = './assets/img/users'){
-    $uploadError = array(
-        1 => 'Filens størrelse overskrider \'upload_max_filesize\' directivet i php.ini.',
-        2 => 'Filen størrelse overskride \'MAX_FILE_SIZE\' directivet i HTML formen.',
-        3 => 'File blev kun delvis uploadet.',
-        4 => 'Filen blev ikke uploaded.',
-        6 => 'Kunne ikke finde \'tmp\' mappen.',
-        7 => 'Kunne ikke gemme filen på disken.',
-        8 => 'A PHP extension stopped the file upload.'
-    );
-    if($_FILES[$inputFieldName]['error'] === 0){
-        $image = $_FILES[$inputFieldName];
-        if(!in_array($image['type'], $mimeType)){
-            return [
-                'code' => false,
-                'msg' => 'Ikke tiladt filtype'
-            ];
-        }
-        if (!file_exists($folder)) {
-            mkdir($folder, 0755, true);
-        }
-        $imageName = sha1(time()*rand(5,1000));
-        if(move_uploaded_file($image['tmp_name'], $folder . '/' . $imageName)){
-            return [
-                'code' => true,
-                'type' => $image['type'],
-                'name' => $imageName
-            ];
-        }
-    } else {
-        return [
-            'code' => false,
-            'msg' => $uploadError[$_FILES[$inputFieldName]['error']]
-        ];
-    }
-}
-
 if(isset($_POST['btn-edit']))
 {
+    $fileUploader = new FileUploader("./assets/img/users/");
+
     $firstname = strip_tags($_POST['firstname']);
     $lastname = strip_tags($_POST['lastname']);
     $username = strip_tags($_POST['username']);
@@ -52,7 +17,6 @@ if(isset($_POST['btn-edit']))
     $email = strip_tags($_POST['email']);
     $address = strip_tags($_POST['address']);
     $phone = strip_tags($_POST['phone']);
-    $avatar = strip_tags($_POST['filUpload']);
 
     if ($firstname=="") {
         $error[] = "Angiv et fornavn !";
@@ -78,10 +42,15 @@ if(isset($_POST['btn-edit']))
         {
             $stmt = $_SESSION['user_id'] == $users->id;
             if($stmt == true) {
-                if($user->editUser($_POST) == true){
-                    $notification->setEditUserNotification();
-                    $user->redirect('profil');
+                $newfile = $fileUploader->fileUploadEditUser($_FILES['filUpload'], 50, 50);
+                if (empty($users->avatar) || !isset($users->avatar)) {
+                    unlink('./assets/img/users/' . $users->avatar);
+                    unlink('./assets/img/users/thumb/' .$users->avatar);
                 }
+//                var_dump($newfile);
+                $user->editUser($_POST, $newfile['filename']);
+                $notification->setEditUserNotification();
+                $user->redirect('profil');
             }
             else
             {
@@ -167,7 +136,7 @@ if(isset($_POST['btn-edit']))
                     </div>
 
                     <div class="form-group">
-                        <input id="input-11" name="filUpload" type="file" multiple class="file-loading" value="<?= @$users->avatar ?>" accept="image/*">
+                        <input id="input-11" name="filUpload" type="file" class="file-loading" value="<?= @$users->avatar ?>" placeholder="<?= @$users->avatar ?>" accept="image/*">
                     </div>
 
                     <div class="clearfix"></div><hr />

@@ -22,10 +22,13 @@
         <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
 
+
     <!-- SLIDER REVOLUTION 5.x CSS SETTINGS -->
     <link rel="stylesheet" type="text/css" href="./assets/include/rs-plugin/css/settings.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="./assets/include/rs-plugin/css/layers.css">
     <link rel="stylesheet" type="text/css" href="./assets/include/rs-plugin/css/navigation.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
     <!-- Document Title
     ============================================= -->
@@ -63,5 +66,5 @@
         .tp-caption { white-space: nowrap; }
 
     </style>
-
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>

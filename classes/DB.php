@@ -8,7 +8,6 @@
 
 class DB extends \PDO
 {
-    //Fields
     /**
      * @var
      */
@@ -34,7 +33,6 @@ class DB extends \PDO
      */
     private $debug = false;
 
-    //properties
 
     /**
      * @param bool $bool
@@ -69,6 +67,7 @@ class DB extends \PDO
         }
 
     }
+
 
     /**
      * @param string $sql
@@ -148,6 +147,6 @@ class DB extends \PDO
      */
     public function lastId($sql, $params = false){
         $this->query($sql, $params);
-        return $this->query->lastInsertId();
+        return $this->lastInsertId();
     }
 }

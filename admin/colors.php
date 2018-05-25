@@ -8,10 +8,10 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-email bg-c-pink2"></i>
+                                <i class="ti-shopping-cart bg-c-blue"></i>
                                 <div class="d-inline">
-                                    <h4>Beskeder</h4>
-                                    <span>Her kan du se alle dine beskeder i systemet</span>
+                                    <h4>Farver</h4>
+                                    <span>Her kan du se alle dine farver i systemet.</span>
                                 </div>
                             </div>
                         </div>
@@ -25,7 +25,7 @@
                                     </li>
                                     <li class="breadcrumb-item"><a href="?side=dashbord">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#!">Beskeder</a>
+                                    <li class="breadcrumb-item"><a href="#!">Farver</a>
                                     </li>
                                 </ul>
                             </div>
@@ -41,29 +41,24 @@
                                 <div class="dt-responsive table-responsive">
                                     <table id="new-cons" class="table table-striped table-bordered nowrap dataTable no-footer dtr-inline collapsed" role="grid">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">Navn</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Besked</th>
-                                            <th scope="col">Tidspunkt</th>
-                                            <th scope="col" style="text-align: center">Handling</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                        foreach($email->getAllEmails() as $emails) { ?>
                                             <tr>
-                                                <td><?= $emails->name ?></td>
-                                                <td><?= $emails->email ?></td>
-                                                <td><?= $emails->message ?></td>
-                                                <td><?= $emails->timestamp ?></td>
-                                                <td style="text-align: center">
-                                                    <a href="?side=visBesked&id=<?= $emails->id ?>" data-toggle="tooltip" data-placement="bottom" title="Slet produkt"><button class="btn btn-primary"> Vis</button></a>
-                                                    <a href="?side=sletEmail&id=<?= $emails->id ?>" data-toggle="tooltip" data-placement="bottom" title="Slet besked"><button class="btn btn-danger" > Slet</button></a>
-                                                </td>
+                                                <th scope="col">Farve Billede</th>
+                                                <th scope="col">Navn</th>
+                                                <th scope="col" style="text-align: center">Handling</th>
                                             </tr>
-                                        <?php } ?>
-                                        </tbody>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach($products->getAllColors() as $color) { ;?>
+                                                <tr>
+                                                    <td><img src="../assets/img/farver/thumb/<?= $color->cimage ?>" width="50" height="50"></td>
+                                                    <td><?= $color->cname ?></td>
+                                                    <td style="text-align: center">
+                                                        <a href="?side=redigerFarve&id=<?=$color->id?>"><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Rediger farve"><i class="ti-pencil-alt"></i> </button></a>
+                                                        <a href="?side=sletFarve&id=<?=$color->id?>"><button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Slet farve"><i class="ti-na"></i> </button></a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                            </tbody>
                                     </table>
                                 </div>
                             </div>

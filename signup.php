@@ -25,8 +25,8 @@ if(isset($_POST['btn-signup']))
     else if($password=="")	{
         $error[] = "Angiv en adgangskode!";
     }
-    else if(strlen($password) < 6){
-        $error[] = "Adgangskoden skal mindst være på 6 karaktere";
+    else if(strlen($password) < 4){
+        $error[] = "Adgangskoden skal mindst være på 4 karaktere";
     }
 
     else

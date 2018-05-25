@@ -34,9 +34,11 @@ $db = new DB('mysql:host='._DB_HOST_.';dbname='._DB_NAME_.';charset=utf8',_DB_US
 // 0 = Off
 $debug = 0;
 
+$pm = 0;
+
 // Build Nummer
 // Ændres for hver gang vi har opdateret vores kode
-$buildnr = 133;
+$buildnr = 134;
 
 // PHP Error reporting //
 ini_set('error_reporting', E_ALL);

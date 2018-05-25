@@ -44,6 +44,7 @@ class User extends \PDO
      * @return boolean
      */
     public function secCheckMethod($method) {
+        $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         return (filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_SPECIAL_CHARS) === strtoupper($method)) ? true : false;
     }
 
@@ -56,6 +57,7 @@ class User extends \PDO
      * @return string
      */
     public function secGetInputArray($input) {
+        $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         return filter_input_array(strtoupper($input), FILTER_SANITIZE_SPECIAL_CHARS);
     }
 
@@ -67,6 +69,7 @@ class User extends \PDO
      * @return bool
      */
     public function methodCheck($method) {
+        $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         $requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_SPECIAL_CHARS);
         if ($requestMethod === $method) {
             return TRUE;
@@ -165,6 +168,7 @@ class User extends \PDO
      */
     public function getAll()
     {
+        $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         return $this->db->toList("SELECT * FROM `users`");
     }
 
@@ -177,6 +181,7 @@ class User extends \PDO
      */
     public function getOne($id)
     {
+        $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         return $this->db->single("SELECT * FROM `users` WHERE id = :id",
             [
                 ':id' => $id,
@@ -264,6 +269,13 @@ class User extends \PDO
                 {
                     $_SESSION['user_id'] = $stmt->id;
                     $_SESSION['username'] = $stmt->username;
+                    $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+                    $this->db->query("UPDATE `users` SET `is_loggedin`=:is_loggedin WHERE id = :id",
+                        [
+                            ':id' => $_SESSION['user_id'],
+                            ':is_loggedin' => 1
+                        ]
+                    );
                     return true;
                 }
                 else
@@ -298,6 +310,7 @@ class User extends \PDO
      */
     public function redirect($url)
     {
+        $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         header("Location: index.php?side=".$url."");
     }
 
@@ -306,9 +319,24 @@ class User extends \PDO
      */
     public function doLogout()
     {
+        $this->db->query("UPDATE `users` SET `is_loggedin`=:is_loggedin WHERE id = :id",
+            [
+                ':id' => $_SESSION['user_id'],
+                ':is_loggedin' => 0
+            ]
+        );
         session_destroy();
-        unset($_SESSION['user_session']);
+        unset($_SESSION['user_id']);
         header('Location: ./index.php?side=forside');
+        return true;
+    }
+
+    public function sessionTimeout()
+    {
+        if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+            // last request was more than 30 minutes ago
+            $this->doLogout();
+        }
         return true;
     }
 
@@ -317,12 +345,12 @@ class User extends \PDO
         return $this->db->query("DELETE FROM users WHERE id = :id", [':id' => $id]);
     }
 
-    public function editUser($post)
+    public function editUser($post, $files)
     {
-        $avatar = mediaImageUploader('filUpload');
-
+        $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+        $newfile = $files;
         // Tjekker om både password og eller billede er sat.
-        if(empty($avatar['name'])) {
+        if(empty($newfile)) {
             $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone
                           WHERE id = :id",
                 [
@@ -334,7 +362,7 @@ class User extends \PDO
                     ':address' => $post['address'],
                     ':phone' => $post['phone']
                 ]);
-        } else if(empty($post['password']) && empty($avatar['name'])) {
+        } else if(empty($post['password']) && empty($newfile)) {
             $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone
                           WHERE id = :id",
                 [
@@ -356,10 +384,10 @@ class User extends \PDO
                     ':username' => $post['username'],
                     ':email' => $post['email'],
                     ':address' => $post['address'],
-                    ':avatar' => $avatar['name'],
+                    ':avatar' => $newfile,
                     ':phone' => $post['phone']
                 ]);
-        } else if(!empty($avatar['name'])) {
+        } else if(!empty($newfile)) {
             $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone, `avatar`=:avatar
                           WHERE id = :id",
                 [
@@ -369,10 +397,10 @@ class User extends \PDO
                     ':username' => $post['username'],
                     ':email' => $post['email'],
                     ':address' => $post['address'],
-                    ':avatar' => $avatar['name'],
+                    ':avatar' => $newfile,
                     ':phone' => $post['phone']
                 ]);
-        } else if(!empty($post['password']) && !empty($avatar['name'])) {
+        } else if(!empty($post['password']) && !empty($newfile)) {
             $new_password = password_hash($post['password'], PASSWORD_BCRYPT, ['cost' => 12]);
 
             $this->db->query("UPDATE `users` SET `firstname`=:firstname,`lastname`=:lastname,`username`=:username, `email`=:email, `address`=:address, `phone`=:phone, `avatar` = :avatar, `password` = :password
@@ -385,7 +413,7 @@ class User extends \PDO
                     ':email' => $post['email'],
                     ':address' => $post['address'],
                     ':phone' => $post['phone'],
-                     ':avatar' => $avatar['name'],
+                     ':avatar' => $newfile,
                     ':password' => $new_password
                 ]);
         }
@@ -403,7 +431,7 @@ class User extends \PDO
                 ':email' => $post['email'],
                 ':address' => $post['address'],
                 ':phone' => $post['phone'],
-                ':avatar' => $avatar['name'],
+                ':avatar' => $newfile,
                 ':password' => $new_password
             ]);
     }

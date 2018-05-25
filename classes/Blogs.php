@@ -52,16 +52,16 @@ class Blogs extends \PDO
     }
 
     // Rediger et element i blogs udfra ID'et med post data //
-    public function editBlog($post)
+    public function editBlog($post, $files)
     {
         // Indsæt et billede hvis der er uploadet et //
-        $images = mediaImageUploader('filUpload');
-        if(!empty($images['name'])) {
+        $newfile = $files;
+        if(!empty($newfile)) {
             $this->db->query("UPDATE `blogs` SET `title`=:title,`images`=:images,`text`=:text,`fk_author`=:fk_author,`fk_category`=:fk_category,`fk_tags`=:fk_tags WHERE id = :id",
                 [
                     ':id' => $post['id'],
                     ':title' => $post['title'],
-                    ':images' => $images['name'],
+                    ':images' => $newfile,
                     ':text' => $post['text'],
                     ':fk_author' => $post['author'],
                     ':fk_category' => $post['category'],
@@ -86,15 +86,15 @@ class Blogs extends \PDO
     }
 
     // Opret et nyt blog element i tabellen blogs, med de angivet post data fra formen //
-    public function newBlog($post)
+    public function newBlog($post, $files)
     {
         // Indsæt et billede hvis der er uploadet et //
-        $images = mediaImageUploader('images');
-        if(!empty($images['name'])) {
+        $newfile = $files;
+        if(!empty($newfile)) {
             $this->db->query("INSERT INTO `blogs`(`title`, `images`, `text`, `fk_author`, `fk_category`, `fk_tags`) VALUES (:title, :images, :text, :fk_author, :fk_category, :fk_tags)",
                 [
                     ':title' => $post['title'],
-                    ':images' => $images['name'],
+                    ':images' => $newfile,
                     ':text' => $post['text'],
                     ':fk_author' => $post['author'],
                     ':fk_category' => $post['category'],
@@ -103,10 +103,9 @@ class Blogs extends \PDO
             );
             // Indsæt ikke et billede hvis det ikke er uploadet //
         } else {
-            $this->db->query("INSERT INTO `blogs`(`title`, `images`, `text`, `fk_author`, `fk_category`, `fk_tags`) VALUES (:title, :images, :text, :fk_author, :fk_category, :fk_tags)",
+            $this->db->query("INSERT INTO `blogs`(`title`, `text`, `fk_author`, `fk_category`, `fk_tags`) VALUES (:title, :text, :fk_author, :fk_category, :fk_tags)",
                 [
                     ':title' => $post['title'],
-                    ':images' => $images['name'],
                     ':text' => $post['text'],
                     ':fk_author' => $post['author'],
                     ':fk_category' => $post['category'],

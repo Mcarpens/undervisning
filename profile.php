@@ -25,7 +25,7 @@
 
                 <div class="col-lg-9">
 
-                    <img src="./assets/img/users/<?= $users->avatar ?>" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
+                    <img src="./assets/img/users/thumb/<?= $users->avatar ?>" class="alignleft img-circle img-thumbnail notopmargin nobottommargin" alt="Avatar" style="max-width: 84px;">
 
                     <div class="heading-block noborder">
                         <h3><?= $users->firstname ?> <?= $users->lastname ?></h3>

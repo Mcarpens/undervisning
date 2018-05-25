@@ -25,22 +25,27 @@
             ============================================= -->
             <div id="posts" class="post-grid grid-container clearfix" data-layout="fitRows">
 
-                <?php foreach ($blogs->getAllBlogs() as $blog) { ?>
+                <?php foreach ($blogs->getAllBlogs() as $blog) {
+                    $comment = $comments->blogComments($blog->id);
+                    ?>
                 <div class="entry clearfix">
                     <div class="entry-image">
-                        <a href="./assets/img/blogs/<?= $blog->images ?>" data-lightbox="image"><img class="image_fade" src="./assets/img/blogs/<?= $blog->images ?>" alt="Standard Post with Image"></a>
+                        <a href="./assets/img/blogs/<?= $blog->images ?>" data-lightbox="image"><img class="image_fade" src="./assets/img/blogs/thumb/<?= $blog->images ?>" alt="Standard Post with Image"></a>
                     </div>
                     <div class="entry-title">
                         <h2><a href="?side=nyhed&id=<?= $blog->id ?>"><?= $blog->title ?></a></h2>
                     </div>
                     <ul class="entry-meta clearfix">
                         <li><i class="icon-calendar3"></i> <?= $blog->timestamp ?></li>
-<!--                        <li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13</a></li>-->
+                        <li><a href="?side=nyhed&id=<?= $blog->id ?>#comments"><i class="icon-comments"></i>
+                                0
+                            </a>
+                        </li>
                         <li><a href="#"><i class="icon-camera-retro"></i></a></li>
                     </ul>
                     <div class="entry-content">
-                        <p><?= substr($blog->text, 0, 100) ?>[...]</p>
-                        <a href="?side=nyhed&id=<?= $blog->id ?>"class="more-link">Read More</a>
+                        <p><?= strlen($blog->text) > 99 ? substr($blog->text, 0, 100) . '[...]' : $blog->text ?></p>
+                        <a href="?side=nyhed&id=<?= $blog->id ?>"class="more-link">Læs mere</a>
                     </div>
                 </div>
                 <?php } ?>

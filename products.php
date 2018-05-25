@@ -1,14 +1,22 @@
+<?php foreach ($setting->getAllWebshopSettings() as $webshop) {
+    echo '';
+}
+if ($webshop->shop_online == 0) {
+    $user->redirect('404');
+}
+?>
 <!-- Page Title
     ============================================= -->
 <section id="page-title">
 
     <div class="container clearfix">
-        <h1>Shop</h1>
-        <span>Produkter med filter</span>
+        <?php foreach ($setting->getAllWebshopSettings() as $webSettings); { ?>
+            <h1><?= $webSettings->shop_nav_title ?></h1>
+            <span><?= $webSettings->shop_nav_subtitle ?></span>
+        <?php } ?>
         <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Filters</a></li>
-            <li class="active">Produkter</li>
+            <li><a href="#">Hjem</a></li>
+            <li class="active">Webshop</li>
         </ol>
     </div>
 
@@ -33,16 +41,24 @@
                     <?php foreach($products->allProducts() as $product) { ?>
                         <div class="product sf-dress clearfix">
                             <div class="product-image">
-                                <a href="#"><img src="./assets/img/produkter/<?= $product->image ?>" alt="<?= $product->name ?>"></a>
-                                <!--                                <div class="sale-flash">50% Off*</div>-->
+                                <a href="#"><img style="border: 1px solid #999; padding: 10px; border-radius: 3px; background: linear-gradient(#fff, #ececec)" src="./assets/img/produkter/thumb/<?= $product->image ?>" alt="<?= $product->name ?>"></a>
+                                <?php if($product->on_sale == 1) { ?>
+                                    <div class="sale-flash"><?= $product->sale_text ?></div>
+                                <?php } ?>
                                 <div class="product-overlay">
-                                    <a href="#" class="add-to-cart"><i class="icon-shopping-cart"></i><span> Tilføj til kurv</span></a>
-                                    <a href="?side=produkt&id=<?=$product->id?>" class="item-quick-view"><i class="icon-zoom-in2"></i><span> Se mere</span></a>
+
+                                    <a style="width: 100%" href="?side=produkt&id=<?=$product->id?>" class="item-quick-view"><i class="icon-zoom-in2"></i><span> Se mere</span></a>
                                 </div>
                             </div>
                             <div class="product-desc center">
                                 <div class="product-title"><h3><a href="#"><?= $product->name ?></a></h3></div>
-                                <div class="product-price"><?= $product->price ?> DKK</div>
+                                <div class="product-price">
+                                    <?php if($product->on_sale == 1) { ?>
+                                        <del><?= $product->price ?> DKK</del> <ins><?= $product->sale_price ?> DKK</ins>
+                                    <?php } else { ?>
+                                        <?= $product->price ?> DKK
+                                    <?php } ?>
+                                </div>
                                 <div class="product-rating">
                                     <i class="icon-star3"></i>
                                     <i class="icon-star3"></i>

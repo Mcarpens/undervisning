@@ -14,7 +14,7 @@
 
                     <div class="widget clearfix">
 
-                        <img src="./assets/img/footer-widget-logo.png" alt="" class="footer-logo">
+                        <img src="./assets/img/<?= $settings->footer_logo ?>" alt="" class="footer-logo">
 
                         <p><?= $settings->footer_description ?></p>
 
@@ -45,7 +45,14 @@
                                 echo '<a href="./index.php?side=' . $menu->link . '">' . $menu->name . '</a>';
                                 echo '</li>';
                             }
+                            foreach ($setting->getAllWebshopSettings() as $webshop) {
+                                echo '';
+                            }
+                            if ($webshop->shop_online == 1) {
+                                echo '<li><a href="?side=webshop"> Webshop</a></li>';
+                            }
                             ?>
+                            <li><a href="?side=kontakt"> Kontakt</a></li>
                             <li><a href="?side=logind"> Logind</a></li>
                             <li><a href="?side=opret"> Opret Bruger</a></li>
                         </ul>
@@ -85,46 +92,46 @@
 
                 <div class="widget clearfix" style="margin-bottom: -20px;">
 
-                    <h4>Kontakt</h4>
+                    <h4>Nyhedsbrev</h4>
 
                 </div>
 
                 <div class="widget subscribe-widget clearfix">
-                    <h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:</h5>
+                    <h5><strong>Tilmeld</strong> dig til vores fantastiske nyhedsbreve:</h5>
                     <div class="widget-subscribe-form-result"></div>
                     <form id="widget-subscribe-form" action="./assets/include/subscribe.php" role="form" method="post" class="nobottommargin">
                         <div class="input-group divcenter">
                             <span class="input-group-addon"><i class="icon-email2"></i></span>
-                            <input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+                            <input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Indtast din email adresse">
                             <span class="input-group-btn">
-										<button class="btn btn-success" type="submit">Subscribe</button>
-									</span>
+                                <button class="btn btn-success" type="submit">Tilmeld</button>
+                            </span>
                         </div>
                     </form>
                 </div>
 
-                <div class="widget clearfix" style="margin-bottom: -20px;">
-
-                    <div class="row">
-
-                        <div class="col-md-6 clearfix bottommargin-sm">
-                            <a href="#" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">
-                                <i class="icon-facebook"></i>
-                                <i class="icon-facebook"></i>
-                            </a>
-                            <a href="#"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>
-                        </div>
-                        <div class="col-md-6 clearfix">
-                            <a href="#" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">
-                                <i class="icon-rss"></i>
-                                <i class="icon-rss"></i>
-                            </a>
-                            <a href="#"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
-                        </div>
-
-                    </div>
-
-                </div>
+<!--                <div class="widget clearfix" style="margin-bottom: -20px;">-->
+<!---->
+<!--                    <div class="row">-->
+<!---->
+<!--                        <div class="col-md-6 clearfix bottommargin-sm">-->
+<!--                            <a href="#" class="social-icon si-dark si-colored si-facebook nobottommargin" style="margin-right: 10px;">-->
+<!--                                <i class="icon-facebook"></i>-->
+<!--                                <i class="icon-facebook"></i>-->
+<!--                            </a>-->
+<!--                            <a href="#"><small style="display: block; margin-top: 3px;"><strong>Like us</strong><br>on Facebook</small></a>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 clearfix">-->
+<!--                            <a href="#" class="social-icon si-dark si-colored si-rss nobottommargin" style="margin-right: 10px;">-->
+<!--                                <i class="icon-rss"></i>-->
+<!--                                <i class="icon-rss"></i>-->
+<!--                            </a>-->
+<!--                            <a href="#"><small style="display: block; margin-top: 3px;"><strong>Subscribe</strong><br>to RSS Feeds</small></a>-->
+<!--                        </div>-->
+<!---->
+<!--                    </div>-->
+<!---->
+<!--                </div>-->
 
             </div>
 
@@ -140,55 +147,55 @@
 
             <div class="col_half">
                 Copyrights &copy; 2017 - <?= date('Y') ?>, Alle Rettigheder Overholdt af <?= $settings->site_name ?>.<br>
-                <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+                <div class="copyright-links"><a href="?side=terms">Terms of Use</a> / <a href="?side=policy">Privacy Policy</a></div>
             </div>
 
             <div class="col_half col_last tright">
-                <div class="fright clearfix">
-                    <a href="#" class="social-icon si-small si-borderless si-facebook">
-                        <i class="icon-facebook"></i>
-                        <i class="icon-facebook"></i>
-                    </a>
-
-                    <a href="#" class="social-icon si-small si-borderless si-twitter">
-                        <i class="icon-twitter"></i>
-                        <i class="icon-twitter"></i>
-                    </a>
-
-                    <a href="#" class="social-icon si-small si-borderless si-gplus">
-                        <i class="icon-gplus"></i>
-                        <i class="icon-gplus"></i>
-                    </a>
-
-                    <a href="#" class="social-icon si-small si-borderless si-pinterest">
-                        <i class="icon-pinterest"></i>
-                        <i class="icon-pinterest"></i>
-                    </a>
-
-                    <a href="#" class="social-icon si-small si-borderless si-vimeo">
-                        <i class="icon-vimeo"></i>
-                        <i class="icon-vimeo"></i>
-                    </a>
-
-                    <a href="#" class="social-icon si-small si-borderless si-github">
-                        <i class="icon-github"></i>
-                        <i class="icon-github"></i>
-                    </a>
-
-                    <a href="#" class="social-icon si-small si-borderless si-yahoo">
-                        <i class="icon-yahoo"></i>
-                        <i class="icon-yahoo"></i>
-                    </a>
-
-                    <a href="#" class="social-icon si-small si-borderless si-linkedin">
-                        <i class="icon-linkedin"></i>
-                        <i class="icon-linkedin"></i>
-                    </a>
-                </div>
+<!--                <div class="fright clearfix">-->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-facebook">-->
+<!--                        <i class="icon-facebook"></i>-->
+<!--                        <i class="icon-facebook"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-twitter">-->
+<!--                        <i class="icon-twitter"></i>-->
+<!--                        <i class="icon-twitter"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-gplus">-->
+<!--                        <i class="icon-gplus"></i>-->
+<!--                        <i class="icon-gplus"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-pinterest">-->
+<!--                        <i class="icon-pinterest"></i>-->
+<!--                        <i class="icon-pinterest"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-vimeo">-->
+<!--                        <i class="icon-vimeo"></i>-->
+<!--                        <i class="icon-vimeo"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-github">-->
+<!--                        <i class="icon-github"></i>-->
+<!--                        <i class="icon-github"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-yahoo">-->
+<!--                        <i class="icon-yahoo"></i>-->
+<!--                        <i class="icon-yahoo"></i>-->
+<!--                    </a>-->
+<!---->
+<!--                    <a href="#" class="social-icon si-small si-borderless si-linkedin">-->
+<!--                        <i class="icon-linkedin"></i>-->
+<!--                        <i class="icon-linkedin"></i>-->
+<!--                    </a>-->
+<!--                </div>-->
 
                 <div class="clear"></div>
 
-                <i class="icon-envelope2"></i> <?= $settings->email ?> <span class="middot">&middot;</span> <i class="icon-headphones"></i> +45 <?= $settings->phone ?>
+                <i class="icon-envelope2"></i> <?= $settings->email ?> <span class="middot">&middot;</span> <i class="icon-phone"></i> +45 <?= $settings->phone ?>
             </div>
 
         </div>
@@ -234,12 +241,12 @@
 
     $('#google-map1').gMap({
 
-        address: 'Pulsen 8, Roskilde',
+        address: 'Farum Hovedgade 10F',
         maptype: 'ROADMAP',
         zoom: 14,
         markers: [
             {
-                address: "Pulsen 8, Roskilde"
+                address: "Farum Hovedgade 10F"
             }
         ],
         doubleclickzoom: false,

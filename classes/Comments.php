@@ -55,6 +55,16 @@ class Comments extends \PDO
         return $this->db->toList("SELECT * FROM `comments` ORDER BY timestamp desc ");
     }
 
+    public function getAll()
+    {
+        return $this->db->toList("SELECT * FROM `comments`");
+    }
+
+    public function getOne($id)
+    {
+        return $this->db->single("SELECT * FROM `comments` WHERE fk_blog = :id", [':id' => $id]);
+    }
+
 //    public function rowCountCommentsFromBlog($id)
 //    {
 //        $result = $this->db->query("SELECT count(*) FROM `comments` WHERE fk_blog = :id",
@@ -78,5 +88,21 @@ class Comments extends \PDO
         $result = $this->db->prepare("SELECT count(*) FROM `comments`");
         $result->execute();
         return $notificationRows = $result->fetchColumn();
+    }
+
+    // Hent antallet af kommentare der passer til den enkelte blog/nyheds id //
+    public function rowCountCommentsSingle($id)
+    {
+        $result = $this->db->prepare("SELECT count(*) FROM `comments` WHERE id = :id", [':id' => $id]);
+        $result->execute();
+        return $notificationRows = $result->fetchColumn();
+    }
+
+    public function blogComments($id)
+    {
+        if ($result = $this->db->prepare("SELECT * FROM comments WHERE fk_blog = $id")) {
+            /* determine number of rows result set */
+            return $result;
+        }
     }
 }

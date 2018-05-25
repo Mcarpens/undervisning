@@ -6,7 +6,7 @@
  * Time: 11:02
  */
 
-class FileUploader {
+class FileUploader{
     private $_errors = [
         1 => "The uploaded file exceeds the upload_max_filesize directive in php.ini",
         2 => "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",
@@ -25,19 +25,23 @@ class FileUploader {
         'image/gif'
     ];
     protected $currentFile = NULL;
-    public function __construct($fileFolder = "img/", $thumbFolder = null)
+
+    public function __construct($fileFolder, $thumbFolder = null)
     {
         $this->_fileFolder = $fileFolder;
         if(!file_exists($this->_fileFolder)){
             mkdir($this->_fileFolder, 0777, true);
         }
+
         if($thumbFolder === null){
             $this->_thumbFolder = $fileFolder . 'thumb/';
         }
+
         if(!file_exists($this->_thumbFolder)){
             mkdir($this->_thumbFolder, 0777, true);
         }
     }
+
     /**
      * Undocumented function
      *
@@ -46,9 +50,126 @@ class FileUploader {
      */
     public function fileUpload($fileInput, $maxWidth = null, $maxHeight = null, $quality = null)
     {
-        if(isset($_FILES[$fileInput])){
-            echo "<pre>",print_r($_FILES),"</pre>";
-            $this->currentFile = $_FILES[$fileInput];
+        if(isset($fileInput)) {
+//            echo "<pre>",print_r($_FILES),"</pre>";
+
+            $this->currentFile = $fileInput;
+            // tjekker om at der er error kode som matcher vores fejlbeskeder
+            if(array_key_exists($this->currentFile['error'][0], $this->_errors)){
+                return [
+                    'success' => false,
+                    'msg' => $this->_errors[$this->currentFile['error'][0]]
+                ];
+            }
+            // tjekker om at mimetypen matcher det tilladte
+            if(!in_array($this->currentFile['type'][0], $this->mimetype)){
+                return [
+                    'success' => false,
+                    'msg' => "The uploaded file type is not allowed!"
+                ];
+            }
+            $newName = time() . '_' . $this->currentFile['name'][0];
+            if (move_uploaded_file($this->currentFile["tmp_name"][0], $this->_fileFolder . $newName)) {
+                if($maxWidth !== null && $maxHeight !== null){
+                    if(($this->currentFile['type'][0] === 'image/jpg') || ($this->currentFile['type'][0] === 'image/jpeg')){
+                        if($quality !== null){
+                            imagejpeg($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName, $quality);
+                        } else {
+                            imagejpeg($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName);
+                        }
+                    }
+                    if($this->currentFile['type'][0] === 'image/png'){
+                        if($quality !== null){
+                            imagepng($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName, $quality);
+                        } else {
+                            imagepng($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName);
+                        }
+                    }
+                    if($this->currentFile['type'][0] === 'image/gif'){
+                        imagegif($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName);
+                    }
+                }
+                return [
+                    'success' => true,
+                    'msg' => "The file ". basename($this->_fileFolder . $newName). " has been uploaded.",
+                    'filename' => $newName
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'msg' => "Sorry, there was an error uploading your file."
+                ];
+            }
+        }
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $fileInput
+     * @return array
+     */
+    public function fileUploadEdit($fileInput, $maxWidth = null, $maxHeight = null, $quality = null)
+    {
+        if(isset($fileInput)) {
+//            echo "<pre>",print_r($_FILES),"</pre>";
+
+            $this->currentFile = $fileInput;
+            // tjekker om at der er error kode som matcher vores fejlbeskeder
+            if(array_key_exists($this->currentFile['error'][0], $this->_errors)){
+                return [
+                    'success' => false,
+                    'msg' => $this->_errors[$this->currentFile['error'][0]]
+                ];
+            }
+            // tjekker om at mimetypen matcher det tilladte
+            if(!in_array($this->currentFile['type'][0], $this->mimetype)){
+                return [
+                    'success' => false,
+                    'msg' => "The uploaded file type is not allowed!"
+                ];
+            }
+            $newName = time() . '_' . $this->currentFile['name'][0];
+            if (move_uploaded_file($this->currentFile["tmp_name"][0], $this->_fileFolder . $newName)) {
+                if($maxWidth !== null && $maxHeight !== null){
+                    if(($this->currentFile['type'][0] === 'image/jpg') || ($this->currentFile['type'][0] === 'image/jpeg')){
+                        if($quality !== null){
+                            imagejpeg($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName, $quality);
+                        } else {
+                            imagejpeg($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName);
+                        }
+                    }
+                    if($this->currentFile['type'][0] === 'image/png'){
+                        if($quality !== null){
+                            imagepng($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName, $quality);
+                        } else {
+                            imagepng($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName);
+                        }
+                    }
+                    if($this->currentFile['type'][0] === 'image/gif'){
+                        imagegif($this->resizeImage($this->_fileFolder . $newName, $this->currentFile['type'][0], $maxWidth, $maxHeight), $this->_thumbFolder . $newName);
+                    }
+                }
+                return [
+                    'success' => true,
+                    'msg' => "The file ". basename($this->_fileFolder . $newName). " has been uploaded.",
+                    'filename' => $newName
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'msg' => "Sorry, there was an error uploading your file."
+                ];
+            }
+        }
+    }
+
+    public function fileUploadEditUser($fileInput, $maxWidth = null, $maxHeight = null, $quality = null)
+    {
+        if(isset($fileInput)) {
+//            echo "<pre>",print_r($_FILES),"</pre>";
+
+            $this->currentFile = $fileInput;
             // tjekker om at der er error kode som matcher vores fejlbeskeder
             if(array_key_exists($this->currentFile['error'], $this->_errors)){
                 return [
@@ -98,6 +219,7 @@ class FileUploader {
         }
     }
 
+
     /**
      * @param $filename
      * @param $mime
@@ -121,6 +243,10 @@ class FileUploader {
             $width = $max_width;
         }
         $image_p = imagecreatetruecolor($width, $height);
+        imagealphablending($image_p, false);
+        imagesavealpha($image_p, true);
+        $transparent = imagecolorallocatealpha($image_p, 255, 255, 255, 127);
+        imagefilledrectangle($image_p, 0, 0, $width, $height, $transparent);
         if(($mime === 'image/jpeg') || ($mime === 'image/jpg')){
             $image = imagecreatefromjpeg($filename);
         }

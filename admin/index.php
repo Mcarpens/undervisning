@@ -14,16 +14,20 @@ session_start();
 require_once '../config.php';
 
 // Instantiering af klasser //
-$setting = new settings($db);
+$setting = new Settings($db);
 $user = new User($db);
 $email = new Email($db);
 $products = new Products($db);
 $notification = new Notifications($db);
 $blogs = new Blogs($db);
 $comments = new Comments($db);
+$payments = new Payments($db);
+$chat = new Pm($db);
 
 // Require vores session fil //
 require_once './inc/session.php';
+
+$settings = $setting->getAllSettings();
 
 // Hvis vi er logget ind, fetch vores user id //
 // inkludere vores head fil //
@@ -34,7 +38,12 @@ if ($user->is_loggedin() == true) {
     if ($debug == 1) {
         include_once './inc/debug.php';
     }
+    if ($pm == 1) {
+        include_once './inc/pm.php';
+    }
 }
+
+//var_dump($_SESSION);
 
 // Vores Søgefelt i top menuen, så vi kan søge på vores produkter //
 if(isset($_POST['search'])) {
@@ -74,6 +83,14 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 include_once './partials/singleEmail.php';
                 break;
 
+            /** Webshop Indstillinger */
+            case 'webshopIndstillinger';
+                include_once './webshopSettings.php';
+                break;
+            case 'shop_MereInfo';
+                include_once './partials/shop_moreInfo.php';
+                break;
+
             /** Produkter */
             case 'produkter';
                 include_once './products.php';
@@ -89,6 +106,20 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'produkt';
                 include_once './partials/singleProduct.php';
+                break;
+
+            /** Produkt - Farver */
+            case 'farver';
+                include_once './colors.php';
+                break;
+            case 'nyFarve';
+                include_once './partials/newColor.php';
+                break;
+            case 'redigerFarve';
+                include_once './partials/editColor.php';
+                break;
+            case 'sletFarve';
+                include_once './partials/deleteColor.php';
                 break;
 
             /** Blogs-Nyheder */
@@ -145,6 +176,9 @@ if ($user->secCheckMethod('GET') || $user->secCheckMethod('POST')) {
                 break;
             case 'logud';
                 include_once './logout.php';
+                break;
+            case 'profil';
+                include_once './profile.php';
                 break;
 
 
